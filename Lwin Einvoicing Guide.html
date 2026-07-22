@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UAE e-Invoicing — PINT-AE & Peppol Workflow</title>
+
+<style>
+:root{
+  --bg:#061225;
+  --grid:rgba(82,137,210,.13);
+  --cyan:#22f0df;
+  --blue:#27bfff;
+  --purple:#a883ff;
+  --pink:#ff6eb7;
+  --orange:#ffad18;
+  --white:#edf7ff;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:#020716;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  font-family:Arial, Helvetica, sans-serif;
+  overflow:auto;
+}
+
+.app{
+  width:100vw;
+  max-width:1220px;
+  display:flex;
+  flex-direction:column;
+}
+
+.scene{
+  width:100%;
+  aspect-ratio:1220/620;
+  position:relative;
+  overflow:visible;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(72,160,255,.16), transparent 28%),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    var(--bg);
+  background-size:100% 100%, 56px 56px, 56px 56px;
+  box-shadow:
+    inset 0 0 30px rgba(130,190,255,.22),
+    0 0 50px rgba(22,85,150,.22);
+}
+
+.scene::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg, rgba(255,255,255,.18), transparent 12%, transparent 88%, rgba(255,255,255,.08));
+  pointer-events:none;
+}
+
+svg{width:100%;height:100%;display:block}
+
+text{
+  fill:var(--white);
+  font-weight:700;
+  paint-order:stroke;
+  stroke:#061225;
+  stroke-width:4px;
+  stroke-linejoin:round;
+}
+
+.small{font-size:13px;font-weight:500;stroke-width:3px}
+.title{font-size:20px}
+.mono{font-family:"Courier New", monospace;font-weight:700}
+.cyan{fill:var(--cyan)}
+.blue{fill:var(--blue)}
+.purple{fill:var(--purple)}
+.pink{fill:var(--pink)}
+.orange{fill:var(--orange)}
+
+
+.nodeTitle,.nodeSubtitle{
+  opacity:.22;
+  transition:opacity .28s ease, filter .28s ease;
+}
+.nodeSubtitle{opacity:.18}
+.nodeGroup.active .nodeTitle,
+.nodeGroup.lit .nodeTitle,
+.nodeGroup.active .nodeSubtitle,
+.nodeGroup.lit .nodeSubtitle{
+  opacity:1;
+  filter:drop-shadow(0 0 5px currentColor);
+}
+
+.nodeOuter,.nodeOuter2{fill:none;stroke-width:1.4;opacity:.055;transition:opacity .25s ease;transform-box:fill-box;transform-origin:center}
+.nodeOuter{stroke-dasharray:20 10}
+.nodeOuter2{stroke-width:1.1;opacity:.035;stroke-dasharray:12 8}
+.nodePulse{
+  fill:none;
+  stroke-width:2.2;
+  opacity:0;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+@keyframes pulseInsideSoft{0%{transform:scale(.94);opacity:.08}50%{transform:scale(1);opacity:.22}100%{transform:scale(.97);opacity:.1}}
+@keyframes ringWaveA{0%,100%{transform:scale(.985);opacity:.12}50%{transform:scale(1.075);opacity:.34}}
+@keyframes ringWaveB{0%,100%{transform:scale(1.035);opacity:.1}50%{transform:scale(.96);opacity:.27}}
+@keyframes ringDriftA{0%{stroke-dashoffset:0}100%{stroke-dashoffset:-120}}
+@keyframes ringDriftB{0%{stroke-dashoffset:0}100%{stroke-dashoffset:96}}
+.nodeMain{
+  fill:rgba(10,24,43,.46);
+  stroke-width:3.2;
+  stroke-opacity:.24;
+  filter:none;
+  transition:stroke-opacity .25s ease, fill .25s ease, filter .25s ease;
+}
+.icon{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:2.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  opacity:.28;
+  filter:none;
+  transition:opacity .25s ease, filter .25s ease, stroke-width .25s ease;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+@keyframes iconFloat{
+  0%,100%{transform:translateY(0px) scale(1)}
+  50%{transform:translateY(-1.6px) scale(1.02)}
+}
+.iconFX > *{
+  opacity:0;
+  fill:currentColor;
+  stroke:currentColor;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+.nodeGroup.active .icon,
+.nodeGroup.lit .icon{animation:iconFloat 2.5s ease-in-out infinite}
+.nodeGroup.active .fxSupplier .dot,
+.nodeGroup.lit .fxSupplier .dot{animation:uploadDots 1.7s ease-in-out infinite}
+.nodeGroup.active .fxSupplier .dot:nth-child(2),
+.nodeGroup.lit .fxSupplier .dot:nth-child(2){animation-delay:.18s}
+.nodeGroup.active .fxSupplier .dot:nth-child(3),
+.nodeGroup.lit .fxSupplier .dot:nth-child(3){animation-delay:.36s}
+@keyframes uploadDots{
+  0%{opacity:0;transform:translateY(6px) scale(.7)}
+  35%{opacity:.95;transform:translateY(0) scale(1)}
+  100%{opacity:0;transform:translateY(-8px) scale(.7)}
+}
+.nodeGroup.active .fxHub .scan,
+.nodeGroup.lit .fxHub .scan{animation:hubScan 1.9s ease-in-out infinite}
+.nodeGroup.active .fxHub .scan:nth-child(2),
+.nodeGroup.lit .fxHub .scan:nth-child(2){animation-delay:.18s}
+.nodeGroup.active .fxHub .scan:nth-child(3),
+.nodeGroup.lit .fxHub .scan:nth-child(3){animation-delay:.36s}
+@keyframes hubScan{
+  0%,100%{opacity:.14;transform:translateX(-3px) scaleX(.75)}
+  45%{opacity:.92;transform:translateX(0) scaleX(1)}
+  80%{opacity:.24;transform:translateX(3px) scaleX(.82)}
+}
+.nodeGroup.active .fxBuyer .spark,
+.nodeGroup.lit .fxBuyer .spark{animation:buyerSpark 1.8s ease-in-out infinite}
+.nodeGroup.active .fxBuyer .spark:nth-child(2),
+.nodeGroup.lit .fxBuyer .spark:nth-child(2){animation-delay:.2s}
+.nodeGroup.active .fxBuyer .spark:nth-child(3),
+.nodeGroup.lit .fxBuyer .spark:nth-child(3){animation-delay:.4s}
+@keyframes buyerSpark{
+  0%,100%{opacity:.08;transform:scale(.7)}
+  40%{opacity:.95;transform:scale(1)}
+  70%{opacity:.18;transform:scale(.8)}
+}
+.nodeGroup.active .fxFta .scanMark,
+.nodeGroup.lit .fxFta .scanMark{animation:ftaSweep 2s ease-in-out infinite}
+.nodeGroup.active .fxFta .scanDot,
+.nodeGroup.lit .fxFta .scanDot{animation:ftaDot 1.8s ease-in-out infinite}
+.nodeGroup.active .fxFta .scanDot:nth-child(3),
+.nodeGroup.lit .fxFta .scanDot:nth-child(3){animation-delay:.22s}
+@keyframes ftaSweep{
+  0%{opacity:0;transform:translateX(-6px)}
+  40%{opacity:.9;transform:translateX(0)}
+  100%{opacity:0;transform:translateX(6px)}
+}
+@keyframes ftaDot{
+  0%,100%{opacity:.08;transform:translateY(2px) scale(.8)}
+  40%{opacity:.9;transform:translateY(-1px) scale(1)}
+}
+.nodeGroup.active .nodeOuter{opacity:.24;animation:ringWaveA 2.1s ease-in-out infinite, ringDriftA 3.2s linear infinite}
+.nodeGroup.active .nodeOuter2{opacity:.18;animation:ringWaveB 2.6s ease-in-out infinite, ringDriftB 3.8s linear infinite}
+.nodeGroup.active .nodePulse{opacity:.2;animation:pulseInsideSoft 1.6s ease-in-out 2}
+.nodeGroup.active .nodeMain{
+  fill:rgba(10,24,43,.76);
+  stroke-opacity:1;
+  filter:drop-shadow(0 0 8px currentColor);
+}
+.nodeGroup.active .icon{
+  opacity:1;
+  filter:drop-shadow(0 0 5px currentColor);
+  stroke-width:3;
+}
+.nodeGroup.lit .nodeOuter{opacity:.22;animation:ringWaveA 2.3s ease-in-out infinite, ringDriftA 3.6s linear infinite}
+.nodeGroup.lit .nodeOuter2{opacity:.16;animation:ringWaveB 2.9s ease-in-out infinite, ringDriftB 4.2s linear infinite}
+.nodeGroup.lit .nodePulse{opacity:0}
+.nodeGroup.lit .nodeMain{
+  fill:rgba(10,24,43,.74);
+  stroke-opacity:.92;
+  filter:drop-shadow(0 0 6px currentColor);
+}
+.nodeGroup.lit .icon{
+  opacity:.96;
+  filter:drop-shadow(0 0 4px currentColor);
+  stroke-width:3;
+}
+
+.miniBlocks rect{
+  fill:currentColor;
+  opacity:0;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+.nodeGroup.active .miniBlocks rect,
+.nodeGroup.lit .miniBlocks rect{
+  animation:blockDance 1.8s ease-in-out infinite;
+}
+.nodeGroup.active .miniBlocks rect:nth-child(2),
+.nodeGroup.lit .miniBlocks rect:nth-child(2){animation-delay:.18s}
+.nodeGroup.active .miniBlocks rect:nth-child(3),
+.nodeGroup.lit .miniBlocks rect:nth-child(3){animation-delay:.36s}
+@keyframes blockDance{
+  0%,100%{opacity:.18;transform:translateY(2px) scale(.9)}
+  35%{opacity:.85;transform:translateY(-2px) scale(1)}
+  65%{opacity:.45;transform:translateY(0) scale(.96)}
+}
+
+.box{fill:rgba(5,15,33,.86);stroke-width:2;rx:7;filter:drop-shadow(0 0 7px rgba(80,180,255,.28))}
+.path{
+  fill:none;
+  stroke-width:3;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  stroke-dasharray:14 7 2 7;
+  opacity:.12;
+  transition:opacity .28s ease, stroke-width .28s ease, filter .28s ease;
+  filter:drop-shadow(0 0 1px currentColor);
+}
+.path.active{
+  opacity:1;
+  stroke-width:4.1;
+  stroke-dasharray:16 8 3 8;
+  animation:dash 1s linear infinite, glow 1.7s ease-in-out infinite, arrowFlow 1.7s ease-in-out infinite;
+}
+.path.done{opacity:.94; stroke-width:3.8; filter:drop-shadow(0 0 8px currentColor)}
+@keyframes dash{to{stroke-dashoffset:-52}}
+@keyframes glow{0%,100%{filter:drop-shadow(0 0 2px currentColor)}50%{filter:drop-shadow(0 0 12px currentColor)}}
+@keyframes arrowFlow{0%,100%{opacity:.84}50%{opacity:1}}
+.packet{filter:drop-shadow(0 0 10px currentColor);opacity:0}
+.packet.active{opacity:1}
+
+.fadeIn{opacity:0;animation:fadeIn .7s ease forwards}
+@keyframes fadeIn{to{opacity:1}}
+
+.labelGroup{opacity:0;transform:translateY(8px);transition:opacity .45s ease, transform .45s ease}
+.labelGroup.show{opacity:1;transform:translateY(0)}
+
+.statusPanel{
+  width:100%;
+  border:1px solid rgba(85,160,230,.38);
+  border-left:0;
+  border-right:0;
+  background:rgba(3,10,24,.96);
+  box-shadow:0 -8px 22px rgba(39,191,255,.13), inset 0 0 18px rgba(39,191,255,.05);
+  padding:14px 24px 16px;
+  margin-top:8px;
+  color:var(--white);
+  backdrop-filter:blur(3px);
+  flex:0 0 auto;
+}
+.statusTop{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin:0 auto 10px;
+  max-width:1020px;
+}
+.statusText{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#9edfff;font-weight:800}
+.stepText{font-size:14px;color:#edf7ff;font-weight:700;text-align:right}
+.progressTrack{
+  height:10px;
+  width:min(100%, 1020px);
+  margin:0 auto;
+  border-radius:999px;
+  overflow:hidden;
+  background:rgba(150,198,255,.14);
+  border:1px solid rgba(160,210,255,.18);
+}
+.progressFill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg, var(--cyan), var(--blue), var(--purple), var(--pink));
+  border-radius:999px;
+  box-shadow:0 0 14px rgba(39,191,255,.65);
+  transition:width .16s linear;
+}
+.controls{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin:10px auto 0;
+  max-width:1020px;
+}
+.percent{font-family:"Courier New", monospace;color:#bdefff;font-weight:800;font-size:13px}
+.replayBtn{
+  border:1px solid rgba(34,240,223,.65);
+  background:rgba(34,240,223,.08);
+  color:#dffffb;
+  padding:8px 16px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:800;
+  letter-spacing:.04em;
+  box-shadow:0 0 12px rgba(34,240,223,.15);
+}
+.replayBtn:hover{background:rgba(34,240,223,.18)}
+
+@media (max-width:700px){
+  body{align-items:flex-start}
+  .app{min-width:900px}
+}
+
+
+/* Accuracy note and page enhancements */
+.modelNote{
+  max-width:1020px;
+  margin:10px auto 0;
+  padding:9px 12px;
+  border:1px solid rgba(255,173,24,.34);
+  border-radius:9px;
+  background:rgba(255,173,24,.07);
+  color:#ffe7b3;
+  font-size:12.5px;
+  line-height:1.6;
+}
+.modelNote strong{color:#ffca68}
+
+.guide{
+  color:#dcecff;
+  background:
+    radial-gradient(circle at 8% 5%, rgba(34,240,223,.07), transparent 20%),
+    radial-gradient(circle at 92% 12%, rgba(168,131,255,.07), transparent 22%),
+    #040b19;
+  padding:0 24px 60px;
+}
+.guideInner{max-width:1120px;margin:0 auto}
+.heroGuide{
+  padding:54px 0 28px;
+  display:grid;
+  grid-template-columns:minmax(0,1.3fr) minmax(300px,.7fr);
+  gap:28px;
+  align-items:start;
+}
+.eyebrow{
+  color:#79e8de;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+}
+.heroGuide h1{
+  margin:10px 0 12px;
+  color:#f1f8ff;
+  font-size:clamp(31px,5vw,56px);
+  line-height:1.08;
+  letter-spacing:-.035em;
+}
+.heroGuide p{margin:0;color:#aac3dc;font-size:17px;line-height:1.8}
+.heroMeta{
+  border:1px solid rgba(80,171,240,.28);
+  border-radius:16px;
+  background:linear-gradient(145deg,rgba(17,35,61,.88),rgba(6,17,34,.9));
+  padding:18px;
+  box-shadow:0 18px 45px rgba(0,0,0,.23);
+}
+.metaRow{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid rgba(140,190,240,.12);font-size:13px}
+.metaRow:last-child{border-bottom:0}
+.metaRow span:first-child{color:#809db9}.metaRow span:last-child{color:#eef7ff;font-weight:800;text-align:right}
+.quickNav{
+  position:sticky;
+  top:0;
+  z-index:20;
+  margin:0 -24px 30px;
+  padding:11px 24px;
+  display:flex;
+  gap:8px;
+  overflow:auto;
+  background:rgba(3,10,24,.88);
+  backdrop-filter:blur(14px);
+  border-top:1px solid rgba(100,180,255,.15);
+  border-bottom:1px solid rgba(100,180,255,.22);
+}
+.quickNav a{
+  flex:0 0 auto;
+  color:#b9d8f5;
+  text-decoration:none;
+  border:1px solid rgba(110,180,240,.25);
+  border-radius:999px;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:800;
+}
+.quickNav a:hover{color:#fff;border-color:#22f0df;background:rgba(34,240,223,.08)}
+.section{scroll-margin-top:76px;margin:42px 0}
+.sectionTitle{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.sectionNo{
+  width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+  color:#001521;background:linear-gradient(135deg,#22f0df,#27bfff);font-weight:900;
+}
+.section h2{margin:0;color:#f0f8ff;font-size:28px;letter-spacing:-.02em}
+.sectionLead{color:#9fb9d2;line-height:1.75;margin:-4px 0 18px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{
+  border:1px solid rgba(92,165,230,.22);
+  border-radius:14px;
+  background:linear-gradient(145deg,rgba(13,29,52,.9),rgba(5,15,31,.92));
+  padding:19px;
+  box-shadow:0 14px 34px rgba(0,0,0,.17);
+}
+.card h3{margin:0 0 9px;color:#eff8ff;font-size:17px}.card p{margin:0;color:#a9c1d8;line-height:1.72;font-size:14px}
+.kicker{display:inline-block;margin-bottom:9px;color:#22f0df;font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+.callout{border-left:4px solid #ffad18;background:rgba(255,173,24,.075);padding:16px 18px;border-radius:0 12px 12px 0;color:#d9e7f4;line-height:1.75}
+.callout strong{color:#ffd37d}
+.timelineTable,.penaltyTable,.scopeTable{width:100%;border-collapse:collapse;overflow:hidden;border-radius:13px;background:rgba(8,20,39,.8)}
+.timelineTable th,.timelineTable td,.penaltyTable th,.penaltyTable td,.scopeTable th,.scopeTable td{padding:14px 13px;border:1px solid rgba(105,170,225,.16);vertical-align:top;text-align:left}
+.timelineTable th,.penaltyTable th,.scopeTable th{color:#dff8ff;background:rgba(39,191,255,.09);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.timelineTable td,.penaltyTable td,.scopeTable td{color:#b6cde2;font-size:13px;line-height:1.55}
+.deadline{color:#fff;font-weight:900}.updated{display:inline-block;padding:3px 7px;border-radius:999px;background:rgba(255,173,24,.13);color:#ffd276;font-size:10px;font-weight:900;margin-left:5px}
+.flowSteps{display:grid;gap:11px;counter-reset:flow}
+.flowItem{counter-increment:flow;display:grid;grid-template-columns:44px 1fr;gap:13px;align-items:start;padding:14px;border:1px solid rgba(105,170,225,.18);border-radius:12px;background:rgba(7,18,36,.75)}
+.flowItem::before{content:counter(flow);width:36px;height:36px;display:grid;place-items:center;border-radius:50%;background:rgba(34,240,223,.10);border:1px solid rgba(34,240,223,.38);color:#7ff8ed;font-weight:900}
+.flowItem h3{margin:1px 0 5px;color:#edf8ff;font-size:15px}.flowItem p{margin:0;color:#9fb7cf;line-height:1.65;font-size:13px}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.tag{border:1px solid rgba(168,131,255,.3);background:rgba(168,131,255,.08);color:#d7c7ff;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:800}
+.checklist{display:grid;gap:9px}.check{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:10px;background:rgba(13,29,50,.68);border:1px solid rgba(100,175,230,.14);color:#b7cee3;font-size:13px;line-height:1.55}.check::before{content:'✓';color:#22f0df;font-weight:900}
+details{border:1px solid rgba(105,170,225,.18);border-radius:12px;background:rgba(7,18,36,.72);margin-bottom:10px;overflow:hidden}summary{cursor:pointer;padding:15px 17px;color:#eef8ff;font-weight:800;list-style:none}summary::-webkit-details-marker{display:none}summary::after{content:'+';float:right;color:#22f0df;font-size:20px}details[open] summary::after{content:'–'}details .detailBody{padding:0 17px 16px;color:#a9c1d8;line-height:1.75;font-size:13px}
+.sourceList{display:grid;gap:10px}.sourceLink{display:block;text-decoration:none;color:#bfe9ff;border:1px solid rgba(39,191,255,.2);border-radius:11px;padding:13px 15px;background:rgba(39,191,255,.055)}.sourceLink:hover{border-color:#27bfff;background:rgba(39,191,255,.1)}.sourceLink small{display:block;color:#718da8;margin-top:4px}
+.disclaimer{margin-top:32px;padding:16px;border-radius:12px;background:rgba(255,110,183,.055);border:1px solid rgba(255,110,183,.18);color:#9fb6cc;font-size:12px;line-height:1.7}
+.footerGuide{text-align:center;color:#67839d;font-size:11px;padding:28px 0 4px}
+.printBtn{border:1px solid rgba(34,240,223,.55);background:rgba(34,240,223,.08);color:#dffffb;border-radius:999px;padding:9px 14px;font-weight:900;cursor:pointer}
+
+@media(max-width:850px){
+  .heroGuide,.grid2,.grid3{grid-template-columns:1fr}
+  .guide{padding-left:16px;padding-right:16px}
+  .quickNav{margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px}
+  .section h2{font-size:23px}
+  .timelineTable,.penaltyTable,.scopeTable{display:block;overflow-x:auto;white-space:nowrap}
+}
+@media print{
+  body{background:#fff!important;color:#111!important}
+  .scene,.statusPanel,.quickNav,.printBtn{display:none!important}
+  .guide,.card,.flowItem,details,.heroMeta{background:#fff!important;color:#111!important;box-shadow:none!important}
+  .guide{padding:0}
+  .heroGuide h1,.section h2,.card h3,.flowItem h3,summary{color:#111!important}
+  .heroGuide p,.card p,.flowItem p,.sectionLead,.detailBody,.timelineTable td,.penaltyTable td,.scopeTable td{color:#333!important}
+  .section{break-inside:avoid}
+}
+
+</style>
+</head>
+
+<body>
+<div class="app">
+<div class="scene">
+<svg id="flowSvg" viewBox="0 0 1220 620" xmlns="http://www.w3.org/2000/svg">
+
+<defs>
+  <marker id="arrowCyan" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto"><path d="M0,0 L13,6.5 L0,13 Z" fill="#22f0df"/></marker>
+  <marker id="arrowBlue" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto"><path d="M0,0 L13,6.5 L0,13 Z" fill="#27bfff"/></marker>
+  <marker id="arrowPurple" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto"><path d="M0,0 L13,6.5 L0,13 Z" fill="#a883ff"/></marker>
+  <marker id="arrowPink" markerWidth="13" markerHeight="13" refX="11" refY="6.5" orient="auto"><path d="M0,0 L13,6.5 L0,13 Z" fill="#ff6eb7"/></marker>
+
+  <path id="submitPath" d="M181 242 C225 242 288 242 354 242"/>
+  <path id="peppolPath" d="M455 205 C515 85 645 85 705 205"/>
+  <path id="ackPath" d="M705 279 C645 399 515 399 455 279"/>
+  <path id="deliverPath" d="M803 242 C850 219 912 204 975 222 C990 226 999 230 1010 235"/>
+  <path id="clearLeftPath" d="M518 522 C430 468 382 370 392 296"/>
+  <path id="reportLeftPath" d="M412 288 C300 320 260 438 332 536 C388 613 468 610 518 584"/>
+  <path id="clearRightPath" d="M632 522 C720 470 786 380 774 305"/>
+  <path id="reportRightPath" d="M774 296 C888 330 930 446 854 542 C798 614 682 610 632 584"/>
+</defs>
+
+<line x1="0" y1="3" x2="1220" y2="3" stroke="rgba(210,232,255,.45)" stroke-width="2"/>
+
+<!-- arrows are visible one by one only -->
+<use id="line-submit" href="#submitPath" class="path" style="color:var(--cyan)" stroke="#22f0df" marker-end="url(#arrowCyan)" />
+<use id="line-peppol" href="#peppolPath" class="path" style="color:var(--blue)" stroke="#27bfff" marker-end="url(#arrowBlue)" />
+<use id="line-ack" href="#ackPath" class="path" style="color:var(--purple)" stroke="#a883ff" marker-end="url(#arrowPurple)" />
+<use id="line-deliver" href="#deliverPath" class="path" style="color:var(--purple)" stroke="#a883ff" marker-end="url(#arrowPurple)" />
+<use id="line-clearLeft" href="#clearLeftPath" class="path" style="color:var(--pink)" stroke="#ff6eb7" marker-end="url(#arrowPink)" />
+<use id="line-reportLeft" href="#reportLeftPath" class="path" style="color:var(--blue)" stroke="#27bfff" marker-end="url(#arrowBlue)" />
+<use id="line-clearRight" href="#clearRightPath" class="path" style="color:var(--pink)" stroke="#ff6eb7" marker-end="url(#arrowPink)" />
+<use id="line-reportRight" href="#reportRightPath" class="path" style="color:var(--blue)" stroke="#27bfff" marker-end="url(#arrowBlue)" />
+
+
+<!-- Main Title -->
+<g id="mainTitleGroup">
+  <text x="600" y="72" text-anchor="middle" font-size="34" font-weight="800" fill="#eaf6ff" style="letter-spacing:.5px;filter:drop-shadow(0 0 8px rgba(39,191,255,.35));">UAE e-Invoicing 5-Corner Model အလုပ်လုပ်ပုံ</text>
+</g>
+
+<!-- Supplier -->
+<g id="supplierNode" class="nodeGroup fadeIn" style="color:var(--cyan);animation-delay:.1s">
+  <circle class="nodeOuter" cx="128" cy="242" r="81" stroke="#22f0df"/>
+  <circle class="nodeOuter2" cx="128" cy="242" r="69" stroke="#22f0df"/>
+  <circle class="nodePulse" cx="128" cy="242" r="38" stroke="#22f0df"/>
+  <circle class="nodeMain" cx="128" cy="242" r="54" stroke="#22f0df"/>
+  <path class="icon iconSupplier" d="M114 249h28a4 4 0 0 0 4-4v-9a4 4 0 0 0-4-4h-6l-5-6h-10l-5 6h-2a4 4 0 0 0-4 4v9a4 4 0 0 0 4 4zM128 245v-12M123 238l5-5 5 5"/>
+  <g class="iconFX fxSupplier">
+    <circle class="dot" cx="122" cy="232" r="1.8"/>
+    <circle class="dot" cx="128" cy="229" r="1.8"/>
+    <circle class="dot" cx="134" cy="232" r="1.8"/>
+  </g>
+  <g class="miniBlocks">
+    <rect x="118" y="252" width="5" height="5" rx="1.2"/>
+    <rect x="126" y="252" width="5" height="5" rx="1.2"/>
+    <rect x="134" y="252" width="5" height="5" rx="1.2"/>
+  </g>
+  <text class="title nodeTitle" x="90" y="157">Supplier</text>
+  <text class="small cyan nodeSubtitle" x="115" y="178">You</text>
+</g>
+
+<!-- LWIN -->
+<g id="lwinNode" class="nodeGroup fadeIn" style="color:var(--blue);animation-delay:.3s">
+  <circle class="nodeOuter" cx="410" cy="242" r="82" stroke="#27bfff"/>
+  <circle class="nodeOuter2" cx="410" cy="242" r="69" stroke="#27bfff"/>
+  <circle class="nodePulse" cx="410" cy="242" r="38" stroke="#27bfff"/>
+  <circle class="nodeMain" cx="410" cy="242" r="54" stroke="#27bfff"/>
+  <path class="icon iconHub" d="M400 253h22M400 253v-20h16v20M404 237h4M404 243h4M404 249h4M416 237h3M416 243h3M416 249h3M396 253v-14h6"/>
+  <g class="iconFX fxHub">
+    <line class="scan" x1="399" y1="229" x2="421" y2="229" stroke-width="1.7"/>
+    <line class="scan" x1="399" y1="241" x2="421" y2="241" stroke-width="1.7"/>
+    <line class="scan" x1="399" y1="253" x2="421" y2="253" stroke-width="1.7"/>
+  </g>
+  <g class="miniBlocks">
+    <rect x="401" y="257" width="5" height="5" rx="1.2"/>
+    <rect x="409" y="257" width="5" height="5" rx="1.2"/>
+    <rect x="417" y="257" width="5" height="5" rx="1.2"/>
+  </g>
+  <text class="title nodeTitle" x="382" y="157">LWIN</text>
+  <text class="small blue nodeSubtitle" x="363" y="178">Your ASP (C2)</text>
+</g>
+
+<!-- Recipient -->
+<g id="recipientNode" class="nodeGroup fadeIn" style="color:var(--purple);animation-delay:.5s">
+  <circle class="nodeOuter" cx="750" cy="242" r="82" stroke="#a883ff"/>
+  <circle class="nodeOuter2" cx="750" cy="242" r="69" stroke="#a883ff"/>
+  <circle class="nodePulse" cx="750" cy="242" r="38" stroke="#a883ff"/>
+  <circle class="nodeMain" cx="750" cy="242" r="54" stroke="#a883ff"/>
+  <path class="icon iconHub" d="M740 253h22M740 253v-20h16v20M744 237h4M744 243h4M744 249h4M756 237h3M756 243h3M756 249h3M736 253v-14h6"/>
+  <g class="iconFX fxHub">
+    <line class="scan" x1="739" y1="229" x2="761" y2="229" stroke-width="1.7"/>
+    <line class="scan" x1="739" y1="241" x2="761" y2="241" stroke-width="1.7"/>
+    <line class="scan" x1="739" y1="253" x2="761" y2="253" stroke-width="1.7"/>
+  </g>
+  <g class="miniBlocks">
+    <rect x="741" y="257" width="5" height="5" rx="1.2"/>
+    <rect x="749" y="257" width="5" height="5" rx="1.2"/>
+    <rect x="757" y="257" width="5" height="5" rx="1.2"/>
+  </g>
+  <text class="title nodeTitle" x="708" y="157">Recipient</text>
+  <text class="small purple nodeSubtitle" x="699" y="178">Buyer ASP (C3)</text>
+</g>
+
+<!-- Buyer -->
+<g id="buyerNode" class="nodeGroup fadeIn" style="color:var(--orange);animation-delay:.7s">
+  <circle class="nodeOuter" cx="1074" cy="242" r="82" stroke="#ffad18"/>
+  <circle class="nodeOuter2" cx="1074" cy="242" r="69" stroke="#ffad18"/>
+  <circle class="nodePulse" cx="1074" cy="242" r="38" stroke="#ffad18"/>
+  <circle class="nodeMain" cx="1074" cy="242" r="54" stroke="#ffad18"/>
+  <path class="icon iconBuyer" d="M1065 252c2-9 16-9 18 0M1074 240a7 7 0 1 0 0-14 7 7 0 0 0 0 14M1088 232l4 4 9-10"/>
+  <g class="iconFX fxBuyer">
+    <circle class="spark" cx="1086" cy="224" r="1.7"/>
+    <circle class="spark" cx="1092" cy="228" r="1.5"/>
+    <circle class="spark" cx="1082" cy="220" r="1.4"/>
+  </g>
+  <g class="miniBlocks">
+    <rect x="1065" y="257" width="5" height="5" rx="1.2"/>
+    <rect x="1073" y="257" width="5" height="5" rx="1.2"/>
+    <rect x="1081" y="257" width="5" height="5" rx="1.2"/>
+  </g>
+  <text class="title nodeTitle" x="1047" y="157">Buyer</text>
+  <text class="small orange nodeSubtitle" x="1043" y="178">Customer</text>
+</g>
+
+<!-- Label boxes: hidden first, appear only after the arrow crosses the relevant area -->
+<g id="label-submit" class="labelGroup">
+  <rect class="box" x="221" y="194" width="97" height="34" stroke="#22f0df"/>
+  <text class="mono cyan" x="244" y="218" font-size="15">Submit</text>
+</g>
+<g id="label-peppol" class="labelGroup">
+  <rect class="box" x="555" y="96" width="118" height="34" stroke="#27bfff"/>
+  <text class="mono blue" x="577" y="122" font-size="15">Sending</text>
+</g>
+<g id="label-ack" class="labelGroup">
+  <rect class="box" x="504" y="326" width="176" height="34" stroke="#a883ff"/>
+  <text class="mono purple" x="531" y="352" font-size="15">Acknowledge</text>
+</g>
+<g id="label-deliver" class="labelGroup">
+  <rect class="box" x="863" y="166" width="97" height="34" stroke="#a883ff"/>
+  <text class="mono purple" x="879" y="192" font-size="15">Deliver</text>
+</g>
+<g id="label-clearLeft" class="labelGroup">
+  <rect class="box" x="304" y="392" width="119" height="34" stroke="#ff6eb7"/>
+  <text class="mono pink" x="321" y="418" font-size="15">FTA Status</text>
+</g>
+<g id="label-reportLeft" class="labelGroup">
+  <rect class="box" x="214" y="381" width="98" height="34" stroke="#27bfff"/>
+  <text class="mono blue" x="234" y="407" font-size="15">Report</text>
+</g>
+<g id="label-clearRight" class="labelGroup">
+  <rect class="box" x="732" y="392" width="119" height="34" stroke="#ff6eb7"/>
+  <text class="mono pink" x="750" y="418" font-size="15">FTA Status</text>
+</g>
+<g id="label-reportRight" class="labelGroup">
+  <rect class="box" x="847" y="381" width="98" height="34" stroke="#27bfff"/>
+  <text class="mono blue" x="867" y="407" font-size="15">Report</text>
+</g>
+
+<!-- UAE FTA -->
+<g id="ftaNode" class="nodeGroup fadeIn" style="color:var(--pink);animation-delay:.9s">
+  <circle class="nodeOuter" cx="575" cy="565" r="81" stroke="#ff6eb7"/>
+  <circle class="nodeOuter2" cx="575" cy="565" r="69" stroke="#ff6eb7"/>
+  <circle class="nodePulse" cx="575" cy="565" r="38" stroke="#ff6eb7"/>
+  <circle class="nodeMain" cx="575" cy="565" r="54" stroke="#ff6eb7"/>
+  <path class="icon iconFta" d="M564 545h22a3.5 3.5 0 0 1 3.5 3.5v22a3.5 3.5 0 0 1-3.5 3.5h-22a3.5 3.5 0 0 1-3.5-3.5v-22a3.5 3.5 0 0 1 3.5-3.5zM570 553h10M570 559h10M571 566l4 4 8-9"/>
+  <g class="iconFX fxFta">
+    <line class="scanMark" x1="568" y1="548" x2="585" y2="548" stroke-width="1.6"/>
+    <circle class="scanDot" cx="571" cy="578" r="1.6"/>
+    <circle class="scanDot" cx="579" cy="578" r="1.6"/>
+  </g>
+  <g class="miniBlocks">
+    <rect x="566" y="580" width="5" height="5" rx="1.2"/>
+    <rect x="574" y="580" width="5" height="5" rx="1.2"/>
+    <rect x="582" y="580" width="5" height="5" rx="1.2"/>
+  </g>
+  <text class="title nodeTitle" x="539" y="504">UAE FTA</text>
+  <text class="small pink nodeSubtitle" x="536" y="526">Federal Tax</text>
+</g>
+
+<!-- Legend -->
+<g id="legendBox">
+  <rect x="975" y="406" width="192" height="146" rx="8" fill="rgba(3,10,24,.76)" stroke="rgba(88,150,224,.36)"/>
+  <text x="993" y="420" font-size="14">Legend</text>
+  <circle cx="999" cy="447" r="7" fill="#22f0df"/><text class="small" x="1014" y="452">Submit Invoice</text>
+  <circle cx="999" cy="475" r="7" fill="#27bfff"/><text class="small" x="1014" y="480">PEPPOL Deliver</text>
+  <circle cx="999" cy="503" r="7" fill="#a883ff"/><text class="small" x="1014" y="508">Acknowledge</text>
+  <circle cx="999" cy="531" r="7" fill="#ff6eb7"/><text class="small" x="1014" y="536">FTA Tax Data / Status</text>
+</g>
+
+<!-- LWIN Logo bottom-left -->
+<g id="lwinLogoBadge" opacity="0.98">
+  <image x="18" y="468" width="110" height="110" href="data:image/png;base64,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"/>
+</g>
+</svg>
+</div>
+
+<div class="statusPanel">
+  <div class="statusTop">
+    <div class="statusText">STATUS: <span id="statusValue">Ready</span></div>
+    <div class="stepText" id="stepValue">Step 0 / 8</div>
+  </div>
+  <div class="progressTrack"><div class="progressFill" id="progressFill"></div></div>
+
+  <div class="modelNote">
+    <strong>Important:</strong> FTA receives Tax Data and status messages. This is not an invoice-by-invoice pre-approval or clearance model.
+  </div>
+  <div class="controls">
+    <div class="percent" id="percentValue">0%</div>
+    <button class="replayBtn" id="replayBtn" type="button">Replay</button>
+  </div>
+</div>
+
+
+<main class="guide" id="guide">
+  <div class="guideInner">
+    <section class="heroGuide">
+      <div>
+        <div class="eyebrow">UAE Electronic Invoicing • Updated 23 July 2026</div>
+        <h1>UAE e‑Invoicing System<br>အလုပ်လုပ်ပုံ အပြည့်အစုံ</h1>
+        <p>
+          PDF invoice ကို email ပို့ခြင်းမဟုတ်ပါ။ Supplier နှင့် Buyer တို့၏ system များကြားတွင်
+          <strong>PINT‑AE XML</strong> structured data ကို Accredited Service Provider (ASP) များနှင့်
+          Peppol network မှတစ်ဆင့် လဲလှယ်ပြီး Tax Data ကို FTA သို့ အီလက်ထရောနစ်နည်းဖြင့် report လုပ်သည့်စနစ်ဖြစ်သည်။
+        </p>
+        <div class="tags">
+          <span class="tag">PINT‑AE XML</span><span class="tag">OpenPeppol</span><span class="tag">5‑Corner Model</span><span class="tag">EmaraTax Onboarding</span>
+        </div>
+      </div>
+      <aside class="heroMeta">
+        <div class="metaRow"><span>Model</span><span>DCTCE / 5‑Corner</span></div>
+        <div class="metaRow"><span>Pilot & Voluntary</span><span>1 July 2026</span></div>
+        <div class="metaRow"><span>First mandatory phase</span><span>1 January 2027</span></div>
+        <div class="metaRow"><span>Invoice format</span><span>Structured XML</span></div>
+        <div class="metaRow"><span>Regulator / Corner 5</span><span>UAE FTA</span></div>
+        <div style="margin-top:14px"><button class="printBtn" type="button" onclick="window.print()">Print / Save PDF</button></div>
+      </aside>
+    </section>
+
+    <nav class="quickNav" aria-label="Guide navigation">
+      <a href="#definition">Definition</a><a href="#timeline">Timeline</a><a href="#scope">Scope</a>
+      <a href="#workflow">10-Step Flow</a><a href="#fields">Invoice Data</a><a href="#example">Example</a>
+      <a href="#special">Special Cases</a><a href="#penalties">Penalties</a><a href="#readiness">Preparation</a><a href="#sources">Sources</a>
+    </nav>
+
+    <section class="section" id="definition">
+      <div class="sectionTitle"><div class="sectionNo">1</div><h2>e‑Invoice ဆိုတာဘာလဲ</h2></div>
+      <div class="grid3">
+        <article class="card"><span class="kicker">Valid e‑Invoice</span><h3>Structured data</h3><p>Invoice ကို issue, transmit နှင့် receive လုပ်နိုင်သည့် machine‑readable XML data ဖြစ်ရမည်။ UAE standard ကို PINT‑AE ဟုခေါ်သည်။</p></article>
+        <article class="card"><span class="kicker">Not sufficient</span><h3>PDF / Word / Scan</h3><p>PDF, Word, image, scanned copy သို့မဟုတ် email attachment တစ်ခုတည်းသည် e‑Invoice မဟုတ်ပါ။ လူဖတ်ရန် visual copy အဖြစ်သာ ထပ်ပေးနိုင်သည်။</p></article>
+        <article class="card"><span class="kicker">Core requirement</span><h3>ASP connection</h3><p>Business သည် UAE Accredited Service Provider တစ်ခုကို ရွေးပြီး accounting/ERP system နှင့် connect လုပ်ရမည်။</p></article>
+      </div>
+      <div class="callout" style="margin-top:16px"><strong>အရေးကြီး:</strong> FTA က invoice တစ်စောင်ချင်းစီကို approve လုပ်ပြီးမှ Buyer သို့ပို့သည့် clearance system မဟုတ်ပါ။ ASP များက invoice ကို validate/exchange လုပ်ပြီး Tax Data Documents နှင့် status messages ကို FTA သို့ report လုပ်သည်။</div>
+    </section>
+
+    <section class="section" id="timeline">
+      <div class="sectionTitle"><div class="sectionNo">2</div><h2>Implementation Timeline</h2></div>
+      <p class="sectionLead">Revenue ဆိုသည်မှာ အနီးဆုံး Accounting Period အတွက် gross income ကိုဆိုလိုသည်။ Large-business ASP deadline ကို Ministerial Resolution No. 66 of 2026 ဖြင့် ပြင်ဆင်ထားသည်။</p>
+      <table class="timelineTable">
+        <thead><tr><th>Entity</th><th>Annual Revenue</th><th>ASP Appoint Deadline</th><th>Mandatory Go‑Live</th></tr></thead>
+        <tbody>
+          <tr><td>Business / Person — Phase 1</td><td>AED 50 million နှင့်အထက်</td><td><span class="deadline">30 October 2026</span><span class="updated">AMENDED</span></td><td><span class="deadline">1 January 2027</span></td></tr>
+          <tr><td>Business / Person — Phase 2</td><td>AED 50 million အောက်</td><td><span class="deadline">31 March 2027</span></td><td><span class="deadline">1 July 2027</span></td></tr>
+          <tr><td>Government Entity</td><td>N/A</td><td><span class="deadline">31 March 2027</span></td><td><span class="deadline">1 October 2027</span></td></tr>
+        </tbody>
+      </table>
+      <div class="grid2" style="margin-top:16px">
+        <div class="card"><h3>Pilot phase</h3><p>1 July 2026 မှစ၍ MoF က ဖိတ်ကြားပြီး စာဖြင့်သဘောတူသော selected participants များ ပါဝင်သည်။</p></div>
+        <div class="card"><h3>Voluntary phase</h3><p>Revenue မရွေး 1 July 2026 မှ စတင်နိုင်သည်။ Voluntary implementation အတွင်း mandatory penalties မသက်ရောက်သေးသော်လည်း technical rules ကိုလိုက်နာရမည်။</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="scope">
+      <div class="sectionTitle"><div class="sectionNo">3</div><h2>ဘယ်သူနှင့် ဘယ် Transaction တွေပါလဲ</h2></div>
+      <table class="scopeTable">
+        <thead><tr><th>Supplier</th><th>Buyer</th><th>Current Scope</th><th>Explanation</th></tr></thead>
+        <tbody>
+          <tr><td>Business</td><td>Business</td><td>✓ In scope</td><td>B2B transactions</td></tr>
+          <tr><td>Business</td><td>Government</td><td>✓ In scope</td><td>B2G transactions</td></tr>
+          <tr><td>Government</td><td>Business</td><td>✓ In scope</td><td>G2B transactions</td></tr>
+          <tr><td>Government</td><td>Government</td><td>✓ In scope</td><td>G2G transactions</td></tr>
+          <tr><td>Business</td><td>Natural-person consumer</td><td>✕ Currently out</td><td>B2C consumer supply</td></tr>
+        </tbody>
+      </table>
+      <div class="grid2" style="margin-top:16px">
+        <article class="card"><h3>VAT registration မရှိလည်း သက်ဆိုင်နိုင်သည်</h3><p>UAE တွင် Business လုပ်သော Person များအတွက် VAT registration status တစ်ခုတည်းဖြင့် scope ကို မဆုံးဖြတ်ပါ။ Tax registration မရှိသော်လည်း in-scope ဖြစ်ပါက FTA ထံမှ TIN ရယူရနိုင်သည်။</p></article>
+        <article class="card"><h3>Free Zone သီးခြား exemption မရှိ</h3><p>Mainland / Free Zone ဆိုတာ scope determination မဟုတ်ပါ။ Business Transaction အမျိုးအစားနှင့် specific statutory exclusions ကိုကြည့်ရမည်။</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="workflow">
+      <div class="sectionTitle"><div class="sectionNo">4</div><h2>Official 10‑Step Workflow</h2></div>
+      <p class="sectionLead">Corners: C1 Supplier • C2 Supplier ASP • C3 Buyer ASP • C4 Buyer • C5 FTA.</p>
+      <div class="flowSteps">
+        <div class="flowItem"><div><h3>Supplier creates invoice data</h3><p>C1 က ERP/accounting system ထဲတွင် invoice data ဖန်တီးပြီး agreed format ဖြင့် C2 သို့ပို့သည်။</p></div></div>
+        <div class="flowItem"><div><h3>Supplier ASP validates and converts</h3><p>C2 က mandatory rules စစ်ပြီး လိုအပ်ပါက PINT‑AE standard XML သို့ convert လုပ်သည်။</p></div></div>
+        <div class="flowItem"><div><h3>C2 sends invoice to C3</h3><p>Peppol network မှတစ်ဆင့် Buyer ၏ UAE Accredited Service Provider သို့ XML invoice ပို့သည်။</p></div></div>
+        <div class="flowItem"><div><h3>C2 reports TDD to FTA</h3><p>Invoice exchange နှင့်အပြိုင် Supplier ASP က Tax Data Document ကို Corner 5 — FTA သို့ report လုပ်သည်။</p></div></div>
+        <div class="flowItem"><div><h3>Buyer ASP validates invoice</h3><p>C3 က invoice ကို validate လုပ်ပြီး Message Level Status (MLS) ကို C2 သို့ ပြန်ပို့သည်။</p></div></div>
+        <div class="flowItem"><div><h3>C3 delivers invoice to Buyer</h3><p>Validation အောင်မြင်ပါက Buyer သဘောတူထားသော format ဖြင့် C4 ၏ ERP/AP system ထဲသို့ပို့သည်။</p></div></div>
+        <div class="flowItem"><div><h3>C3 also reports TDD</h3><p>အောင်မြင်ပါက Buyer ASP သည်လည်း TDD ကို FTA သို့ report လုပ်သည်။ Failure ဖြစ်ပါက negative MLS ကို C2 နှင့် C5 သို့ပို့ပြီး C3 TDD မတင်ပါ။</p></div></div>
+        <div class="flowItem"><div><h3>FTA returns reporting status</h3><p>C5 က Tax Data reporting အောင်မြင်ကြောင်း MLS ကို C2 သို့ပြန်ပို့သည်။</p></div></div>
+        <div class="flowItem"><div><h3>C2 updates Supplier</h3><p>C2 က C3 exchange status နှင့် C5 reporting status ကို C1 Supplier ထံပို့သည်။</p></div></div>
+        <div class="flowItem"><div><h3>C3 updates Buyer</h3><p>C3 က C5 reporting status ကို C4 Buyer ထံပို့သည်။</p></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="fields">
+      <div class="sectionTitle"><div class="sectionNo">5</div><h2>Invoice Data & Identifiers</h2></div>
+      <div class="grid3">
+        <article class="card"><h3>TIN</h3><p>FTA က ထုတ်ပေးသော 10-digit Tax Identification Number ဖြစ်သည်။ Tax registration ရှိသူအတွက် အများအားဖြင့် 15-digit TRN ၏ ပထမ 10 လုံးဖြစ်သည်။</p></article>
+        <article class="card"><h3>Peppol Participant ID</h3><p>UAE endpoint identifier သည် scheme <strong>0235</strong> နှင့် 10-digit TIN ကိုအခြေခံသည်။ ASP onboarding ပြီးနောက် Peppol network တွင် identify လုပ်ရန်သုံးသည်။</p></article>
+        <article class="card"><h3>UUID</h3><p>Tax Invoice တစ်စောင်ချင်းစီကို distinguish လုပ်ရန် system မှ generate လုပ်သော unique identifier ဖြစ်ပြီး sequential invoice number အပြင် ထပ်ရှိသည်။</p></article>
+      </div>
+      <div class="grid2" style="margin-top:16px">
+        <article class="card"><span class="kicker">Invoice header</span><h3>Core document fields</h3><p>Invoice number/date/type, currency, payment due date, business process type, transaction flags, seller/buyer identifiers နှင့် addresses.</p></article>
+        <article class="card"><span class="kicker">Amounts & lines</span><h3>Tax and item fields</h3><p>Net totals, VAT taxable amount/rate/amount, AED tax amounts, quantity, unit of measure, unit price, discount, item name နှင့် description.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="example">
+      <div class="sectionTitle"><div class="sectionNo">6</div><h2>လက်တွေ့ ဥပမာ</h2></div>
+      <div class="card">
+        <span class="kicker">Service Invoice</span>
+        <h3>Company A → Company B</h3>
+        <p>Service value AED 10,000 + VAT AED 500 = AED 10,500 ဟုယူဆပါ။ Company A ၏ ERP က customer TIN, invoice date, supply details, VAT category နှင့် payment terms ကိုဖန်တီးပြီး Company A ၏ ASP သို့ပို့မည်။ Supplier ASP က PINT‑AE validation/formatting လုပ်ပြီး Company B ၏ ASP သို့ Peppol ဖြင့်ပို့ကာ TDD ကို FTA သို့ report လုပ်မည်။ Buyer ASP က validate လုပ်ပြီး Company B ၏ AP system သို့ deliver လုပ်ကာ ၎င်း၏ TDD ကိုလည်း FTA သို့ report လုပ်မည်။ Supplier နှင့် Buyer နှစ်ဖက်စလုံးက exchange/reporting statuses ကို မိမိတို့၏ ASP မှ ရရှိမည်။</p>
+      </div>
+      <div class="callout" style="margin-top:14px"><strong>Accounting impact:</strong> Buyer side တွင် PO matching, goods/service receipt matching, AP posting, VAT input checking နှင့် payment approval ကို automation တိုးနိုင်သည်။ သို့သော် e‑Invoice status “delivered” ဖြစ်ခြင်းက commercial acceptance သို့မဟုတ် payment approval ဖြစ်ပြီးသားဟု မဆိုလိုပါ။</div>
+    </section>
+
+    <section class="section" id="special">
+      <div class="sectionTitle"><div class="sectionNo">7</div><h2>Special Scenarios</h2></div>
+      <details open><summary>Credit Note / Refund / Cancellation</summary><div class="detailBody">Invoice ထုတ်ပြီးနောက် price reduction, cancellation, returned goods, refund သို့မဟုတ် correction ဖြစ်ပါက original invoice ကို reference လုပ်သော structured Electronic Credit Note ကို issue/transmit လုပ်ရမည်။ ERP ထဲမှ invoice ဖျက်ခြင်းတစ်ခုတည်း မလုံလောက်ပါ။</div></details>
+      <details><summary>Advance Payment</summary><div class="detailBody">Advance receipt ကြောင့် VAT tax point ဖြစ်ပါက advance amount အတွက် invoice ထုတ်ရမည်။ Final invoice တွင် advance invoice ကို reference လုပ်ပြီး ယခင် invoice ထုတ်ထားသော amount ကို နှစ်ကြိမ်မတွက်ရန် လိုသည်။</div></details>
+      <details><summary>Export Transactions</summary><div class="detailBody">UAE Business မှ foreign business သို့ supply သည် Business Transaction ဖြစ်နိုင်သဖြင့် e‑Invoicing scope ဝင်နိုင်သည်။ e‑Invoicing status နှင့် VAT zero-rating ကို မရောထွေးရ။ VAT zero rating အတွက် place-of-supply နှင့် evidence rules ကို သီးခြားစစ်ရမည်။</div></details>
+      <details><summary>Imports / Reverse Charge</summary><div class="detailBody">Foreign supplier က UAE system အောက်တွင် invoice မထုတ်နိုင်သည့်အခြေအနေများရှိနိုင်သည်။ Import documentation, customs records, commercial invoice နှင့် reverse-charge VAT accounting obligations ကို ဆက်လက်ထိန်းသိမ်းရမည်။</div></details>
+      <details><summary>VAT Tax Groups</summary><div class="detailBody">Member တစ်ခုချင်းစီ၏ own TIN/identity ကိုအသုံးပြုရသည်။ Intra-VAT-group Business Transactions အတွက် 1 January 2027 မှ 24-month temporary grace period ကို guideline ကဖော်ပြထားသော်လည်း permanent exclusion မဟုတ်ပါ။ Group ပြင်ပ transactions များ၏ phase deadline ကို မရွှေ့ပေးပါ။</div></details>
+      <details><summary>Main exclusions</summary><div class="detailBody">Qualifying sovereign government activities, certain airline passenger/ancillary documents, temporary air-cargo exclusion, certain exempt financial services နှင့် နောက်ပိုင်း Minister သတ်မှတ်မည့် transactions များ။ Exclusion ကို entity name သို့မဟုတ် industry label တစ်ခုတည်းဖြင့် မဆုံးဖြတ်သင့်ပါ။</div></details>
+    </section>
+
+    <section class="section" id="penalties">
+      <div class="sectionTitle"><div class="sectionNo">8</div><h2>Administrative Penalties</h2></div>
+      <p class="sectionLead">Mandatory implementation date ရောက်ပြီးနောက် Cabinet Decision No. 106 of 2025 အောက်တွင် အောက်ပါ penalties သက်ရောက်နိုင်သည်။ Voluntary participation အတွက် မသက်ရောက်ပါ။</p>
+      <table class="penaltyTable">
+        <thead><tr><th>Violation</th><th>Penalty</th></tr></thead>
+        <tbody>
+          <tr><td>System implement မလုပ်ခြင်း သို့မဟုတ် ASP ကို deadline အတွင်း မခန့်ခြင်း</td><td><span class="deadline">AED 5,000</span> per month or part thereof</td></tr>
+          <tr><td>Electronic Invoice ကို သတ်မှတ်အချိန်အတွင်း issue/transmit မလုပ်ခြင်း</td><td><span class="deadline">AED 100 per invoice</span>, max AED 5,000 per calendar month</td></tr>
+          <tr><td>Electronic Credit Note ကို အချိန်မီ issue/transmit မလုပ်ခြင်း</td><td><span class="deadline">AED 100 per credit note</span>, max AED 5,000 per calendar month</td></tr>
+          <tr><td>Issuer သို့မဟုတ် Recipient က system failure ကို deadline အတွင်း FTA သို့ မတင်ပြခြင်း</td><td><span class="deadline">AED 1,000 per day</span> or part thereof</td></tr>
+          <tr><td>Registered data changes ကို ASP သို့ အချိန်မီမပြောခြင်း</td><td><span class="deadline">AED 1,000 per day</span> or part thereof</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" id="readiness">
+      <div class="sectionTitle"><div class="sectionNo">9</div><h2>Company Preparation Plan</h2></div>
+      <div class="grid2">
+        <article class="card"><span class="kicker">Stop</span><h3>ရပ်သင့်သည့်အရာ</h3><div class="checklist"><div class="check">PDF email ပို့လျှင် compliant ဖြစ်ပြီဟု ယူဆခြင်း</div><div class="check">VAT registration မရှိလို့ scope မဝင်ဟု ယူဆခြင်း</div><div class="check">Deadline နီးမှ ERP integration စတင်ခြင်း</div></div></article>
+        <article class="card"><span class="kicker">Start now</span><h3>စတင်သင့်သည့်အရာ</h3><div class="checklist"><div class="check">Phase/deadline နှင့် revenue threshold confirm လုပ်ခြင်း</div><div class="check">Customer/Supplier TIN နှင့် legal master data clean-up</div><div class="check">ASP commercial/technical comparison</div></div></article>
+      </div>
+      <div class="grid3" style="margin-top:16px">
+        <article class="card"><h3>1. Scope assessment</h3><p>B2B/B2G/G2B/G2G, exports, branches, VAT group members, transaction volume နှင့် entity revenue ကို map လုပ်ပါ။</p></article>
+        <article class="card"><h3>2. ASP selection</h3><p>MoF list, final accreditation status, ERP connector, API, pricing, support SLA, data export, contract exit နှင့် security ကိုစစ်ပါ။</p></article>
+        <article class="card"><h3>3. EmaraTax onboarding</h3><p>Account admin က E‑INVOICING tile မှ ASP ကိုရွေးပြီး ASP portal onboarding နှင့် participant ID setup ကိုဆက်လုပ်သည်။</p></article>
+        <article class="card"><h3>4. System integration</h3><p>Odoo, SAP, Oracle, Dynamics, QuickBooks/Tally connector သို့မဟုတ် custom system မှ required data ပို့/လက်ခံနိုင်ရန် integrate လုပ်ပါ။</p></article>
+        <article class="card"><h3>5. End-to-end testing</h3><p>Standard, zero-rate, exempt, export, advance, credit note, invalid TIN, rejection, duplicate နှင့် downtime scenarios ကို test လုပ်ပါ။</p></article>
+        <article class="card"><h3>6. Controls</h3><p>Error queue, failed-status alert, daily reconciliation, access controls, audit log, retention, incident reporting နှင့် fallback process တည်ဆောက်ပါ။</p></article>
+      </div>
+      <div class="callout" style="margin-top:16px"><strong>Priority risk:</strong> Software ဝယ်ခြင်းထက် master data နှင့် process ownership အားနည်းခြင်းက implementation ကိုပိုမိုပျက်စီးစေတတ်သည်။ Finance, Sales, Procurement, IT နှင့် Tax တာဝန်ရှင်ကို ရှင်းလင်းစွာ သတ်မှတ်ပါ။</div>
+    </section>
+
+    <section class="section" id="sources">
+      <div class="sectionTitle"><div class="sectionNo">10</div><h2>Official Sources</h2></div>
+      <div class="sourceList">
+        <a class="sourceLink" target="_blank" rel="noopener" href="https://mof.gov.ae/en/about-us/initiatives/einvoicing/">UAE Ministry of Finance — eInvoicing Portal<small>Official programme overview, workflow and legislative documents</small></a>
+        <a class="sourceLink" target="_blank" rel="noopener" href="https://mof.gov.ae/wp-content/uploads/2026/06/UAE-Electronic-Invoicing-Guidelines_V-1.1-01June2026.pdf">UAE Electronic Invoicing Guidelines — Version 1.1, 1 June 2026<small>Scope, 5-corner framework, onboarding, scenarios and readiness</small></a>
+        <a class="sourceLink" target="_blank" rel="noopener" href="https://mof.gov.ae/wp-content/uploads/2026/05/Ministerial-Resolution-No.-66-of-2026-Amending-Certain-Provisions-of-Ministerial-Resolution-No.-244-of-2025-Regarding-the-Implementation-of-the-Electronic-Invoicing-System-En-20260514.pdf">Ministerial Resolution No. 66 of 2026<small>Large-business ASP appointment deadline amended to 30 October 2026</small></a>
+        <a class="sourceLink" target="_blank" rel="noopener" href="https://mof.gov.ae/wp-content/uploads/2026/02/UAE-Electronic-Invoice-mandatory-fields_V-1.0-23Feb2026.pdf">UAE Electronic Invoice Mandatory Fields — Version 1.0<small>Required Tax Invoice and commercial invoice XML data fields</small></a>
+        <a class="sourceLink" target="_blank" rel="noopener" href="https://mof.gov.ae/wp-content/uploads/2025/12/Cabinet-Decision-Violations-and-Penalties-eInvoicing-final-version-en-8.12.25.pdf">Cabinet Decision No. 106 of 2025<small>Violations and administrative penalties</small></a>
+        <a class="sourceLink" target="_blank" rel="noopener" href="https://mof.gov.ae/en/about-us/initiatives/einvoicing/pre-approved-einvoicing-service-providers/">MoF Pre‑Approved eInvoicing Service Providers<small>The list is periodically updated; pre-approval is not necessarily final accreditation</small></a>
+      </div>
+    </section>
+
+    <div class="footerGuide">Prepared as a standalone HTML explainer • Updated 23 July 2026</div>
+  </div>
+</main>
+
+</div>
+
+<script>
+document.documentElement.style.scrollBehavior = "smooth";
+const steps = [
+  {key:'submit', path:'submitPath', line:'line-submit', label:'label-submit', color:'#22f0df', text:'Supplier submits invoice data to its Accredited Service Provider', reveal:.42, dur:1900, startNode:'supplierNode', endNode:'lwinNode'},
+  {key:'peppol', path:'peppolPath', line:'line-peppol', label:'label-peppol', color:'#27bfff', text:'Supplier ASP sends PINT-AE XML to Buyer ASP via Peppol', reveal:.46, dur:2400, startNode:'lwinNode', endNode:'recipientNode'},
+  {key:'ack', path:'ackPath', line:'line-ack', label:'label-ack', color:'#a883ff', text:'Buyer ASP returns Message Level Status to Supplier ASP', reveal:.44, dur:2400, startNode:'recipientNode', endNode:'lwinNode'},
+  {key:'reportLeft', path:'reportLeftPath', line:'line-reportLeft', label:'label-reportLeft', color:'#27bfff', text:'Supplier ASP reports Tax Data Document to UAE FTA', reveal:.36, dur:2900, startNode:'lwinNode', endNode:'ftaNode'},
+  {key:'reportRight', path:'reportRightPath', line:'line-reportRight', label:'label-reportRight', color:'#27bfff', text:'Buyer ASP reports Tax Data Document to UAE FTA', reveal:.36, dur:2800, startNode:'recipientNode', endNode:'ftaNode'},
+  {key:'clearLeft', path:'clearLeftPath', line:'line-clearLeft', label:'label-clearLeft', color:'#ff6eb7', text:'FTA reporting confirmation sent to Supplier ASP', reveal:.42, dur:2200, startNode:'ftaNode', endNode:'lwinNode'},
+  {key:'clearRight', path:'clearRightPath', line:'line-clearRight', label:'label-clearRight', color:'#ff6eb7', text:'FTA reporting confirmation sent to Buyer ASP', reveal:.42, dur:2200, startNode:'ftaNode', endNode:'recipientNode'},
+  {key:'deliver', path:'deliverPath', line:'line-deliver', label:'label-deliver', color:'#a883ff', text:'Buyer ASP delivers the validated eInvoice to the Buyer', reveal:.43, dur:2100, startNode:'recipientNode', endNode:'buyerNode'}
+];
+
+const phases = [
+  {type:'single', step:steps[0], text:steps[0].text},
+  {type:'single', step:steps[1], text:steps[1].text},
+  {type:'single', step:steps[2], text:steps[2].text},
+  {type:'parallel', steps:[steps[3], steps[4]], text:'Both ASPs report Tax Data Documents to UAE FTA'},
+  {type:'parallel', steps:[steps[5], steps[6]], text:'FTA reporting confirmations returned to both ASPs'},
+  {type:'single', step:steps[7], text:steps[7].text}
+];
+
+const flowSvg = document.getElementById('flowSvg');
+const statusValue = document.getElementById('statusValue');
+const stepValue = document.getElementById('stepValue');
+const progressFill = document.getElementById('progressFill');
+const percentValue = document.getElementById('percentValue');
+const replayBtn = document.getElementById('replayBtn');
+let animationToken = 0;
+const nodeTimers = new Map();
+
+function pulseNode(nodeId, duration = 1100){
+  if(!nodeId) return;
+  const node = document.getElementById(nodeId);
+  if(!node) return;
+  if(nodeTimers.has(nodeId)) clearTimeout(nodeTimers.get(nodeId));
+  node.classList.remove('active');
+  void node.getBBox();
+  node.classList.add('active');
+  const timer = setTimeout(() => {
+    node.classList.remove('active');
+    nodeTimers.delete(nodeId);
+  }, duration);
+  nodeTimers.set(nodeId, timer);
+}
+
+function lightNode(nodeId){
+  if(!nodeId) return;
+  const node = document.getElementById(nodeId);
+  if(node) node.classList.add('lit');
+}
+
+function setProgress(value){
+  const pct = Math.max(0, Math.min(100, value));
+  progressFill.style.width = pct.toFixed(0) + '%';
+  percentValue.textContent = pct.toFixed(0) + '%';
+}
+
+function createPacket(color){
+  const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  circle.setAttribute('r', '7');
+  circle.setAttribute('fill', color);
+  circle.setAttribute('cx', '0');
+  circle.setAttribute('cy', '0');
+  circle.setAttribute('class', 'packet active');
+  flowSvg.appendChild(circle);
+  return circle;
+}
+
+function removePacket(packet){
+  if(packet && packet.parentNode) packet.parentNode.removeChild(packet);
+}
+
+function resetFlow(){
+  document.querySelectorAll('.path').forEach(el => el.classList.remove('active','done'));
+  document.querySelectorAll('.labelGroup').forEach(el => el.classList.remove('show'));
+  document.querySelectorAll('.nodeGroup').forEach(el => el.classList.remove('active','lit'));
+  document.querySelectorAll('.packet').forEach(el => el.remove());
+  nodeTimers.forEach(timer => clearTimeout(timer));
+  nodeTimers.clear();
+  lightNode('supplierNode');
+  setProgress(0);
+  statusValue.textContent = 'Ready';
+  stepValue.textContent = 'Step 0 / ' + phases.length;
+}
+
+function animateLine(step, onProgress){
+  return new Promise(resolve => {
+    const path = document.getElementById(step.path);
+    const line = document.getElementById(step.line);
+    const label = document.getElementById(step.label);
+    const packet = createPacket(step.color);
+    const len = path.getTotalLength();
+    const token = animationToken;
+    let revealed = false;
+    let endNodeActivated = false;
+
+    setTimeout(() => {
+      if(token !== animationToken){ removePacket(packet); return; }
+      const start = performance.now();
+      line.classList.add('active');
+
+      function frame(now){
+        if(token !== animationToken){ removePacket(packet); return; }
+        const t = Math.min((now - start) / step.dur, 1);
+        const eased = 1 - Math.pow(1 - t, 2.25);
+        const point = path.getPointAtLength(len * eased);
+        packet.setAttribute('cx', point.x);
+        packet.setAttribute('cy', point.y);
+
+        if(!revealed && t >= step.reveal){
+          revealed = true;
+          label.classList.add('show');
+        }
+        if(!endNodeActivated && t >= 0.92){
+          endNodeActivated = true;
+          lightNode(step.endNode);
+          pulseNode(step.endNode, 1200);
+        }
+        if(onProgress) onProgress(t);
+
+        if(t < 1){
+          requestAnimationFrame(frame);
+        }else{
+          label.classList.add('show');
+          line.classList.add('active');
+          removePacket(packet);
+          resolve();
+        }
+      }
+      requestAnimationFrame(frame);
+    }, 180);
+  });
+}
+
+async function animateSinglePhase(phase, phaseIndex){
+  statusValue.textContent = phase.text;
+  stepValue.textContent = 'Step ' + (phaseIndex + 1) + ' / ' + phases.length;
+  const base = (phaseIndex / phases.length) * 100;
+  const span = (1 / phases.length) * 100;
+  await animateLine(phase.step, t => setProgress(base + span * t));
+}
+
+async function animateParallelPhase(phase, phaseIndex){
+  statusValue.textContent = phase.text;
+  stepValue.textContent = 'Step ' + (phaseIndex + 1) + ' / ' + phases.length;
+  const base = (phaseIndex / phases.length) * 100;
+  const span = (1 / phases.length) * 100;
+  const progress = new Array(phase.steps.length).fill(0);
+  await Promise.all(phase.steps.map((step, i) =>
+    animateLine(step, t => {
+      progress[i] = t;
+      const avg = progress.reduce((a,b) => a + b, 0) / progress.length;
+      setProgress(base + span * avg);
+    })
+  ));
+}
+
+async function playFlow(){
+  animationToken++;
+  const token = animationToken;
+  resetFlow();
+  await new Promise(r => setTimeout(r, 550));
+  for(let i = 0; i < phases.length; i++){
+    if(token !== animationToken) return;
+    if(phases[i].type === 'parallel'){
+      await animateParallelPhase(phases[i], i);
+    } else {
+      await animateSinglePhase(phases[i], i);
+    }
+    if(i < phases.length - 1) await new Promise(r => setTimeout(r, 220));
+  }
+  if(token !== animationToken) return;
+  statusValue.textContent = 'Completed';
+  stepValue.textContent = 'Step ' + phases.length + ' / ' + phases.length;
+  setProgress(100);
+}
+
+replayBtn.addEventListener('click', playFlow);
+window.addEventListener('load', playFlow);
+</script>
+</body>
+</html>

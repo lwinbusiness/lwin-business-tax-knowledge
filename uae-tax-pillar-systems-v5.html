@@ -1,0 +1,1657 @@
+<!doctype html>
+<!-- Interactive mind-map revision: v5 multicolour modules -->
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>UAE Tax Pillar Systems</title>
+<style>:root {
+  color-scheme: light dark;
+  background-color: transparent !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --main-surface-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: light-dark(rgb(26 28 31), rgb(255 255 255));
+  --card: color-mix(in oklab, var(--foreground) 5%, transparent);
+  --card-foreground: var(--foreground);
+  --popover: light-dark(rgb(255 255 255), rgb(45 45 45));
+  --popover-foreground: var(--foreground);
+  --primary: light-dark(rgb(51 156 255), rgb(131 195 255));
+  --primary-foreground: light-dark(rgb(255 255 255), rgb(13 13 13));
+  --secondary: light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%));
+  --secondary-foreground: var(--foreground);
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: light-dark(
+    rgb(26 28 31 / 49.4%),
+    rgb(255 255 255 / 49.8%)
+  );
+  --accent: light-dark(rgb(229 242 255), rgb(13 39 63));
+  --accent-foreground: var(--primary);
+  --destructive: light-dark(rgb(226 85 7), rgb(255 133 73));
+  --border: light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%));
+  --input: light-dark(
+    rgb(26 28 31 / 11.8%),
+    color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+  );
+  --ring: light-dark(rgb(51 156 255), rgb(131 195 255 / 76%));
+  --font-size-base: 14px;
+  --red: light-dark(rgb(186 38 35), rgb(250 66 62));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans: -apple-system, system-ui, "Segoe UI", sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono",
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 430;
+  --font-weight-medium: 500;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --radius: 10px;
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 1.6);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 17 17'%3E%3Cpath d='M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z'/%3E%3C/svg%3E");
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+  --color-background-primary: var(--background);
+  --color-text-primary: var(--foreground);
+  --color-border-secondary: var(--border);
+}
+
+:root[data-visualize-standalone] {
+  background-color: var(--background) !important;
+}
+
+/* Generic mobile code-block hosts provide light/dark mode but no series palette.
+   AppBlock hosts set all six variables themselves. */
+:root:not([data-app-block-surface]) {
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(#f3883b, #f59a56);
+  --viz-series-3: light-dark(#5dc977, #74d58b);
+  --viz-series-4: light-dark(#eb77b1, #f08fc0);
+  --viz-series-5: light-dark(#9b79ec, #aa91ef);
+  --viz-series-6: light-dark(#3ab9b1, #5acbc2);
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html > body {
+  margin: 0;
+  padding: 5px;
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-normal);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+}
+
+:root:not([data-app-block-surface]) > body {
+  padding: 12px;
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: pointer;
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+b,
+strong,
+th {
+  font-weight: var(--font-weight-medium);
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+}
+
+.table-responsive > .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead th {
+  padding-block: 8px;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 16%, transparent);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 6px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align="right"]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align="center"]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+#widget > :not(.card) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--popover-foreground);
+  background: var(--popover);
+  box-shadow: none;
+  font-size: var(--font-size-tooltip);
+  line-height: var(--line-height-tooltip);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* The bundled tooltip runtime owns [data-tooltip]. AppBlock's CSS-only
+   pseudo-tooltip can widen dense grids even while hidden. */
+main [data-tooltip]::after {
+  content: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.viz-badge {
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+  color: var(--accent-foreground);
+  background: var(--accent);
+  font-weight: var(--font-weight-medium);
+}
+
+small,
+.text-small,
+.viz-badge {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls > .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls > .form-label > :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+.btn {
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  min-height: 28px;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn-primary {
+  border-color: transparent;
+  color: var(--interactive-label-primary-default, var(--primary-foreground));
+  background: var(--interactive-bg-primary-default, var(--foreground));
+  background-clip: padding-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(
+    in srgb,
+    var(--interactive-label-primary-default, var(--primary-foreground)) 50%,
+    transparent
+  );
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: padding-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  background: var(--secondary);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type="file"] {
+  padding: 0;
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control[type="file"]::file-selector-button {
+  min-height: 26px;
+  margin-right: 8px;
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+}
+
+.form-control[type="file"]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type="color"] {
+  width: 40px;
+  height: 28px;
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+}
+
+textarea.form-control {
+  height: auto;
+  min-height: 72px;
+  padding: 8px 10px;
+  resize: vertical;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-height: 28px;
+  margin: 0;
+  padding: 0 32px 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  border-radius: var(--radius-lg);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--muted-foreground) 50%),
+    linear-gradient(135deg, var(--muted-foreground) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 50%,
+    calc(100% - 10px) 50%;
+  background-repeat: no-repeat;
+  background-size: 4px 4px;
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-select:focus-visible {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-check {
+  display: flex;
+  min-height: 20px;
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"] {
+  border-color: var(--input);
+  border-radius: var(--radius-sm);
+  background-color: var(--secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch) .form-check-input[type="checkbox"]:checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type="checkbox"]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: "";
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+}
+
+.form-check-input[type="radio"] {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+}
+
+.form-check-input[type="radio"]:checked {
+  border: 2px solid var(--primary);
+  background:
+    radial-gradient(circle, var(--primary-foreground) 0 2.5px, transparent 3px),
+    var(--primary);
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+  box-shadow: var(--shadow-sm);
+  content: "";
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--primary);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: 28px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: 0;
+  accent-color: var(--primary);
+  background: linear-gradient(
+      color-mix(in srgb, var(--foreground) 7%, transparent),
+      color-mix(in srgb, var(--foreground) 7%, transparent)
+    )
+    center / 100% 2px no-repeat;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-webkit-slider-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range::-moz-range-track {
+  height: 28px;
+  background: transparent;
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: light-dark(var(--primary-foreground), var(--foreground));
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  border-color: var(--ring);
+  box-shadow: inset 0 0 0 1px var(--ring);
+}
+
+.form-range:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+    [aria-pressed="true"],
+    [aria-selected="true"],
+    .is-selected
+  ) {
+  border-color: var(--primary);
+  color: var(--primary-foreground);
+  background: var(--primary);
+}
+
+.btn.viz-tile:is([aria-pressed="true"], [aria-selected="true"], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget > svg {
+  width: 100%;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+</style>
+</head>
+<body>
+<div id="uae-pillar-guide">
+  <style>
+    #uae-pillar-guide { color: var(--foreground); max-width:1320px; margin:auto; }
+    #uae-pillar-guide .app-shell { display:grid; grid-template-columns:250px minmax(0,1fr); gap:24px; }
+    #uae-pillar-guide .sidebar { position:sticky; top:12px; align-self:start; max-height:calc(100vh - 24px); overflow:auto; padding:14px; border:1px solid var(--border); border-radius:16px; background:var(--card); }
+    #uae-pillar-guide .brand { font-weight:700; letter-spacing:.02em; margin-bottom:10px; }
+    #uae-pillar-guide .nav-link { display:block; padding:8px 9px; margin:2px 0; border-radius:8px; color:var(--muted-foreground); font-size:13px; }
+    #uae-pillar-guide .nav-link:hover, #uae-pillar-guide .nav-link.active { color:var(--foreground); background:var(--accent); text-decoration:none; }
+    #uae-pillar-guide .search-wrap { position:relative; margin:12px 0; }
+    #uae-pillar-guide .search-wrap input { width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:10px; background:var(--secondary); color:var(--foreground); }
+    #uae-pillar-guide .search-count { color:var(--muted-foreground); font-size:12px; margin-top:5px; }
+    #uae-pillar-guide mark { background:#ffe083; color:#231f10; border-radius:3px; padding:0 2px; }
+    #uae-pillar-guide .content { min-width:0; }
+    #uae-pillar-guide .hero { padding: 18px 0 10px; }
+    #uae-pillar-guide .eyebrow { color: var(--muted-foreground); margin: 0 0 6px; }
+    #uae-pillar-guide .lead { max-width: 76ch; margin: 8px 0 14px; }
+    #uae-pillar-guide .mindmap { margin:16px 0; }
+    #uae-pillar-guide .map-root { width:max-content; max-width:100%; margin:0 auto 28px; padding:12px 22px; border-radius:12px; background:var(--primary); color:var(--primary-foreground); font-weight:700; text-align:center; position:relative; }
+    #uae-pillar-guide .map-root::after { content:""; position:absolute; width:2px; height:29px; background:var(--border); left:50%; top:100%; }
+    #uae-pillar-guide .map-branches { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; position:relative; }
+    #uae-pillar-guide .map-branches::before { content:""; position:absolute; height:2px; background:var(--border); left:25%; right:25%; top:-15px; }
+    #uae-pillar-guide .branch { position:relative; padding:15px; border:1px solid var(--border); border-top:4px solid var(--viz-series-1); border-radius:14px; background:color-mix(in srgb,var(--viz-series-1) 7%,transparent); }
+    #uae-pillar-guide .branch::before { content:""; position:absolute; width:2px; height:15px; background:var(--border); left:50%; bottom:100%; }
+    #uae-pillar-guide .branch.excise { border-top-color:var(--viz-series-2); background:color-mix(in srgb,var(--viz-series-2) 7%,transparent); }
+    #uae-pillar-guide .branch h3 { margin:0 0 10px; text-align:center; }
+    #uae-pillar-guide .node-level { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+    #uae-pillar-guide .node { width:100%; min-height:48px; padding:8px 10px; border:1px solid var(--border); background:var(--secondary); color:var(--foreground); border-radius:10px; cursor:pointer; text-align:left; font:inherit; transition:transform .15s,border-color .15s,background .15s; }
+    #uae-pillar-guide .node:hover { transform:translateY(-1px); border-color:var(--primary); }
+    #uae-pillar-guide .node[aria-pressed="true"] { background:var(--primary); color:var(--primary-foreground); border-color:var(--primary); }
+    #uae-pillar-guide .node small { display:block; margin-top:2px; opacity:.72; }
+    #uae-pillar-guide .detail-panel { margin-top:14px; padding:16px; border:1px solid var(--border); border-left:4px solid var(--primary); border-radius:12px; background:var(--card); }
+    #uae-pillar-guide .detail-panel[hidden] { display:none; }
+    #uae-pillar-guide .detail-panel h3 { margin-bottom:7px; }
+    #uae-pillar-guide .example-case { margin-top:10px; padding:11px; border-radius:9px; background:color-mix(in srgb,var(--green) 9%,transparent); border-left:3px solid var(--green); }
+    #uae-pillar-guide .module-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:12px 0; }
+    #uae-pillar-guide .module-btn { --module-color:var(--viz-series-1); min-height:68px; padding:10px; border:1px solid color-mix(in srgb,var(--module-color) 38%,var(--border)); border-top:4px solid var(--module-color); border-radius:10px; background:color-mix(in srgb,var(--module-color) 12%,var(--secondary)); color:var(--foreground); cursor:pointer; text-align:left; font:inherit; transition:transform .15s,background .15s,border-color .15s; }
+    #uae-pillar-guide .module-btn:nth-child(1) { --module-color:var(--viz-series-1); }
+    #uae-pillar-guide .module-btn:nth-child(2) { --module-color:var(--viz-series-2); }
+    #uae-pillar-guide .module-btn:nth-child(3) { --module-color:var(--viz-series-3); }
+    #uae-pillar-guide .module-btn:nth-child(4) { --module-color:var(--viz-series-4); }
+    #uae-pillar-guide .module-btn:nth-child(5) { --module-color:var(--viz-series-5); }
+    #uae-pillar-guide .module-btn:nth-child(6) { --module-color:var(--viz-series-6); }
+    #uae-pillar-guide .module-btn:nth-child(7) { --module-color:var(--destructive); }
+    #uae-pillar-guide .module-btn:nth-child(8) { --module-color:var(--green); }
+    #uae-pillar-guide .module-btn:hover { transform:translateY(-2px); background:color-mix(in srgb,var(--module-color) 20%,var(--secondary)); border-color:var(--module-color); }
+    #uae-pillar-guide .module-btn b { display:block; color:var(--module-color); margin-bottom:3px; font-weight:700; }
+    #uae-pillar-guide .module-btn[aria-pressed="true"] { background:color-mix(in srgb,var(--module-color) 30%,var(--secondary)); color:var(--foreground); border-color:var(--module-color); box-shadow:inset 0 0 0 1px var(--module-color); }
+    #uae-pillar-guide .module-btn[aria-pressed="true"] b { color:var(--module-color); }
+    #uae-pillar-guide .section { margin:20px 0; }
+    #uae-pillar-guide .section-card { border:1px solid var(--border); border-radius:16px; padding:18px; background:color-mix(in srgb,var(--card) 70%,transparent); }
+    #uae-pillar-guide .section > h2 { margin-bottom:8px; }
+    #uae-pillar-guide details { border-top:1px solid var(--border); padding:10px 0; }
+    #uae-pillar-guide summary { cursor:pointer; font-weight:500; }
+    #uae-pillar-guide details p, #uae-pillar-guide details ul { max-width:88ch; }
+    #uae-pillar-guide .mm { color:var(--muted-foreground); }
+    #uae-pillar-guide .flow { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin:12px 0; }
+    #uae-pillar-guide .step { padding:10px; background:var(--muted); color:var(--muted-foreground); text-align:center; }
+    #uae-pillar-guide .arrow { display:none; }
+    #uae-pillar-guide .result { margin-top:12px; padding:12px; border-left:4px solid var(--viz-series-1); background:color-mix(in srgb,var(--viz-series-1) 8%,transparent); }
+    #uae-pillar-guide .warning { border-left-color:var(--destructive); background:color-mix(in srgb,var(--destructive) 8%,transparent); }
+    #uae-pillar-guide .good { border-left-color:var(--green); background:color-mix(in srgb,var(--green) 8%,transparent); }
+    #uae-pillar-guide .formula { font-family:ui-monospace,monospace; background:var(--muted); padding:8px; margin:8px 0; overflow-wrap:anywhere; }
+    #uae-pillar-guide .connections td:first-child { font-weight:500; }
+    #uae-pillar-guide .sources a { display:block; margin:5px 0; }
+    #uae-pillar-guide .kpis { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin:14px 0; }
+    #uae-pillar-guide .kpi { padding:14px; border:1px solid var(--border); border-radius:12px; background:var(--card); }
+    #uae-pillar-guide .kpi b { display:block; font-size:19px; color:var(--primary); }
+    #uae-pillar-guide .kpi span { color:var(--muted-foreground); font-size:12px; }
+    #uae-pillar-guide .risk-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    #uae-pillar-guide .risk-card { padding:13px; border-top:3px solid var(--viz-series-1); background:var(--muted); border-radius:10px; }
+    #uae-pillar-guide .risk-card.high { border-color:var(--destructive); }
+    #uae-pillar-guide .risk-card.medium { border-color:var(--viz-series-2); }
+    #uae-pillar-guide .calc-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+    #uae-pillar-guide .calc-card { border:1px solid var(--border); border-radius:14px; padding:15px; }
+    #uae-pillar-guide .calc-card label { display:block; margin:8px 0; color:var(--muted-foreground); }
+    #uae-pillar-guide .calc-card input { width:100%; margin-top:4px; }
+    #uae-pillar-guide .checklist { display:grid; gap:7px; }
+    #uae-pillar-guide .check-item { display:flex; gap:9px; align-items:flex-start; padding:9px; border:1px solid var(--border); border-radius:9px; }
+    #uae-pillar-guide .check-item.done { opacity:.62; background:color-mix(in srgb,var(--green) 10%,transparent); }
+    #uae-pillar-guide .progress { height:8px; background:var(--muted); border-radius:999px; overflow:hidden; margin:8px 0; }
+    #uae-pillar-guide .progress > span { display:block; height:100%; width:0; background:var(--green); transition:width .2s; }
+    #uae-pillar-guide .hidden-by-search { display:none !important; }
+    #uae-pillar-guide .mobile-nav { display:none; }
+    @media (max-width:650px) {
+      #uae-pillar-guide .app-shell { grid-template-columns:1fr; }
+      #uae-pillar-guide .sidebar { position:static; max-height:none; display:none; }
+      #uae-pillar-guide .sidebar.open { display:block; }
+      #uae-pillar-guide .mobile-nav { display:block; width:100%; margin:6px 0; padding:9px; border:1px solid var(--border); border-radius:9px; background:var(--secondary); color:var(--foreground); }
+      #uae-pillar-guide .map-branches, #uae-pillar-guide .flow, #uae-pillar-guide .kpis, #uae-pillar-guide .risk-grid, #uae-pillar-guide .calc-grid { grid-template-columns:1fr; }
+      #uae-pillar-guide .map-branches::before, #uae-pillar-guide .branch::before, #uae-pillar-guide .map-root::after { display:none; }
+      #uae-pillar-guide .node-level, #uae-pillar-guide .module-grid { grid-template-columns:1fr; }
+    }
+  </style>
+
+  <button class="mobile-nav" id="mobile-nav" type="button">☰ Open guide navigation</button>
+  <div class="app-shell">
+  <aside class="sidebar" aria-label="Guide navigation">
+    <div class="brand">UAE TAX CONTROL CENTRE</div>
+    <div class="search-wrap">
+      <input id="guide-search" type="search" placeholder="Search guide / ရှာရန်…" aria-label="Search guide">
+      <div id="search-count" class="search-count">Search all sections</div>
+    </div>
+    <nav>
+      <a class="nav-link" href="#overview">Overview</a>
+      <a class="nav-link" href="#mindmap">Master Mind Map</a>
+      <a class="nav-link" href="#pillar-one">Pillar One</a>
+      <a class="nav-link" href="#pillar-two">Pillar Two & DMTT</a>
+      <a class="nav-link" href="#scope-test">Scope Test</a>
+      <a class="nav-link" href="#advanced-calculators">Calculation Tools</a>
+      <a class="nav-link" href="#excise-pillars">Excise Pillars</a>
+      <a class="nav-link" href="#connections">Connections</a>
+      <a class="nav-link" href="#risk-dashboard">Risk Dashboard</a>
+      <a class="nav-link" href="#implementation">Implementation Checklist</a>
+      <a class="nav-link" href="#priorities">Decision Priorities</a>
+      <a class="nav-link" href="#references">Official References</a>
+    </nav>
+  </aside>
+  <main class="content">
+  <section class="hero" id="overview">
+    <p class="eyebrow">Professional bilingual reference • UAE • updated 25 July 2026</p>
+    <h1>UAE Tax Pillar Systems</h1>
+    <p class="lead">“Pillar system” has two different meanings here. OECD Pillar One/Pillar Two are international corporate-tax rules. The Excise Compliance Pillars are an operational control model used in this guide—not an OECD tax regime.</p>
+    <p class="mm">ဤနေရာတွင် “Pillar system” ဟူသောစကားလုံးသည် အဓိပ္ပာယ်နှစ်မျိုးရှိသည်။ OECD Pillar One/Pillar Two သည် နိုင်ငံတကာ Corporate Tax စနစ်ဖြစ်ပြီး Excise Compliance Pillars သည် Excise လုပ်ငန်းစဉ်များကို ထိန်းချုပ်ရန် ဤလမ်းညွှန်တွင် ဖွဲ့စည်းထားသော operating model ဖြစ်သည်။</p>
+    <div class="kpis">
+      <div class="kpi"><b>€750m</b><span>Pillar Two revenue threshold</span></div>
+      <div class="kpi"><b>2 of 4</b><span>Preceding fiscal years test</span></div>
+      <div class="kpi"><b>15%</b><span>GloBE minimum ETR</span></div>
+      <div class="kpi"><b>8</b><span>Excise operational pillars</span></div>
+    </div>
+  </section>
+
+  <section aria-label="Interactive Tax Pillar Master Mind Map" id="mindmap" class="section-card">
+    <h2>Tax Pillar Master Mind Map</h2>
+    <div class="mindmap">
+      <div class="map-root">UAE Tax Pillar Systems</div>
+      <div class="map-branches">
+        <div class="branch">
+          <h3>OECD Two-Pillar Solution</h3>
+          <div class="node-level">
+            <button class="node map-node" type="button" data-topic="pillar-one" aria-pressed="false"><b>Pillar One</b><small>Market taxing rights</small></button>
+            <button class="node map-node" type="button" data-topic="pillar-two" aria-pressed="false"><b>Pillar Two</b><small>15% global minimum</small></button>
+            <button class="node map-node" type="button" data-topic="amount-a" aria-pressed="false"><b>Amount A</b><small>Residual profit allocation</small></button>
+            <button class="node map-node" type="button" data-topic="amount-b" aria-pressed="false"><b>Amount B</b><small>Baseline distribution</small></button>
+            <button class="node map-node" type="button" data-topic="globe" aria-pressed="false"><b>GloBE</b><small>ETR & top-up calculation</small></button>
+            <button class="node map-node" type="button" data-topic="dmtt" aria-pressed="false"><b>UAE DMTT</b><small>Domestic top-up tax</small></button>
+            <button class="node map-node" type="button" data-topic="iir-utpr" aria-pressed="false"><b>IIR / UTPR</b><small>Parent & backstop rules</small></button>
+            <button class="node map-node" type="button" data-topic="sttr" aria-pressed="false"><b>STTR</b><small>Treaty source rule</small></button>
+          </div>
+        </div>
+        <div class="branch excise">
+          <h3>UAE Excise Compliance System</h3>
+          <div class="node-level">
+            <button class="node map-node" type="button" data-topic="excise-registration" aria-pressed="false"><b>Registration</b><small>Person + product/SKU</small></button>
+            <button class="node map-node" type="button" data-topic="excise-taxpoint" aria-pressed="false"><b>Tax Point</b><small>Import, production, stockpile</small></button>
+            <button class="node map-node" type="button" data-topic="excise-value" aria-pressed="false"><b>Valuation</b><small>Excise price + rate</small></button>
+            <button class="node map-node" type="button" data-topic="excise-operations" aria-pressed="false"><b>Operations</b><small>Import + production control</small></button>
+            <button class="node map-node" type="button" data-topic="excise-dz" aria-pressed="false"><b>Warehouse / DZ</b><small>Tax-suspended movements</small></button>
+            <button class="node map-node" type="button" data-topic="excise-dts" aria-pressed="false"><b>DTS</b><small>Stamp & traceability</small></button>
+            <button class="node map-node" type="button" data-topic="excise-return" aria-pressed="false"><b>Return / Payment</b><small>Filing, deduction, refund</small></button>
+            <button class="node map-node" type="button" data-topic="excise-audit" aria-pressed="false"><b>Audit Evidence</b><small>Stock reconciliation</small></button>
+          </div>
+        </div>
+      </div>
+      <div id="map-detail" class="detail-panel" hidden aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="section" id="pillar-one">
+    <h2>1. OECD Pillar One</h2>
+    <details open>
+      <summary>Purpose / ရည်ရွယ်ချက်</summary>
+      <p><b>English:</b> Pillar One changes where part of the profit of the world’s largest and most profitable multinational groups may be taxed. It gives market jurisdictions a taxing right even where the group has limited physical presence.</p>
+      <p class="mm"><b>မြန်မာ:</b> Pillar One သည် အလွန်ကြီးမားပြီး အမြတ်အစွန်းမြင့်သော multinational group များ၏ အမြတ်တစ်စိတ်တစ်ပိုင်းကို မည်သည့်နိုင်ငံက အခွန်ကောက်နိုင်သည်ကို ပြန်လည်ခွဲဝေခြင်းဖြစ်သည်။ Customer/market ရှိသော်လည်း physical office မရှိသည့်နိုင်ငံအားလည်း taxing right ရစေရန် ရည်ရွယ်သည်။</p>
+    </details>
+    <details>
+      <summary>Amount A — residual profit reallocation</summary>
+      <p><b>English:</b> The agreed design targets groups generally above EUR 20 billion revenue and above 10% profitability, subject to exclusions and detailed rules. A portion of residual profit is allocated to eligible market countries using revenue sourcing and nexus tests.</p>
+      <p class="mm"><b>မြန်မာ:</b> ယေဘုယျအားဖြင့် consolidated revenue EUR 20 billion ကျော်ပြီး profit margin 10% ကျော်သော group များကို ရည်ရွယ်သည်။ 10% ထက်ပိုသော residual profit ၏ အစိတ်အပိုင်းကို customer/market ရှိသောနိုင်ငံများသို့ nexus နှင့် revenue-sourcing rules ဖြင့် ခွဲဝေပေးသည်။ Extractives နှင့် regulated financial services ကဲ့သို့ exclusions များရှိနိုင်သည်။</p>
+      <div class="formula">Illustration only: Revenue 30bn × 15% margin = Profit 4.5bn → routine profit 3bn → residual 1.5bn → 25% reallocation pool ≈ 375m</div>
+      <p class="mm">ဤတွက်ချက်မှုသည် concept example သာဖြစ်ပြီး final liability မဟုတ်ပါ။ segmentation, exclusions, withholding and double-tax relief စည်းမျဉ်းများက result ကိုပြောင်းနိုင်သည်။</p>
+    </details>
+    <details>
+      <summary>Amount B — baseline distribution returns</summary>
+      <p><b>English:</b> Amount B simplifies the transfer-pricing approach for qualifying baseline marketing and distribution activities. It is not the same as Amount A and does not automatically apply to every distributor.</p>
+      <p class="mm"><b>မြန်မာ:</b> Amount B သည် qualifying baseline marketing and distribution activities များအတွက် transfer-pricing return သတ်မှတ်မှုကို ရိုးရှင်းစေရန်ဖြစ်သည်။ Distributor တိုင်းအလိုအလျောက် မဝင်ပါ။ Functions, assets, risks, industry grouping နှင့် local implementation ကို စစ်ရမည်။</p>
+    </details>
+    <details>
+      <summary>Implementation status — critical limitation</summary>
+      <div class="result warning"><b>Known as at 25 July 2026:</b> OECD’s Amount A MLC text has been published, but the OECD page states it is not yet open for signature. Therefore Pillar One Amount A should not be treated as a fully operating UAE tax charge today.</div>
+      <p class="mm"><b>အရေးကြီး:</b> Amount A MLC စာသားကိုထုတ်ပြန်ထားသော်လည်း လက်မှတ်ရေးထိုးရန် မဖွင့်ရသေးကြောင်း OECD ကဖော်ပြထားသည်။ ထို့ကြောင့် Pillar One ကို လက်ရှိ UAE တွင် စတင်အခွန်ပေးရမည့် active tax ဟု မယူဆရ။</p>
+    </details>
+  </section>
+
+  <section class="section" id="pillar-two">
+    <h2>2. OECD Pillar Two and UAE DMTT</h2>
+    <details open>
+      <summary>Scope test / ဘယ်သူဝင်သလဲ</summary>
+      <p><b>English:</b> Pillar Two GloBE generally applies to constituent entities of an MNE group with consolidated annual revenue of at least EUR 750 million in at least two of the four preceding fiscal years. UAE DMTT applies for fiscal years beginning on or after 1 January 2025 under Cabinet Decision No. 142 of 2024.</p>
+      <p class="mm"><b>မြန်မာ:</b> MNE group ၏ consolidated revenue သည် အရင်ဘဏ္ဍာရေးနှစ် ၄ နှစ်ထဲမှ အနည်းဆုံး ၂ နှစ်တွင် EUR 750 million ပြည့်/ကျော်ပါက ယေဘုယျအားဖြင့် scope ထဲဝင်သည်။ UAE DMTT သည် 1 January 2025 သို့မဟုတ် ထို့နောက်စသည့် fiscal year များအတွက် အသက်ဝင်သည်။</p>
+      <div class="result warning"><b>Common error:</b> AED 750 million မဟုတ်ပါ။ EUR 750 million ဖြစ်ပြီး UAE entity တစ်ခုတည်း၏ revenue မဟုတ်ဘဲ consolidated group revenue ကို စစ်ရသည်။</div>
+    </details>
+    <details>
+      <summary>GloBE mechanisms: QDMTT/DMTT, IIR, UTPR and STTR</summary>
+      <table class="table table-sm">
+        <thead><tr><th>Rule</th><th>English</th><th>မြန်မာ</th></tr></thead>
+        <tbody>
+          <tr><td>UAE DMTT / QDMTT</td><td>UAE collects domestic top-up tax first on low-taxed UAE constituent entities, if the domestic regime qualifies.</td><td>UAE entity များ၏ low-taxed income အပေါ် top-up tax ကို UAE က ဦးစွာကောက်ခံခြင်း။</td></tr>
+          <tr><td>IIR</td><td>Parent jurisdiction may charge top-up tax for low-taxed subsidiaries.</td><td>Low-taxed subsidiary အတွက် parent နိုင်ငံက top-up tax ကောက်နိုင်ခြင်း။</td></tr>
+          <tr><td>UTPR</td><td>Backstop allocation where low-tax profit is not fully picked up under an IIR.</td><td>IIR ဖြင့် မကောက်နိုင်သေးသော top-up amount ကို implementing countries ကြားခွဲဝေကောက်ခံသည့် backstop rule။</td></tr>
+          <tr><td>STTR</td><td>Treaty-based source-country rule for specified related-party payments taxed below the agreed minimum nominal rate.</td><td>သတ်မှတ် related-party payment ကို recipient နိုင်ငံတွင် အလွန်နိမ့်သော nominal rate ဖြင့်အခွန်ကောက်ပါက source နိုင်ငံအား treaty top-up right ပေးခြင်း။</td></tr>
+        </tbody>
+      </table>
+    </details>
+    <details>
+      <summary>ETR and top-up calculation</summary>
+      <div class="formula">Jurisdictional ETR = Adjusted Covered Taxes ÷ Net GloBE Income</div>
+      <div class="formula">Top-up % = 15% − Jurisdictional ETR (not below zero)</div>
+      <div class="formula">Top-up Tax ≈ Top-up % × (Net GloBE Income − Substance-based Income Exclusion) − eligible domestic top-up tax</div>
+      <p><b>Example:</b> UAE GloBE income AED 100m; adjusted covered tax AED 9m; ETR 9%. If substance exclusion is AED 10m, excess profit is AED 90m. Indicative gross top-up is 6% × AED 90m = AED 5.4m before other adjustments.</p>
+      <p class="mm"><b>ဥပမာ:</b> UAE GloBE income AED 100m၊ covered tax AED 9m ဖြစ်လျှင် ETR 9% ဖြစ်သည်။ substance exclusion AED 10m ဖြစ်ပါက excess profit AED 90m ဖြစ်ပြီး indicative top-up သည် 6% × AED 90m = AED 5.4m ဖြစ်သည်။ ဒါသည် simplified example သာဖြစ်သည်။</p>
+    </details>
+    <details>
+      <summary>Free-zone 0% and UAE 9% relationship</summary>
+      <p><b>English:</b> A Qualifying Free Zone Person’s 0% Corporate Tax treatment does not create a Pillar Two exemption. If the group is in scope, UAE jurisdictional ETR is calculated under GloBE rules, not by simply comparing the headline 0% or 9% rate with 15%.</p>
+      <p class="mm"><b>မြန်မာ:</b> Qualifying Free Zone Person ၏ 0% Corporate Tax သည် Pillar Two exemption မဟုတ်ပါ။ Group scope ထဲဝင်ပါက 0%/9% statutory rate ကို 15% နှင့်တိုက်ရိုက်နုတ်ခြင်းမဟုတ်ဘဲ GloBE income, covered taxes, deferred tax, substance exclusion နှင့် entity rules တို့ဖြင့် jurisdictional ETR တွက်ရမည်။</p>
+    </details>
+    <details>
+      <summary>Safe harbours, exclusions and evidence</summary>
+      <ul>
+        <li>Transitional CbCR Safe Harbour may reduce full calculations where the prescribed tests and data quality requirements are met.</li>
+        <li>De minimis, simplified ETR and routine-profits tests are not interchangeable; evidence must support the selected test.</li>
+        <li>Excluded entities can include certain governmental entities, international organisations, non-profits, pension funds and qualifying investment-fund/real-estate UPEs, subject to exact definitions.</li>
+        <li>Keep consolidation packs, entity mapping, CbCR data, deferred-tax schedules, payroll and tangible-asset data.</li>
+      </ul>
+      <p class="mm">Safe harbour ကို “အခွန်မရှိ” ဟု မဆိုလိုပါ။ Qualification ကိုနှစ်တိုင်းစစ်ပြီး source data reconciliation နှင့် audit trail ထိန်းထားရမည်။</p>
+    </details>
+  </section>
+
+  <section class="section section-card" id="scope-test">
+    <h2>3. Interactive Pillar Two starting-point test</h2>
+    <div class="viz-controls">
+      <label class="form-label">Group operates in more than one jurisdiction?
+        <select id="mne" class="form-select"><option value="no">No</option><option value="yes">Yes</option></select>
+      </label>
+      <label class="form-label">Years ≥ EUR 750m in preceding four years
+        <select id="years" class="form-select"><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select>
+      </label>
+      <label class="form-label">UAE jurisdictional ETR estimate (%)
+        <input id="etr" class="form-control" type="number" min="0" max="100" step="0.1" value="9">
+      </label>
+    </div>
+    <div id="scope-result" class="result" aria-live="polite"></div>
+  </section>
+
+  <section class="section" id="advanced-calculators">
+    <h2>4. Calculation Tools</h2>
+    <p>These calculators are screening tools only. They do not replace a jurisdictional GloBE computation or a legally validated Excise valuation.</p>
+    <p class="mm">ဤ calculators များသည် အစပိုင်းစစ်ဆေးရန်သာဖြစ်ပြီး final GloBE calculation သို့မဟုတ် တရားဝင် Excise valuation ကို အစားမထိုးပါ။</p>
+    <div class="calc-grid">
+      <div class="calc-card">
+        <h3>Pillar Two indicative top-up</h3>
+        <label>Net GloBE income (AED)<input id="globe-income" class="form-control" type="number" min="0" value="100000000"></label>
+        <label>Adjusted covered taxes (AED)<input id="covered-tax" class="form-control" type="number" min="0" value="9000000"></label>
+        <label>Substance exclusion (AED)<input id="substance" class="form-control" type="number" min="0" value="10000000"></label>
+        <div id="topup-result" class="result"></div>
+      </div>
+      <div class="calc-card">
+        <h3>Excise ad-valorem screening</h3>
+        <label>Retail selling price, VAT inclusive (AED)<input id="rsp" class="form-control" type="number" min="0" step=".01" value="100"></label>
+        <label>Standard price / FTA minimum (AED)<input id="standard-price" class="form-control" type="number" min="0" step=".01" value="85"></label>
+        <label>Excise rate (%)<input id="excise-rate" class="form-control" type="number" min="0" max="100" value="100"></label>
+        <div id="excise-result" class="result"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="excise-pillars">
+    <h2>5. UAE Excise Tax Compliance Pillars</h2>
+    <p><b>Important distinction:</b> The eight pillars below are a practical control framework. They are not named “OECD Pillars” and do not create a separate tax.</p>
+    <p class="mm"><b>ခွဲခြားရန်:</b> အောက်ပါ pillar ၈ ခုသည် Excise compliance ကိုစီမံရန် practical framework ဖြစ်ပြီး သီးခြားအခွန်အသစ် မဟုတ်ပါ။</p>
+    <div class="module-grid" aria-label="Select an Excise compliance module">
+      <button type="button" class="module-btn excise-module" data-module="person" aria-pressed="false"><b>01</b>Taxable Person Registration</button>
+      <button type="button" class="module-btn excise-module" data-module="product" aria-pressed="false"><b>02</b>Product / SKU Registration</button>
+      <button type="button" class="module-btn excise-module" data-module="taxpoint" aria-pressed="false"><b>03</b>Tax Point & Valuation</button>
+      <button type="button" class="module-btn excise-module" data-module="operations" aria-pressed="false"><b>04</b>Import / Production Control</button>
+      <button type="button" class="module-btn excise-module" data-module="warehouse" aria-pressed="false"><b>05</b>Warehouse / Designated Zone</button>
+      <button type="button" class="module-btn excise-module" data-module="dts" aria-pressed="false"><b>06</b>Digital Tax Stamps</button>
+      <button type="button" class="module-btn excise-module" data-module="return" aria-pressed="false"><b>07</b>Return / Payment / Refund</button>
+      <button type="button" class="module-btn excise-module" data-module="audit" aria-pressed="false"><b>08</b>Reconciliation / Audit</button>
+    </div>
+    <div id="excise-module-detail" class="detail-panel" hidden aria-live="polite"></div>
+  </section>
+
+  <section class="section" id="connections">
+    <h2>6. What is connected—and what is not</h2>
+    <div class="table-responsive">
+      <table class="table connections">
+        <thead><tr><th>System</th><th>Connection</th><th>Not the same as</th></tr></thead>
+        <tbody>
+          <tr><td>Pillar One</td><td>Corporate tax treaties, nexus, profit allocation, transfer pricing, market revenue</td><td>VAT or Excise Tax</td></tr>
+          <tr><td>Pillar Two</td><td>UAE CT, Free Zone 0%, DMTT, consolidated accounts, CbCR, transfer pricing, deferred tax</td><td>A blanket 15% UAE CT rate for every company</td></tr>
+          <tr><td>UAE DMTT</td><td>Low-taxed UAE constituent entities of in-scope MNE groups</td><td>Ordinary 9% CT or Excise return</td></tr>
+          <tr><td>Excise pillars</td><td>Customs, imports, production, warehouses, DZ, DTS, inventory, VAT-on-import value</td><td>OECD Two-Pillar Solution</td></tr>
+          <tr><td>Excise + VAT</td><td>Excise may form part of the taxable value on which VAT is calculated; classification and timing must align</td><td>The same tax or the same return</td></tr>
+          <tr><td>Excise + Customs</td><td>Customs declarations and controlled movements provide key evidence</td><td>Customs payment automatically settling every Excise obligation</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section" id="risk-dashboard">
+    <h2>7. Risk Dashboard</h2>
+    <div class="risk-grid">
+      <div class="risk-card high"><h3>High risk</h3><p>Threshold assumed from a single UAE entity; Free Zone 0% treated as a DMTT exemption; Excise SKU released before registration.</p></div>
+      <div class="risk-card medium"><h3>Medium risk</h3><p>CbCR data not reconciled to consolidation; warehouse movements lack reference numbers; excise price evidence is outdated.</p></div>
+      <div class="risk-card"><h3>Control target</h3><p>Named owner, documented legal basis, monthly reconciliation, exception log and management sign-off for every material adjustment.</p></div>
+    </div>
+  </section>
+
+  <section class="section section-card" id="implementation">
+    <h2>8. 30-Day Implementation Checklist</h2>
+    <div id="check-progress-text">0 of 8 controls completed</div>
+    <div class="progress"><span id="check-progress"></span></div>
+    <div class="checklist" id="control-checklist">
+      <label class="check-item"><input type="checkbox"> Confirm UPE, group perimeter and constituent entities</label>
+      <label class="check-item"><input type="checkbox"> Test consolidated EUR 750m threshold for each of four years</label>
+      <label class="check-item"><input type="checkbox"> Reconcile CbCR, consolidation and UAE statutory accounts</label>
+      <label class="check-item"><input type="checkbox"> Prepare covered-tax and deferred-tax schedules</label>
+      <label class="check-item"><input type="checkbox"> Map every Excise SKU, classification and registered price</label>
+      <label class="check-item"><input type="checkbox"> Map customs, production, DZ and market-release tax points</label>
+      <label class="check-item"><input type="checkbox"> Perform stock-to-return reconciliation and investigate variances</label>
+      <label class="check-item"><input type="checkbox"> Assign filing owner, reviewer, evidence folder and due-date calendar</label>
+    </div>
+  </section>
+
+  <section class="section" id="priorities">
+    <h2>9. Decision priorities</h2>
+    <div class="result warning"><b>Stop:</b> Calling every tax-control framework “Pillar Two”; applying 15% to every UAE company; assuming Free Zone 0% is protected from DMTT; treating a customs free zone as an Excise DZ.</div>
+    <div class="result good"><b>Start:</b> Map the legal group and UPE, test EUR 750m for two of four years, prepare UAE jurisdictional ETR data, and separately map every Excise SKU and taxable movement.</div>
+    <div class="result"><b>Increase:</b> Consolidation-data quality, transfer-pricing support, customs-to-stock reconciliations, product master governance and written evidence for exemptions/suspensions/refunds.</div>
+  </section>
+
+  <section class="section sources" id="references">
+    <h2>Official references</h2>
+    <a href="https://www.oecd.org/en/topics/reallocation-of-taxing-rights-to-market-jurisdictions.html">OECD — Pillar One / reallocation of taxing rights</a>
+    <a href="https://www.oecd.org/en/topics/sub-issues/reallocation-of-taxing-rights-to-market-jurisdictions/multilateral-convention-to-implement-amount-a-of-pillar-one.html">OECD — Amount A Multilateral Convention</a>
+    <a href="https://www.oecd.org/en/topics/sub-issues/transfer-pricing/pillar-one-amount-b.html">OECD — Pillar One Amount B</a>
+    <a href="https://www.oecd.org/en/topics/sub-issues/global-minimum-tax/global-anti-base-erosion-model-rules-pillar-two.html">OECD — GloBE Rules / Pillar Two</a>
+    <a href="https://mof.gov.ae/wp-content/uploads/2025/04/English-Ministerial-Decision-No.-88-of-2025-on-Commentary-and-Guidance-for-Top-Up-Tax.pdf">UAE MoF — Ministerial Decision No. 88 of 2025</a>
+    <a href="https://tax.gov.ae/en/taxes/excise.tax/excise.tax.topics.aspx">UAE FTA — Excise Tax Topics</a>
+  </section>
+  </main>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById("uae-pillar-guide");
+      var mne = root.querySelector("#mne");
+      var years = root.querySelector("#years");
+      var etr = root.querySelector("#etr");
+      var result = root.querySelector("#scope-result");
+      function updateScope() {
+        var isMne = mne.value === "yes";
+        var qualifyingYears = Number(years.value);
+        var rate = Math.max(0, Number(etr.value) || 0);
+        if (!isMne) {
+          result.innerHTML = "<b>Starting result:</b> Not an MNE group, so the ordinary Pillar Two MNE scope test is not met. Still verify group structure and excluded-entity rules.";
+          return;
+        }
+        if (qualifyingYears < 2) {
+          result.innerHTML = "<b>Starting result:</b> The EUR 750m two-of-four-years test is not met on the inputs. Recheck consolidated—not standalone—revenue and merger/de-merger rules.";
+          return;
+        }
+        var gap = Math.max(0, 15 - rate).toFixed(1);
+        result.innerHTML = "<b>Starting result:</b> Potentially in scope. Estimated ETR gap to 15%: <b>" + gap + "%</b>. This is not the final top-up rate; calculate GloBE income, covered taxes, safe harbours, substance exclusion and UAE DMTT adjustments.";
+      }
+      [mne, years, etr].forEach(function (el) { el.addEventListener("input", updateScope); });
+      updateScope();
+
+      root.querySelector("#mobile-nav").addEventListener("click", function () {
+        root.querySelector(".sidebar").classList.toggle("open");
+      });
+
+      function money(value) { return new Intl.NumberFormat("en-AE", { maximumFractionDigits: 2 }).format(value); }
+      var calcInputs = ["globe-income", "covered-tax", "substance"].map(function (id) { return root.querySelector("#" + id); });
+      function updateTopup() {
+        var income = Math.max(0, Number(calcInputs[0].value) || 0);
+        var tax = Math.max(0, Number(calcInputs[1].value) || 0);
+        var exclusion = Math.min(income, Math.max(0, Number(calcInputs[2].value) || 0));
+        var calcEtr = income ? tax / income * 100 : 0;
+        var topupRate = Math.max(0, 15 - calcEtr);
+        var amount = topupRate / 100 * Math.max(0, income - exclusion);
+        root.querySelector("#topup-result").innerHTML = "<b>Indicative ETR:</b> " + calcEtr.toFixed(2) + "%<br><b>Top-up rate:</b> " + topupRate.toFixed(2) + "%<br><b>Indicative top-up:</b> AED " + money(amount);
+      }
+      calcInputs.forEach(function (el) { el.addEventListener("input", updateTopup); });
+      updateTopup();
+
+      var exciseInputs = ["rsp", "standard-price", "excise-rate"].map(function (id) { return root.querySelector("#" + id); });
+      function updateExcise() {
+        var vatInclusive = Math.max(0, Number(exciseInputs[0].value) || 0);
+        var standard = Math.max(0, Number(exciseInputs[1].value) || 0);
+        var rate = Math.max(0, Number(exciseInputs[2].value) || 0) / 100;
+        var priceExVat = vatInclusive / 1.05;
+        var base = Math.max(priceExVat, standard);
+        root.querySelector("#excise-result").innerHTML = "<b>Price excluding VAT:</b> AED " + money(priceExVat) + "<br><b>Screening excise price:</b> AED " + money(base) + "<br><b>Indicative excise tax:</b> AED " + money(base * rate);
+      }
+      exciseInputs.forEach(function (el) { el.addEventListener("input", updateExcise); });
+      updateExcise();
+
+      var checklist = Array.from(root.querySelectorAll("#control-checklist input"));
+      function updateChecklist() {
+        var complete = checklist.filter(function (box) { return box.checked; }).length;
+        checklist.forEach(function (box) { box.closest(".check-item").classList.toggle("done", box.checked); });
+        root.querySelector("#check-progress").style.width = (complete / checklist.length * 100) + "%";
+        root.querySelector("#check-progress-text").textContent = complete + " of " + checklist.length + " controls completed";
+      }
+      checklist.forEach(function (box) { box.addEventListener("change", updateChecklist); });
+      updateChecklist();
+
+      var mapTopics = {
+        "pillar-one": {
+          title:"Pillar One — Market Taxing Rights",
+          body:"Part of the residual profit of the world’s largest and most profitable MNE groups may be reallocated to customer or market jurisdictions even without a traditional physical presence.",
+          mm:"ကမ္ဘာ့အကြီးဆုံးနှင့် အမြတ်အစွန်းအမြင့်ဆုံး MNE group များ၏ residual profit တစ်စိတ်တစ်ပိုင်းကို physical presence မရှိသော်လည်း customer/market ရှိသောနိုင်ငံသို့ ခွဲဝေပေးနိုင်သည့်စနစ်ဖြစ်သည်။",
+          example:"A global digital group sells heavily into the UAE without a UAE office. If the final Amount A rules become effective and all thresholds are met, part of residual profit may be allocated to the UAE market."
+        },
+        "pillar-two": {
+          title:"Pillar Two — 15% Global Minimum Tax",
+          body:"Generally tests MNE groups with consolidated revenue of at least EUR 750 million in two of the four preceding fiscal years. The calculation is jurisdictional and uses GloBE income and covered taxes.",
+          mm:"အရင် fiscal year ၄ နှစ်ထဲမှ ၂ နှစ်တွင် consolidated revenue EUR 750 million ပြည့်/ကျော်သော MNE group များကို ယေဘုယျအားဖြင့် စစ်ဆေးပြီး GloBE income နှင့် covered taxes ဖြင့် နိုင်ငံအလိုက် ETR တွက်သည်။",
+          example:"A group has EUR 1.1bn consolidated revenue and UAE entities with an 11% GloBE ETR. The top-up is not simply 4% of accounting profit; GloBE adjustments and substance exclusion must be applied."
+        },
+        "amount-a": {
+          title:"Amount A — Residual Profit Reallocation",
+          body:"The agreed design generally targets groups above EUR 20 billion revenue and above 10% profitability, subject to exclusions, nexus and revenue-sourcing rules.",
+          mm:"ယေဘုယျအားဖြင့် revenue EUR 20 billion ကျော်ပြီး profitability 10% ကျော်သော group များကို exclusions, nexus နှင့် revenue-sourcing rules အရ စစ်ဆေးသည်။",
+          example:"Revenue EUR 30bn and profit EUR 4.5bn gives a 15% margin. Routine profit at 10% is EUR 3bn; the remaining EUR 1.5bn is the residual-profit starting point, not the final tax base."
+        },
+        "amount-b": {
+          title:"Amount B — Baseline Distribution",
+          body:"A simplified transfer-pricing approach for qualifying baseline marketing and distribution activities. It does not automatically apply to every distributor.",
+          mm:"Qualifying baseline marketing နှင့် distribution activities များအတွက် transfer-pricing approach ကို ရိုးရှင်းစေခြင်းဖြစ်ပြီး distributor တိုင်းအလိုအလျောက်မဝင်ပါ။",
+          example:"A UAE distributor performs routine sales functions and owns no unique intangibles. Its functions, assets and risks must first pass the scoping criteria before an Amount B return can be considered."
+        },
+        "globe": {
+          title:"GloBE — ETR and Top-up Computation",
+          body:"Jurisdictional ETR equals adjusted covered taxes divided by net GloBE income. Top-up percentage is the positive difference between 15% and that ETR, after prescribed adjustments.",
+          mm:"Jurisdictional ETR = adjusted covered taxes ÷ net GloBE income ဖြစ်ပြီး 15% နှင့် ETR ကြား အပေါင်းလက္ခဏာ gap ကို prescribed adjustments များအပြီး top-up percentage အဖြစ်ယူသည်။",
+          example:"GloBE income AED 100m, covered taxes AED 9m and substance exclusion AED 10m produce a 9% ETR and an indicative AED 5.4m gross top-up before other adjustments."
+        },
+        "dmtt": {
+          title:"UAE DMTT — Domestic Minimum Top-up Tax",
+          body:"For fiscal years beginning on or after 1 January 2025, the UAE may collect domestic top-up tax on low-taxed UAE constituent entities of in-scope MNE groups.",
+          mm:"1 January 2025 သို့မဟုတ် ထို့နောက်စသည့် fiscal year များတွင် scope ဝင် MNE group ၏ low-taxed UAE constituent entities အပေါ် UAE က domestic top-up tax ကောက်နိုင်သည်။",
+          example:"A qualifying free-zone entity pays 0% UAE Corporate Tax, but its group exceeds the Pillar Two threshold. The 0% status does not itself remove the entity from UAE DMTT testing."
+        },
+        "iir-utpr": {
+          title:"IIR and UTPR",
+          body:"The Income Inclusion Rule allows a parent jurisdiction to charge top-up tax for low-taxed subsidiaries. UTPR is the backstop where the low-tax amount is not fully collected under an IIR.",
+          mm:"IIR သည် low-taxed subsidiary အတွက် parent jurisdiction က top-up tax ကောက်ရန်ဖြစ်ပြီး UTPR သည် IIR ဖြင့် အပြည့်မကောက်နိုင်သည့်အခါ အသုံးပြုသည့် backstop rule ဖြစ်သည်။",
+          example:"If a low-taxed subsidiary’s top-up is not collected through a qualifying parent-level IIR, implementing UTPR jurisdictions may allocate the remaining amount under their rules."
+        },
+        "sttr": {
+          title:"STTR — Subject to Tax Rule",
+          body:"A treaty-based source rule for specified related-party payments that are taxed below the agreed minimum nominal rate in the recipient jurisdiction.",
+          mm:"Recipient jurisdiction တွင် agreed minimum nominal rate ထက်နိမ့်စွာ အခွန်ကောက်သော specified related-party payments များအတွက် source country ကို treaty-based taxing right ပေးသည်။",
+          example:"A UAE company pays covered related-party interest to a treaty jurisdiction where that payment is nominally taxed below the STTR minimum. The source country may obtain an additional treaty taxing right."
+        },
+        "excise-registration": {
+          title:"Excise Registration",
+          body:"Test both taxable-person registration and product/SKU registration before import, production, stockpiling or release from an Excise Designated Zone.",
+          mm:"Import, production, stockpiling သို့မဟုတ် Excise DZ မှ release မလုပ်မီ taxable-person registration နှင့် product/SKU registration နှစ်မျိုးလုံး စစ်ရမည်။",
+          example:"An importer has an Excise TRN but imports a new energy-drink SKU that was never product-registered. The company registration alone does not cure the SKU failure."
+        },
+        "excise-taxpoint": {
+          title:"Excise Tax Point",
+          body:"Identify the legal event: import, local production or release, stockpiling, or release from a Designated Zone. The tax date must match operational and customs evidence.",
+          mm:"Import, local production/release, stockpiling သို့မဟုတ် DZ release အဖြစ် legal event ကိုသတ်မှတ်ပြီး tax date ကို operations/customs evidence နှင့်ညီရမည်။",
+          example:"Goods leave an approved DZ for UAE mainland sale on 10 August. The release record, customs movement and excise reporting must all support the same taxable event."
+        },
+        "excise-value": {
+          title:"Excise Valuation",
+          body:"For ad-valorem goods, verify the legally required excise price and applicable rate. Do not use an invoice price automatically where higher-of valuation rules apply.",
+          mm:"Ad-valorem goods တွင် legally required excise price နှင့် rate ကိုစစ်ရပြီး higher-of rule သက်ရောက်လျှင် invoice price ကိုအလိုအလျောက်မသုံးရ။",
+          example:"A tobacco product invoices at AED 70 but the applicable published/standard price is AED 90. If the higher-of rule applies, AED 90 is the screening base."
+        },
+        "excise-operations": {
+          title:"Import and Production Controls",
+          body:"Match importer code, customs declaration, product record, quantity and unit. Producers also reconcile recipes, raw materials, wastage, output and finished stock.",
+          mm:"Importer code, customs declaration, product record, quantity နှင့် unit ကိုတိုက်စစ်ပြီး producer များက recipe, raw material, wastage, output နှင့် finished stock ကို reconcile လုပ်ရမည်။",
+          example:"Customs shows 12,000 cans, the FTA product record uses cartons and the return reports 11,500 cans. The unit conversion and 500-can variance require evidence."
+        },
+        "excise-dz": {
+          title:"Warehouse and Designated Zone",
+          body:"Tax suspension depends on approved Excise DZ status, physical controls, guarantees, records and valid movements. A customs free zone is not automatically an Excise DZ.",
+          mm:"Tax suspension ရရန် approved Excise DZ status, physical controls, guarantee, records နှင့် valid movements လိုအပ်ပြီး customs free zone ဖြစ်ခြင်းတစ်ခုတည်းမလုံလောက်ပါ။",
+          example:"Goods stored in an ordinary free-zone warehouse are assumed tax-suspended. If that location lacks Excise DZ approval, the assumption may fail and tax can become due."
+        },
+        "excise-dts": {
+          title:"Digital Tax Stamps",
+          body:"Where DTS applies, control ordering, affixing, activation, damaged or unused stamps, imports and market-release traceability.",
+          mm:"DTS သက်ရောက်သော goods များအတွက် order, affixing, activation, damaged/unused stamps, import နှင့် market-release traceability ကိုထိန်းရမည်။",
+          example:"The stamp system shows 10,000 activated stamps but only 9,800 stamped packs in finished inventory. The 200-stamp difference needs a documented investigation."
+        },
+        "excise-return": {
+          title:"Return, Payment, Deduction and Refund",
+          body:"File and pay by the applicable deadline. Deductions and refunds need the correct legal route and complete evidence; export alone is not sufficient proof.",
+          mm:"သက်ဆိုင်ရာ deadline အတွင်း return file နှင့် payment လုပ်ရပြီး deduction/refund အတွက် legal route မှန်ကန်မှုနှင့် evidence ပြည့်စုံမှုလိုအပ်သည်။",
+          example:"Excise-paid goods are exported. Customs exit evidence, purchase/tax records and the eligible refund route must be reconciled before claiming."
+        },
+        "excise-audit": {
+          title:"Reconciliation and Audit Evidence",
+          body:"Reconcile opening stock, imports, production, exports, taxable releases, approved losses and closing stock. Investigate every unexplained variance.",
+          mm:"Opening stock, imports, production, exports, taxable releases, approved losses နှင့် closing stock ကို reconcile လုပ်ပြီး unexplained variance တိုင်းကိုစစ်ရမည်။",
+          example:"Book closing stock is 50,000 units but the warehouse count is 49,400. The 600-unit shortage cannot be treated as tax-free loss without a valid basis and evidence."
+        }
+      };
+
+      function topicHtml(topic) {
+        return "<h3>" + topic.title + "</h3><p><b>English:</b> " + topic.body + "</p><p class=\"mm\"><b>မြန်မာ:</b> " + topic.mm + "</p><div class=\"example-case\"><b>Example case:</b> " + topic.example + "</div>";
+      }
+      var mapDetail = root.querySelector("#map-detail");
+      root.querySelectorAll(".map-node").forEach(function (button) {
+        button.addEventListener("click", function () {
+          var isActive = button.getAttribute("aria-pressed") === "true";
+          root.querySelectorAll(".map-node").forEach(function (item) { item.setAttribute("aria-pressed", "false"); });
+          if (isActive) {
+            mapDetail.hidden = true;
+            mapDetail.innerHTML = "";
+          } else {
+            button.setAttribute("aria-pressed", "true");
+            mapDetail.innerHTML = topicHtml(mapTopics[button.dataset.topic]);
+            mapDetail.hidden = false;
+          }
+        });
+      });
+
+      var exciseModules = {
+        person:mapTopics["excise-registration"],
+        product:{
+          title:"Product / SKU Registration",
+          body:"Register every taxable SKU with correct category, ingredients, pack size, retail price and required laboratory or conformity evidence before the taxable event.",
+          mm:"Taxable SKU တစ်ခုချင်းစီ၏ category, ingredients, pack size, retail price နှင့်လိုအပ်သော lab/conformity evidence ကို taxable event မတိုင်မီ register လုပ်ရမည်။",
+          example:"A registered importer launches a new 330ml flavour under an existing brand. Different ingredients or pack data can make it a separate SKU requiring registration before import."
+        },
+        taxpoint:mapTopics["excise-taxpoint"],
+        operations:mapTopics["excise-operations"],
+        warehouse:mapTopics["excise-dz"],
+        dts:mapTopics["excise-dts"],
+        return:mapTopics["excise-return"],
+        audit:mapTopics["excise-audit"]
+      };
+      var moduleDetail = root.querySelector("#excise-module-detail");
+      root.querySelectorAll(".excise-module").forEach(function (button) {
+        button.addEventListener("click", function () {
+          var isActive = button.getAttribute("aria-pressed") === "true";
+          root.querySelectorAll(".excise-module").forEach(function (item) { item.setAttribute("aria-pressed", "false"); });
+          if (isActive) {
+            moduleDetail.hidden = true;
+            moduleDetail.innerHTML = "";
+          } else {
+            button.setAttribute("aria-pressed", "true");
+            moduleDetail.innerHTML = topicHtml(exciseModules[button.dataset.module]);
+            moduleDetail.hidden = false;
+          }
+        });
+      });
+
+      var search = root.querySelector("#guide-search");
+      var searchable = Array.from(root.querySelectorAll("main > section"));
+      search.addEventListener("input", function () {
+        var query = search.value.trim().toLowerCase();
+        var matches = 0;
+        searchable.forEach(function (section) {
+          var visible = !query || section.textContent.toLowerCase().includes(query);
+          section.classList.toggle("hidden-by-search", !visible);
+          if (visible && query) matches++;
+        });
+        root.querySelector("#search-count").textContent = query ? matches + " matching section(s)" : "Search all sections";
+      });
+
+      var links = Array.from(root.querySelectorAll(".nav-link"));
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            links.forEach(function (link) { link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id); });
+          }
+        });
+      }, { rootMargin:"-20% 0px -70% 0px" });
+      searchable.forEach(function (section) { if (section.id) observer.observe(section); });
+    }());
+  </script>
+</div>
+
+<script id="codex-visualization-floating-ui-core" src="https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js"></script>
+<script id="codex-visualization-floating-ui-dom" src="https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js"></script>
+<script id="codex-visualization-lucide" async src="https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js"></script>
+<script id="codex-visualization-tooltip">/* oxlint-disable typescript/no-unsafe-argument, typescript/no-unsafe-call, typescript/no-unsafe-return */
+// Runs inside the visualization sandbox, not the host webview.
+(() => {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set(["top", "right", "bottom", "left"]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+
+  const getTrigger = (target) =>
+    target?.nodeType === Node.ELEMENT_NODE
+      ? target.closest("[data-tooltip]")
+      : null;
+  const containsTarget = (trigger, target) =>
+    target?.nodeType != null && trigger.contains(target);
+  const getContent = (trigger) =>
+    trigger.getAttribute("data-tooltip")?.trim() ?? "";
+  const getPlacement = (trigger) => {
+    const placement = trigger.getAttribute("data-tooltip-placement");
+    return tooltipPlacements.has(placement) ? placement : "top";
+  };
+  const getTooltip = () => {
+    if (tooltip == null) {
+      tooltip = document.createElement("div");
+      tooltip.id = tooltipId;
+      tooltip.className = "tooltip";
+      tooltip.setAttribute("role", "tooltip");
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) => {
+    const ids = new Set(
+      (trigger.getAttribute("aria-describedby") ?? "")
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute("aria-describedby");
+    } else {
+      trigger.setAttribute("aria-describedby", [...ids].join(" "));
+    }
+  };
+  const clearOpenTimeout = () => {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) => {
+    clearOpenTimeout();
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) => {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              "--tooltip-available-width",
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              "--tooltip-available-height",
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: "fixed",
+    })
+      .then(({ x, y }) => {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = "visible";
+      })
+      .catch(() => {
+        if (activeTrigger === trigger && request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) => {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = "hidden";
+    floating.style.transform = "translate(0, 0)";
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () => {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) => {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() < skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() => {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) => {
+    if (event.pointerType === "touch") {
+      return;
+    }
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handleLeave = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) => {
+    const trigger = getTrigger(event.target);
+    if (trigger?.matches(":focus-visible")) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Escape") {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) => {
+    const trigger = getTrigger(event.target);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const destroy = () => {
+    closeTooltip(false);
+    document.removeEventListener("pointerover", handlePointerOpen);
+    document.removeEventListener("pointerout", handleLeave);
+    document.removeEventListener("focusin", handleFocusIn);
+    document.removeEventListener("focusout", handleLeave);
+    document.removeEventListener("keydown", handleKeyDown);
+    document.removeEventListener("contextmenu", handleContextMenu);
+    tooltip = null;
+  };
+
+  document.addEventListener("pointerover", handlePointerOpen);
+  document.addEventListener("pointerout", handleLeave);
+  document.addEventListener("focusin", handleFocusIn);
+  document.addEventListener("focusout", handleLeave);
+  document.addEventListener("keydown", handleKeyDown);
+  document.addEventListener("contextmenu", handleContextMenu);
+  window.addEventListener("pagehide", destroy, { once: true });
+})();
+</script>
+<script id="codex-visualization-lucide-initialization">(() => {
+  const initialize = () => {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById("codex-visualization-lucide")
+    ?.addEventListener("load", initialize, { once: true });
+})();
+</script>
+</body>
+</html>

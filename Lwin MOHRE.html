@@ -1,15 +1,3 @@
-
-
-Lwin MOHRE.html
-File
-ဒီcode မှာ နောက်ခံ background ကို ဖြုတ်ချင်တာ 
-
-Worked for 1m 4s
-နောက်ခံပုံကို ဖယ်ပြီး background: none သတ်မှတ်ထားပါတယ်။ မူရင်း HTML ရဲ့ အခြား content နဲ့ functions တွေကို မပြောင်းထားပါ။ 
-
-
-Lwin_MOHRE_No_Background.html
-
 <!doctype html>
 <html lang="en" data-visualize-standalone>
 <head>
@@ -830,6 +818,14 @@ svg {
   color: var(--destructive);
 }
 </style>
+
+<style id="transparent-background-override">
+html, html[data-visualize-standalone], body, #mohre-guide {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+</style>
 </head>
 <body>
 <div id="mohre-guide">
@@ -1011,7 +1007,7 @@ svg {
     #mohre-guide details{padding:10px 0;border-top:1px solid var(--border)}
     #mohre-guide summary{cursor:pointer;font-weight:500}
     #mohre-guide .sources a{display:block;margin:6px 0}
-    #mohre-guide{--selected-warm:color-mix(in srgb,var(--viz-series-2) 72%,var(--destructive));background:none!important;background-image:none!important}
+    #mohre-guide{--selected-warm:color-mix(in srgb,var(--viz-series-2) 72%,var(--destructive));background:transparent!important;background-image:none!important}
     #mohre-guide .hero,
     #mohre-guide .category-intro,
     #mohre-guide .path,
@@ -1240,6 +1236,8 @@ svg {
       <button type="button" class="authority-region-btn" data-region="abudhabi" aria-pressed="false">Abu Dhabi</button>
       <button type="button" class="authority-region-btn" data-region="sharjah" aria-pressed="false">Sharjah</button>
       <button type="button" class="authority-region-btn" data-region="ajman" aria-pressed="false">Ajman</button>
+      <button type="button" class="authority-region-btn" data-region="uaq" aria-pressed="false">UAQ</button>
+      <button type="button" class="authority-region-btn" data-region="fujairah" aria-pressed="false">Fujairah</button>
       <button type="button" class="authority-region-btn" data-region="rak" aria-pressed="false">Ras Al Khaimah</button>
       <button type="button" class="authority-region-btn" data-region="personal" aria-pressed="false">Personal Sponsorship</button>
     </div>
@@ -1287,6 +1285,10 @@ svg {
       <button type="button" class="authority-tab" data-region="sharjah" data-authority="srtip" aria-pressed="false"><i data-lucide="microscope" aria-hidden="true"></i><span><b>SRTI Park</b><br><span class="mini">Research, technology and innovation</span></span></button>
       <button type="button" class="authority-tab" data-region="ajman" data-authority="ajmanfz" aria-pressed="false"><i data-lucide="warehouse" aria-hidden="true"></i><span><b>Ajman Free Zone</b><br><span class="mini">Trading, industry and e-commerce</span></span></button>
       <button type="button" class="authority-tab" data-region="ajman" data-authority="ajmanmedia" aria-pressed="false"><i data-lucide="clapperboard" aria-hidden="true"></i><span><b>Ajman Media City</b><br><span class="mini">Media and service businesses</span></span></button>
+      <button type="button" class="authority-tab" data-region="uaq" data-authority="uaqmainland" aria-pressed="false"><i data-lucide="building-2" aria-hidden="true"></i><span><b>UAQ Mainland</b><br><span class="mini">MOHRE + ICP route</span></span></button>
+      <button type="button" class="authority-tab" data-region="uaq" data-authority="uaqftz" aria-pressed="false"><i data-lucide="warehouse" aria-hidden="true"></i><span><b>UAQ Free Trade Zone</b><br><span class="mini">Trading, services and industry</span></span></button>
+      <button type="button" class="authority-tab" data-region="fujairah" data-authority="fujairahmainland" aria-pressed="false"><i data-lucide="building-2" aria-hidden="true"></i><span><b>Fujairah Mainland</b><br><span class="mini">MOHRE + ICP route</span></span></button>
+      <button type="button" class="authority-tab" data-region="fujairah" data-authority="ffz" aria-pressed="false"><i data-lucide="ship" aria-hidden="true"></i><span><b>Fujairah Free Zone</b><br><span class="mini">Port trade, logistics and industry</span></span></button>
       <button type="button" class="authority-tab" data-region="rak" data-authority="rakez" aria-pressed="false"><i data-lucide="mountain" aria-hidden="true"></i><span><b>RAKEZ</b><br><span class="mini">Commercial, industrial and warehousing</span></span></button>
       <button type="button" class="authority-tab" data-region="personal" data-authority="personal" aria-pressed="false"><i data-lucide="users-round" aria-hidden="true"></i><span><b>Personal Sponsorship</b><br><span class="mini">Family / Domestic Worker</span></span></button>
     </div>
@@ -2052,6 +2054,16 @@ svg {
         return {title:title,input:input,action:action,output:output,time:time,channel:channel,authority:authority,fee:fee,control:control}
       }
       var operations={
+        northernEmiratesMainland:{
+          title:"Northern Emirates Mainland Employment Route — Economic Authority, MOHRE and ICP",
+          scope:"The emirate-level economic authority issues the mainland trade licence, MOHRE manages private-sector labour and work permits, and ICP manages establishment immigration records, residence and Emirates ID.",
+          stages:[
+            opStage("Verify company records","Valid mainland trade licence, premises record where applicable, MOHRE labour file, ICP establishment record and authorised signatory.","Compare the company name, licence number, owners, activities, address, expiry and authorised signatory across the economic authority, MOHRE and ICP. Resolve any suspension or mismatch before starting the employee application.","Active and consistent establishment route.","1 working day internally.","Economic authority, MOHRE and ICP records.","Relevant emirate economic authority, MOHRE and ICP.","No filing fee at pre-check.","Do not use Dubai GDRFA or AMER as the default immigration route for a UAQ or Fujairah mainland company."),
+            opStage("Check quota and submit MOHRE permit","MOHRE employer access, available quota, candidate passport/photo/status, official offer and qualification or professional approval where applicable.","Check the available quota, request additional quota only when necessary, generate the correct official offer and submit the appropriate outside, inside, transfer or existing-residence work-permit service. Clear shortfalls and pay the live voucher.","Approved MOHRE work permit.","Several working days for a complete application.","MOHRE app/website or authorised service centre.","MOHRE.","Category, permit, protection and service-channel fees vary.","The occupation and licensed activity must match; do not select an inaccurate profession to reduce cost."),
+            opStage("Complete ICP residence and Emirates ID","Approved labour permit, passport, entry/status documents, medical, insurance and Emirates ID requirements.","Continue through ICP or the integrated channel, complete entry or status amendment, medical fitness, Emirates ID/biometrics and final residence issuance.","Digital residence and Emirates ID application/card.","Several working days depending on status and appointments.","ICP smart services and approved centres.","ICP and the competent health and insurance authorities.","Variable by applicant status, duration, medical and insurance.","Track the immigration process through ICP rather than GDRFA Dubai."),
+            opStage("Activate payroll and compliance","Final work permit/contract, residence, Emirates ID and salary account.","Verify the final records, activate WPS payroll, ILOE and insurance where applicable, and maintain expiry, renewal and cancellation controls.","Compliant active employee file.","Same day to the next payroll cycle.","MOHRE/WPS and employer systems.","MOHRE, ICP and the employer.","Case-specific.","Residence approval alone does not complete labour and payroll compliance.")
+          ]
+        },
         sharjahMainland:{
           title:"Sharjah Mainland Employment Route — SEDD, MOHRE and ICP",
           scope:"SEDD issues the Sharjah mainland economic licence, MOHRE manages private-sector labour and work permits, and ICP manages establishment immigration records, residence and Emirates ID.",
@@ -2294,6 +2306,10 @@ svg {
         srtip:zoneAuthority("Sharjah Research, Technology and Innovation Park","Research, advanced manufacturing, technology, sustainability and innovation ecosystem within Sharjah University City."),
         ajmanfz:zoneAuthority("Ajman Free Zone","Trading, industrial, service and e-commerce activities with authority-managed establishment and visa services."),
         ajmanmedia:zoneAuthority("Ajman Media City Free Zone","Media, creative and service-business licensing with Free Zone employment and immigration services."),
+        uaqmainland:{title:"UAQ Mainland — MOHRE Employment and ICP Residence Services",note:"Umm Al Quwain mainland companies use the emirate-level economic licensing channel, MOHRE for labour and work permits, and ICP for immigration residence and Emirates ID.",services:[{key:"northernEmiratesMainland",label:"Company, Employment & Residence Route",icon:"building-2"}]},
+        uaqftz:zoneAuthority("UAQ Free Trade Zone","Trading, professional services, e-commerce and light industrial activities with Free Zone-managed employment and immigration services."),
+        fujairahmainland:{title:"Fujairah Mainland — MOHRE Employment and ICP Residence Services",note:"Fujairah mainland companies use the emirate-level economic licensing channel, MOHRE for labour and work permits, and ICP for immigration residence and Emirates ID.",services:[{key:"northernEmiratesMainland",label:"Company, Employment & Residence Route",icon:"building-2"}]},
+        ffz:zoneAuthority("Fujairah Free Zone","Port-linked trading, logistics, industrial and service activities with Free Zone-managed employment and immigration services."),
         rakez:zoneAuthority("RAKEZ — Ras Al Khaimah Economic Zone","Commercial, industrial, manufacturing, warehousing and service activities across RAKEZ facilities."),
         personal:{title:"Personal Sponsorship — Immigration and MOHRE-linked Services",services:[
           {key:"family",label:"Dubai Family Residence & Emirates ID",icon:"users-round"},
@@ -2922,4 +2938,3 @@ svg {
 </script>
 </body>
 </html>
-

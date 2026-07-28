@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>UAE goAML & AML/CFT/CPF Compliance Portal - Myanmar / English</title>
+<style>
+:root {
+  --bg:#120d05; --bg2:#211606; --panel:rgba(48,34,11,.80); --panel2:rgba(26,18,7,.90);
+  --line:rgba(242,215,126,.19); --text:#f8ecd0; --muted:#c4af7c; --cyan:#d5a93e;
+  --blue:#f2d77e; --amber:#f5c568; --red:#ff8e86; --green:#9de0a7; --purple:#d9bd73;
+  --shadow:0 18px 55px rgba(0,0,0,.28); --radius:18px;
+  --font:Inter, "Noto Sans Myanmar", "Myanmar Text", Padauk, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:
+ radial-gradient(circle at 8% 4%,rgba(213,169,62,.23),transparent 30%),
+ radial-gradient(circle at 94% 10%,rgba(158,118,37,.19),transparent 31%),
+ linear-gradient(150deg,var(--bg),#080502 72%);
+ color:var(--text);font-family:var(--font);font-size:15px;line-height:1.62;min-height:100vh}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.25;background-image:
+ linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+ linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
+ background-size:32px 32px;mask-image:linear-gradient(to bottom,black,transparent 85%)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{color:#9ddaff;text-decoration:none} a:hover{text-decoration:underline}
+.app{display:grid;grid-template-columns:268px minmax(0,1fr);min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;padding:20px 15px;border-right:1px solid var(--line);
+ background:rgba(12,8,3,.88);backdrop-filter:blur(22px);z-index:20;overflow:auto}
+.brand{display:flex;gap:12px;align-items:center;padding:7px 8px 17px}
+.logo{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-weight:900;color:#06131f;
+ background:linear-gradient(135deg,var(--cyan),var(--blue));box-shadow:0 10px 30px rgba(86,214,210,.22)}
+.brand strong{font-size:15px;display:block;letter-spacing:.3px} .brand small{color:var(--muted)}
+.nav-group{margin:8px 0 18px} .nav-label{padding:8px 12px;color:#6f879f;font-size:11px;text-transform:uppercase;letter-spacing:1.4px}
+.nav-link{display:flex;align-items:center;gap:10px;width:100%;padding:9px 11px;border:1px solid transparent;border-radius:12px;color:#c9d7e5;background:none;text-align:left;margin:2px 0}
+.nav-link:hover,.nav-link.active{background:rgba(86,214,210,.09);border-color:rgba(86,214,210,.18);text-decoration:none;color:white}
+.nav-num{min-width:26px;height:26px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.06);font-size:11px;color:#b9c7d6}
+.sidebar-note{margin:14px 8px;padding:12px;border:1px solid rgba(255,201,107,.24);background:rgba(255,201,107,.07);border-radius:14px;color:#d9c79f;font-size:12px}
+.main{min-width:0}
+.topbar{position:sticky;top:0;z-index:15;display:flex;align-items:center;gap:10px;padding:12px 24px;border-bottom:1px solid var(--line);
+ background:rgba(18,13,5,.80);backdrop-filter:blur(22px)}
+.search{flex:1;position:relative} .search input{width:100%;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.045);color:white;padding:10px 14px 10px 38px;outline:none}
+.search::before{content:"⌕";position:absolute;left:14px;top:6px;color:var(--muted);font-size:20px}
+.segment{display:flex;border:1px solid var(--line);border-radius:12px;padding:3px;background:rgba(255,255,255,.035)}
+.segment button{border:0;background:transparent;color:var(--muted);padding:7px 10px;border-radius:9px;font-size:12px}
+.segment button.active{background:rgba(109,168,255,.18);color:white}
+.icon-btn{border:1px solid var(--line);background:rgba(255,255,255,.04);color:white;border-radius:11px;padding:8px 11px}
+.content{max-width:1440px;margin:0 auto;padding:28px 28px 70px}
+.module{scroll-margin-top:84px;margin-bottom:27px}
+.module-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:13px}
+.kicker{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan);font-weight:800}
+h1{font-size:28px;line-height:1.25;margin:6px 0 7px;letter-spacing:-.5px}
+h2{font-size:21px;line-height:1.35;margin:3px 0 5px;letter-spacing:-.2px}
+h3{font-size:16px;margin:0 0 8px} h4{margin:0 0 6px;font-size:14px}
+.sub{color:var(--muted);max-width:880px;margin:0}
+.glass{background:linear-gradient(145deg,rgba(22,43,67,.78),rgba(10,25,43,.73));border:1px solid var(--line);
+ box-shadow:var(--shadow);backdrop-filter:blur(19px);border-radius:var(--radius)}
+.hero{padding:24px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;width:330px;height:330px;border-radius:50%;right:-110px;top:-160px;background:radial-gradient(circle,rgba(86,214,210,.18),transparent 66%)}
+.hero-grid{display:grid;grid-template-columns:1.5fr .9fr;gap:18px;position:relative;z-index:1}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.badge{padding:5px 9px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.045);font-size:11px;color:#c9d8e7}
+.badge.new{border-color:rgba(117,223,168,.3);color:#a5efc6;background:rgba(117,223,168,.08)}
+.hero-alert{padding:15px;border:1px solid rgba(255,201,107,.25);background:rgba(255,201,107,.075);border-radius:15px;color:#e9d5aa}
+.hero-alert strong{color:#ffe2a4}
+.stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin-top:14px}
+.stat{padding:14px} .stat b{font-size:22px;display:block;color:white} .stat span{font-size:12px;color:var(--muted)}
+.bi-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.lang-card{padding:15px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.075)}
+.lang-tag{display:inline-block;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-bottom:7px}
+body.lang-mm .en-col{display:none!important} body.lang-mm .bi-grid{grid-template-columns:1fr}
+body.lang-en .mm-col{display:none!important} body.lang-en .bi-grid{grid-template-columns:1fr}
+.grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid-4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.card{padding:17px} .card p{margin:5px 0;color:#c5d2df} .muted{color:var(--muted)}
+.callout{padding:15px 16px;border-radius:15px;border:1px solid var(--line);background:rgba(255,255,255,.035)}
+.callout.warning{border-color:rgba(255,201,107,.3);background:rgba(255,201,107,.07)}
+.callout.danger{border-color:rgba(255,125,138,.28);background:rgba(255,125,138,.065)}
+.callout.success{border-color:rgba(117,223,168,.28);background:rgba(117,223,168,.065)}
+.callout.info{border-color:rgba(109,168,255,.28);background:rgba(109,168,255,.07)}
+.steps{counter-reset:step;display:grid;gap:10px}
+.step{position:relative;padding:16px 16px 16px 60px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.03)}
+.step::before{counter-increment:step;content:counter(step);position:absolute;left:16px;top:16px;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#05121d;font-weight:900}
+.step h3{margin-bottom:3px} .step p{margin:0;color:#b9c9d9}
+.checklist{display:grid;gap:7px;margin-top:10px} .check{display:flex;gap:9px;align-items:flex-start;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.025)}
+.check input{margin-top:5px;accent-color:var(--cyan)}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.field label{font-size:12px;color:#aebed0;display:block;margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:11px;background:rgba(0,0,0,.18);color:white;padding:10px 11px;outline:none}
+.field textarea{min-height:105px;resize:vertical} .field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(86,214,210,.55);box-shadow:0 0 0 3px rgba(86,214,210,.08)}
+.btn{border:1px solid var(--line);border-radius:11px;padding:9px 13px;background:rgba(255,255,255,.055);color:white;text-decoration:none}
+.btn:hover{background:rgba(255,255,255,.09);text-decoration:none} .btn.primary{border:0;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#06131f;font-weight:800}
+.btn.danger{border-color:rgba(255,125,138,.28);color:#ffadb6} .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.progress{height:9px;border-radius:999px;background:rgba(255,255,255,.055);overflow:hidden} .progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue));transition:.25s}
+.decision{padding:18px} .question{display:none} .question.active{display:block} .q-title{font-size:18px;margin-bottom:5px} .q-buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.result-box{display:none;padding:18px;border-radius:16px;border:1px solid rgba(117,223,168,.3);background:rgba(117,223,168,.065)} .result-box.show{display:block}
+.report-filter{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 13px} .chip{border:1px solid var(--line);background:rgba(255,255,255,.035);color:#c4d2e0;border-radius:999px;padding:6px 10px;font-size:12px} .chip.active{border-color:rgba(86,214,210,.38);background:rgba(86,214,210,.1);color:white}
+.report-card{position:relative;overflow:hidden} .report-code{font-size:23px;font-weight:900;color:var(--cyan);letter-spacing:.6px} .report-kind{position:absolute;right:13px;top:13px;font-size:10px;padding:4px 7px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.risk-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}
+.slider-row{display:grid;grid-template-columns:1.4fr 1fr 42px;gap:9px;align-items:center;margin:11px 0}
+.slider-row label{color:#cbd7e2} input[type=range]{accent-color:var(--cyan);width:100%}
+.score-panel{padding:19px;display:grid;place-items:center;text-align:center;min-height:280px} .score-ring{width:148px;height:148px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--cyan) 0deg,rgba(255,255,255,.08) 0deg);position:relative}
+.score-ring::after{content:"";position:absolute;inset:13px;border-radius:50%;background:#211606} .score-ring span{position:relative;z-index:1;font-size:31px;font-weight:900} .score-label{font-weight:800;margin-top:11px;font-size:18px}
+.matrix{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;max-width:330px;margin:14px auto} .cell{aspect-ratio:1;border-radius:7px;display:grid;place-items:center;font-size:10px;color:#08121d;font-weight:800}
+.cell.low{background:#75dfa8} .cell.med{background:#ffc96b} .cell.high{background:#ff9a7d} .cell.crit{background:#ff6f81}
+.sector-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:13px} .sector-card{padding:17px} .sector-icon{width:39px;height:39px;border-radius:12px;display:grid;place-items:center;background:rgba(86,214,210,.1);border:1px solid rgba(86,214,210,.19);font-size:20px;margin-bottom:10px}
+.sector-lists{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px} ul.compact{margin:6px 0;padding-left:19px;color:#c5d2df} ul.compact li{margin:4px 0}
+.case-card{padding:17px} .case-answer{display:none;margin-top:10px} .case-answer.show{display:block}
+.compare{width:100%;border-collapse:collapse} .compare th,.compare td{padding:10px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top} .compare th{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#8ea5bc} .compare tr:hover td{background:rgba(255,255,255,.025)}
+.tag-red{color:#ffabb5} .tag-green{color:#9aefc0} .tag-amber{color:#ffe0a1} .tag-blue{color:#a8caff}
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px} .tab{border:1px solid var(--line);background:rgba(255,255,255,.035);color:#c5d2df;padding:7px 10px;border-radius:10px} .tab.active{background:rgba(109,168,255,.12);border-color:rgba(109,168,255,.28);color:white}
+.tab-panel{display:none} .tab-panel.active{display:block}
+.narrative-output{min-height:235px;white-space:pre-wrap}
+.toast{position:fixed;right:20px;bottom:20px;z-index:99;padding:11px 14px;border:1px solid rgba(117,223,168,.28);background:#102b24;color:#baf4d4;border-radius:12px;box-shadow:var(--shadow);opacity:0;transform:translateY(12px);pointer-events:none;transition:.25s} .toast.show{opacity:1;transform:none}
+.footer{padding:22px 0;color:#7f94aa;font-size:12px;text-align:center}
+mark{background:rgba(255,201,107,.35);color:white;border-radius:3px;padding:0 2px}
+.hidden-search{display:none!important}
+.mobile-nav{display:none}
+@media(max-width:1050px){.app{grid-template-columns:1fr}.sidebar{display:none}.mobile-nav{display:inline-flex}.hero-grid,.risk-layout{grid-template-columns:1fr}.stat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.topbar{padding:10px 12px;flex-wrap:wrap}.search{order:3;flex-basis:100%}.content{padding:20px 13px 55px}.bi-grid,.grid-2,.grid-3,.grid-4,.form-grid,.sector-lists{grid-template-columns:1fr}.stat-grid{grid-template-columns:1fr 1fr}h1{font-size:24px}.slider-row{grid-template-columns:1fr 54px}.slider-row input{grid-column:1/-1}}
+@media print{body{background:white;color:#111}body::before,.sidebar,.topbar,.actions,.report-filter,.sector-toolbar,.tabs button,.btn,.chip{display:none!important}.app{display:block}.content{max-width:none;padding:0}.glass,.card,.callout,.step,.lang-card{background:white!important;color:#111!important;border:1px solid #bbb;box-shadow:none;break-inside:avoid}.muted,.sub,.card p,.step p,ul.compact{color:#333!important}a{color:#111;text-decoration:none}.module{page-break-before:auto}}
+
+/* v2 gold sector-command additions */
+.segment{display:none!important}
+.topbar{grid-template-columns:minmax(260px,1fr) minmax(340px,520px) auto}
+.sector-select-wrap{min-width:0}
+.sector-select-wrap label{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:var(--blue);margin-bottom:3px}
+.sector-select-wrap select{width:100%;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.045);color:var(--text);padding:9px 11px;outline:none}
+.sector-select-wrap option{background:#211606;color:#fff}
+.ops-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ops-phase{padding:16px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.03)}
+.ops-phase h3{color:var(--blue)}
+.doc-progress{height:9px;border-radius:999px;background:rgba(255,255,255,.055);overflow:hidden;margin:8px 0 13px}
+.doc-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--blue))}
+.practice-steps{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:12px 0}
+.practice-step{padding:8px 5px;border:1px solid var(--line);border-radius:9px;text-align:center;font-size:10px;color:var(--muted);background:rgba(255,255,255,.025)}
+.practice-step.active{color:#fff;border-color:rgba(242,215,126,.38);background:rgba(213,169,62,.13)}
+.practice-panel{display:none}.practice-panel.active{display:block}
+.practice-form{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.file-preview{display:grid;gap:6px;margin-top:8px}
+.file-row{display:flex;justify-content:space-between;gap:10px;padding:7px 9px;border-radius:9px;background:rgba(255,255,255,.025)}
+.case-choice{display:grid;gap:6px;margin-top:9px}
+.case-rationale{display:none;margin-top:9px}.case-rationale.show{display:block}
+.both-fixed{font-size:11px;color:var(--blue);white-space:nowrap}
+@media(max-width:1050px){.topbar{grid-template-columns:auto 1fr}.sector-select-wrap{grid-column:1/-1}.ops-grid{grid-template-columns:1fr}}
+@media(max-width:760px){.practice-form{grid-template-columns:1fr}.practice-steps{grid-template-columns:repeat(3,1fr)}}
+
+
+/* =========================================================
+   v3 — White Tempered Glass Theme
+   ========================================================= */
+:root{
+  --bg:#ffffff;
+  --bg2:#f7f8fa;
+  --panel:rgba(255,255,255,.72);
+  --panel2:rgba(255,255,255,.88);
+  --line:rgba(22,32,45,.12);
+  --text:#172033;
+  --muted:#647184;
+  --cyan:#8a6a22;
+  --blue:#b58b2b;
+  --amber:#b98015;
+  --red:#c44f52;
+  --green:#2f8b62;
+  --purple:#73569b;
+  --shadow:0 16px 44px rgba(28,39,55,.10);
+  --radius:18px;
+}
+html{background:#fff}
+body{
+  background:#fff!important;
+  color:var(--text)!important;
+}
+body::before{
+  opacity:.65!important;
+  background-image:
+    linear-gradient(rgba(25,35,48,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(25,35,48,.025) 1px,transparent 1px)!important;
+  mask-image:linear-gradient(to bottom,black,transparent 92%)!important;
+}
+a{color:#6f551e!important}
+a:hover{color:#453612!important}
+
+.sidebar{
+  background:rgba(255,255,255,.74)!important;
+  border-right:1px solid rgba(25,35,48,.10)!important;
+  box-shadow:10px 0 36px rgba(28,39,55,.06)!important;
+  backdrop-filter:blur(28px) saturate(135%)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(135%)!important;
+}
+.brand strong{color:#172033!important}
+.brand small,.nav-label{color:#7b8797!important}
+.logo{
+  color:#fff!important;
+  background:linear-gradient(145deg,#c7a34b,#85651d)!important;
+  box-shadow:0 10px 25px rgba(125,96,29,.22)!important;
+}
+.nav-link{
+  color:#465367!important;
+}
+.nav-link:hover,.nav-link.active{
+  background:rgba(255,255,255,.72)!important;
+  border-color:rgba(138,106,34,.18)!important;
+  box-shadow:0 7px 20px rgba(28,39,55,.07)!important;
+  color:#172033!important;
+}
+.nav-num{
+  background:rgba(138,106,34,.08)!important;
+  color:#70561e!important;
+}
+.sidebar-note{
+  background:rgba(255,255,255,.66)!important;
+  color:#64542e!important;
+  border-color:rgba(138,106,34,.18)!important;
+  box-shadow:0 8px 22px rgba(28,39,55,.06)!important;
+}
+
+.topbar{
+  background:rgba(255,255,255,.72)!important;
+  border-bottom:1px solid rgba(25,35,48,.10)!important;
+  box-shadow:0 8px 26px rgba(28,39,55,.06)!important;
+  backdrop-filter:blur(26px) saturate(140%)!important;
+  -webkit-backdrop-filter:blur(26px) saturate(140%)!important;
+}
+.search input,
+.sector-select-wrap select,
+.field input,.field select,.field textarea,
+.topbar input,.topbar select{
+  background:rgba(255,255,255,.72)!important;
+  color:#172033!important;
+  border-color:rgba(25,35,48,.14)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85)!important;
+}
+.search input::placeholder,
+.field input::placeholder,
+.field textarea::placeholder{
+  color:#8b95a3!important;
+}
+.search::before{color:#738092!important}
+.sector-select-wrap label,.both-fixed{color:#6f551e!important}
+.sector-select-wrap option,
+.field select option{
+  background:#fff!important;
+  color:#172033!important;
+}
+.icon-btn{
+  background:rgba(255,255,255,.72)!important;
+  color:#263246!important;
+  border-color:rgba(25,35,48,.13)!important;
+  box-shadow:0 6px 18px rgba(28,39,55,.06)!important;
+}
+
+.glass,
+.hero,
+.card,
+.lang-card,
+.step,
+.callout,
+.ops-phase,
+.phase,
+.case-card,
+.sector-card,
+.decision,
+.result-box,
+.practice-panel,
+.score-panel{
+  background:rgba(255,255,255,.68)!important;
+  border:1px solid rgba(255,255,255,.85)!important;
+  box-shadow:
+    0 18px 50px rgba(28,39,55,.10),
+    inset 0 1px 0 rgba(255,255,255,.95)!important;
+  backdrop-filter:blur(24px) saturate(135%)!important;
+  -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
+}
+.glass{
+  outline:1px solid rgba(25,35,48,.07)!important;
+}
+.hero::after{
+  background:radial-gradient(circle,rgba(178,187,199,.20),transparent 68%)!important;
+}
+h1,h2,h3,h4,.q-title,.score-label{
+  color:#172033!important;
+}
+.sub,.muted,.card p,.step p,.slider-row label,ul.compact{
+  color:#647184!important;
+}
+.kicker,.lang-tag,.report-code{
+  color:#84631c!important;
+}
+.badge,.chip,.tab,.practice-step{
+  background:rgba(255,255,255,.60)!important;
+  color:#4c596d!important;
+  border-color:rgba(25,35,48,.11)!important;
+  box-shadow:0 5px 14px rgba(28,39,55,.04)!important;
+}
+.badge.new,.chip.active,.tab.active,.practice-step.active{
+  color:#654b15!important;
+  border-color:rgba(138,106,34,.24)!important;
+  background:rgba(245,237,214,.76)!important;
+}
+.hero-alert{
+  color:#5f4d29!important;
+  background:rgba(255,250,237,.76)!important;
+  border-color:rgba(138,106,34,.17)!important;
+}
+.hero-alert strong{color:#4b3916!important}
+.stat b{color:#172033!important}
+.stat span{color:#6a7687!important}
+
+.callout.warning{
+  background:rgba(255,248,226,.70)!important;
+  border-color:rgba(185,128,21,.20)!important;
+  color:#5c4a26!important;
+}
+.callout.danger{
+  background:rgba(255,239,239,.70)!important;
+  border-color:rgba(196,79,82,.18)!important;
+  color:#713b3e!important;
+}
+.callout.success{
+  background:rgba(235,249,241,.72)!important;
+  border-color:rgba(47,139,98,.18)!important;
+  color:#285e48!important;
+}
+.callout.info{
+  background:rgba(240,244,249,.76)!important;
+  border-color:rgba(72,93,121,.16)!important;
+  color:#3d4c61!important;
+}
+
+.check,.file-row,.file-item{
+  background:rgba(255,255,255,.56)!important;
+  border:1px solid rgba(25,35,48,.06)!important;
+}
+.check input{accent-color:#8a6a22!important}
+.btn{
+  background:rgba(255,255,255,.70)!important;
+  color:#293548!important;
+  border-color:rgba(25,35,48,.13)!important;
+  box-shadow:0 6px 17px rgba(28,39,55,.06)!important;
+}
+.btn:hover{
+  background:#fff!important;
+}
+.btn.primary{
+  background:linear-gradient(145deg,#c7a34b,#8a6a22)!important;
+  color:#fff!important;
+  box-shadow:0 9px 24px rgba(125,96,29,.20)!important;
+}
+.btn.danger{color:#a54448!important}
+.progress,.doc-progress,.scorebar{
+  background:rgba(25,35,48,.07)!important;
+}
+.progress span,.doc-progress span,.scorebar span{
+  background:linear-gradient(90deg,#a57c22,#d2b15f)!important;
+}
+.result-box{
+  border-color:rgba(47,139,98,.18)!important;
+  background:rgba(237,250,243,.75)!important;
+}
+.report-kind,.compare th,.report-kind{
+  color:#718094!important;
+}
+.compare th,.compare td{
+  border-color:rgba(25,35,48,.09)!important;
+}
+.compare tr:hover td{
+  background:rgba(245,247,250,.72)!important;
+}
+.tag-red{color:#a64449!important}
+.tag-green{color:#2d7c59!important}
+.tag-amber{color:#8a6118!important}
+.tag-blue{color:#516a8b!important}
+
+.score-ring::after{
+  background:#fff!important;
+  box-shadow:inset 0 0 0 1px rgba(25,35,48,.07)!important;
+}
+.score-ring span{color:#172033!important}
+.matrix .cell{box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+.cell.low{background:#bde7ce!important}
+.cell.med{background:#f3dca5!important}
+.cell.high{background:#f4b29e!important}
+.cell.crit{background:#ee929b!important}
+
+.practice-step.done{
+  background:rgba(235,249,241,.80)!important;
+  color:#2f7456!important;
+  border-color:rgba(47,139,98,.17)!important;
+}
+.file-row span:last-child{color:#566477}
+.toast{
+  background:rgba(255,255,255,.90)!important;
+  color:#285e48!important;
+  border-color:rgba(47,139,98,.18)!important;
+  backdrop-filter:blur(16px)!important;
+  -webkit-backdrop-filter:blur(16px)!important;
+}
+#mobileMenu{
+  background:rgba(255,255,255,.88)!important;
+  color:#172033!important;
+  border-color:rgba(25,35,48,.12)!important;
+  backdrop-filter:blur(26px)!important;
+  -webkit-backdrop-filter:blur(26px)!important;
+}
+.footer{color:#7f8a99!important}
+mark{background:rgba(213,186,112,.42)!important;color:#172033!important}
+
+@media print{
+  body{background:#fff!important;color:#111!important}
+  .glass,.card,.callout,.step,.lang-card,.ops-phase{
+    background:#fff!important;
+    color:#111!important;
+    border:1px solid #cfd4da!important;
+    box-shadow:none!important;
+  }
+}
+
+
+/* =========================================================
+   v4 — Single-page application navigation
+   Only one selected module is displayed at a time.
+   ========================================================= */
+.content{
+  min-height:calc(100vh - 76px);
+}
+.module{
+  display:none!important;
+  margin-bottom:0!important;
+  animation:moduleEnter .24s ease-out;
+}
+.module.page-active{
+  display:block!important;
+}
+@keyframes moduleEnter{
+  from{opacity:0;transform:translateY(7px)}
+  to{opacity:1;transform:none}
+}
+.topbar{
+  display:grid!important;
+  grid-template-columns:auto minmax(175px,250px) minmax(220px,1fr) minmax(300px,500px) auto auto!important;
+}
+.active-page-box{
+  min-width:0;
+  padding:5px 10px;
+  border-left:3px solid rgba(138,106,34,.48);
+}
+.active-page-box span{
+  display:block;
+  color:#7b8797;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:1.15px;
+}
+.active-page-box strong{
+  display:block;
+  color:#172033;
+  font-size:12px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.mm-detail-guide{
+  margin:0 0 15px;
+  padding:17px 18px;
+  background:rgba(255,255,255,.72);
+  border:1px solid rgba(255,255,255,.94);
+  outline:1px solid rgba(25,35,48,.07);
+  border-radius:16px;
+  box-shadow:0 13px 34px rgba(28,39,55,.075),inset 0 1px 0 rgba(255,255,255,.98);
+  backdrop-filter:blur(22px) saturate(135%);
+  -webkit-backdrop-filter:blur(22px) saturate(135%);
+}
+.mm-detail-guide .mm-guide-head{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:8px;
+}
+.mm-detail-guide .mm-guide-icon{
+  width:31px;
+  height:31px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:linear-gradient(145deg,#c7a34b,#8a6a22);
+  color:#fff;
+  font-weight:900;
+  box-shadow:0 7px 18px rgba(125,96,29,.17);
+}
+.mm-detail-guide h3{
+  margin:0!important;
+  font-size:15px!important;
+}
+.mm-detail-guide p{
+  margin:6px 0;
+  color:#455267!important;
+}
+.mm-detail-guide ul{
+  margin:8px 0 0;
+  padding-left:21px;
+  color:#455267;
+}
+.mm-detail-guide li{
+  margin:5px 0;
+}
+.mm-guide-warning{
+  margin-top:10px;
+  padding:9px 11px;
+  border-left:3px solid #b98015;
+  border-radius:8px;
+  background:rgba(255,248,226,.72);
+  color:#5c4a26;
+}
+.nav-link.nav-search-hidden{
+  display:none!important;
+}
+.module-search-hit{
+  outline:2px solid rgba(181,139,43,.25);
+  outline-offset:5px;
+}
+.page-empty-search{
+  padding:15px;
+  border-radius:13px;
+  background:rgba(255,248,226,.72);
+  color:#5c4a26;
+  border:1px solid rgba(185,128,21,.18);
+}
+@media(max-width:1200px){
+  .topbar{
+    grid-template-columns:auto minmax(150px,220px) minmax(220px,1fr) minmax(260px,420px) auto!important;
+  }
+  .both-fixed{display:none}
+}
+@media(max-width:900px){
+  .topbar{
+    grid-template-columns:auto minmax(0,1fr) auto!important;
+  }
+  .active-page-box{display:none}
+  .search{grid-column:2/3}
+  .sector-select-wrap{grid-column:1/-1}
+}
+@media(max-width:620px){
+  .topbar{
+    grid-template-columns:auto minmax(0,1fr) auto!important;
+  }
+  .search{grid-column:2/3}
+}
+@media print{
+  .module{display:none!important}
+  .module.page-active{display:block!important}
+}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">AML</div><div><strong>goAML Ops Portal</strong><small>Myanmar / English · 2026</small></div></div>
+    <div class="nav-group">
+      <div class="nav-label">Core</div>
+      <a class="nav-link active" href="#home"><span class="nav-num">01</span> Dashboard</a>
+      <a class="nav-link" href="#scope"><span class="nav-num">02</span> Scope Check</a>
+      <a class="nav-link" href="#registration"><span class="nav-num">03</span> Registration</a>
+      <a class="nav-link" href="#decision"><span class="nav-num">04</span> Report Decision</a>
+      <a class="nav-link" href="#catalog"><span class="nav-num">05</span> Report Catalog</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Risk & Controls</div>
+      <a class="nav-link" href="#risk"><span class="nav-num">06</span> Risk Engine</a>
+      <a class="nav-link" href="#sectors"><span class="nav-num">07</span> Sector Command</a>
+      <a class="nav-link" href="#sector-docs"><span class="nav-num">7A</span> Sector Documents</a>
+      <a class="nav-link" href="#action-cycle"><span class="nav-num">7B</span> Action Lifecycle</a>
+      <a class="nav-link" href="#goaml-practice"><span class="nav-num">7C</span> goAML Practice</a>
+      <a class="nav-link" href="#sector-practice"><span class="nav-num">7D</span> Sector Practice</a>
+      <a class="nav-link" href="#cdd"><span class="nav-num">08</span> CDD / EDD</a>
+      <a class="nav-link" href="#governance"><span class="nav-num">09</span> Governance</a>
+    </div>
+    <div class="nav-group">
+      <div class="nav-label">Practice</div>
+      <a class="nav-link" href="#cases"><span class="nav-num">10</span> Case Lab</a>
+      <a class="nav-link" href="#narrative"><span class="nav-num">11</span> Narrative Builder</a>
+      <a class="nav-link" href="#iems"><span class="nav-num">12</span> IEMS</a>
+      <a class="nav-link" href="#sources"><span class="nav-num">13</span> Sources</a>
+    </div>
+    <div class="sidebar-note">This is an offline training and operating aid. It does not connect to UAE FIU and cannot submit a report.</div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <button class="icon-btn mobile-nav" onclick="document.getElementById('mobileMenu').showModal()">☰</button>
+      <div class="active-page-box"><span>လက်ရှိစာမျက်နှာ</span><strong id="activePageName">Dashboard / ပင်မစာမျက်နှာ</strong></div>
+      <div class="search"><input id="pageSearch" type="search" placeholder="Search modules / Module များရှာရန်"></div>
+      <div class="sector-select-wrap">
+        <label>Sector Dropdown / ကဏ္ဍရွေးရန်</label>
+        <select id="globalSectorSelect"></select>
+      </div>
+      <span class="both-fixed">မြန်မာ + English</span>
+      <button class="icon-btn" onclick="window.print()" title="Print">⎙</button>
+    </div>
+
+    <dialog id="mobileMenu" class="glass" style="width:min(92vw,420px);background:#211606;color:white;border:1px solid var(--line);padding:14px">
+      <div style="display:flex;justify-content:space-between;align-items:center"><strong>Modules</strong><button class="icon-btn" onclick="this.closest('dialog').close()">×</button></div>
+      <div class="grid-2" style="margin-top:12px">
+        <a class="btn" href="#home" onclick="this.closest('dialog').close()">Dashboard</a>
+        <a class="btn" href="#scope" onclick="this.closest('dialog').close()">Scope Check</a>
+        <a class="btn" href="#registration" onclick="this.closest('dialog').close()">Registration</a>
+        <a class="btn" href="#decision" onclick="this.closest('dialog').close()">Report Decision</a>
+        <a class="btn" href="#catalog" onclick="this.closest('dialog').close()">Report Catalog</a>
+        <a class="btn" href="#risk" onclick="this.closest('dialog').close()">Risk Engine</a>
+        <a class="btn" href="#sectors" onclick="this.closest('dialog').close()">Sector Command</a>
+        <a class="btn" href="#sector-docs" onclick="this.closest('dialog').close()">Sector Documents</a>
+        <a class="btn" href="#action-cycle" onclick="this.closest('dialog').close()">Action Lifecycle</a>
+        <a class="btn" href="#goaml-practice" onclick="this.closest('dialog').close()">goAML Practice</a>
+        <a class="btn" href="#sector-practice" onclick="this.closest('dialog').close()">Sector Practice</a>
+        <a class="btn" href="#cdd" onclick="this.closest('dialog').close()">CDD / EDD</a>
+        <a class="btn" href="#governance" onclick="this.closest('dialog').close()">Governance</a>
+        <a class="btn" href="#cases" onclick="this.closest('dialog').close()">Case Lab</a>
+        <a class="btn" href="#narrative" onclick="this.closest('dialog').close()">Narrative Builder</a>
+        <a class="btn" href="#iems" onclick="this.closest('dialog').close()">IEMS</a>
+        <a class="btn" href="#sources" onclick="this.closest('dialog').close()">Sources</a>
+      </div>
+    </dialog>
+
+    <div class="content">
+      <section id="home" class="module">
+        <div class="hero glass">
+          <div class="hero-grid">
+            <div>
+              <div class="kicker">UAE AML/CFT/CPF · Operational Guide</div>
+              <h1>goAML Registration, Risk Assessment & Reporting Portal</h1>
+              <p class="sub">မြန်မာ / English ယှဉ်လျက်ဖော်ပြထားသော UAE goAML registration၊ report selection၊ sector risk၊ CDD/EDD နှင့် submission-quality guide။</p>
+              <div class="badges">
+                <span class="badge new">Current legal baseline: 14 Dec 2025</span>
+                <span class="badge">Offline single HTML</span>
+                <span class="badge">Risk calculator</span>
+                <span class="badge">Case simulator</span>
+                <span class="badge">Narrative builder</span>
+              </div>
+            </div>
+            <div class="hero-alert">
+              <strong>Source hierarchy warning</strong><br>
+              The uploaded 2022-2024 UAE FIU guides remain useful for portal operations, but the legal baseline changed in December 2025. The uploaded <em>FIAU Malta End-User Guide</em> is not a UAE guide and is excluded from UAE legal/procedural conclusions.
+            </div>
+          </div>
+          <div class="stat-grid">
+            <div class="stat glass"><b>2</b><span>SACM + goAML registration stages</span></div>
+            <div class="stat glass"><b>0</b><span>Minimum amount for STR/SAR suspicion</span></div>
+            <div class="stat glass"><b>5 yrs</b><span>Minimum record retention</span></div>
+            <div class="stat glass"><b>24/7</b><span>TFS screening and urgent escalation mindset</span></div>
+          </div>
+        </div>
+        <div class="bi-grid" style="margin-top:14px">
+          <div class="lang-card mm-col"><span class="lang-tag">မြန်မာ</span><strong>ဒီ portal ကဘာလုပ်ပေးသလဲ</strong><p>Registration မတင်ခင် document checklist စစ်ခြင်း၊ report type ရွေးခြင်း၊ risk score ခန့်မှန်းခြင်း၊ sector red flags ဖတ်ခြင်း၊ case အလိုက်ဆုံးဖြတ်ချက်လေ့ကျင့်ခြင်းနှင့် English narrative draft တည်ဆောက်ခြင်းတို့ကို ကူညီပေးသည်။</p></div>
+          <div class="lang-card en-col"><span class="lang-tag">English</span><strong>What this portal does</strong><p>It supports registration readiness, report-type triage, risk scoring, sector red-flag review, case-based decision practice and preparation of an English factual narrative draft.</p></div>
+        </div>
+        <div class="callout danger" style="margin-top:14px">
+          <strong>Critical limitation:</strong> This tool does not replace the UAE FIU portal, your supervisory authority, legal advice, or an MLRO decision. It must not be used to auto-file, auto-clear a sanctions match, or justify not reporting.
+        </div>
+      </section>
+
+      <section id="scope" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 02</div><h2>Applicability & Supervisory Scope</h2><p class="sub">Not every UAE company is automatically a goAML reporting entity. The licensed activity and regulator determine scope.</p></div></div>
+        <div class="grid-3">
+          <div class="card glass"><h3>MOET-supervised DNFBPs</h3><p>Real estate brokers/agents, DPMS, independent accountants/auditors, and company/trust service providers under mainland and commercial free-zone licensing, subject to the applicable framework.</p></div>
+          <div class="card glass"><h3>MOJ-supervised professions</h3><p>Lawyers, notaries and relevant independent legal professionals, when carrying out the specified activities.</p></div>
+          <div class="card glass"><h3>Other regulators</h3><p>Financial institutions, securities firms, VASPs, financial-free-zone entities and gaming operators follow their licensing/supervisory authority in addition to federal requirements.</p></div>
+        </div>
+        <div class="glass card" style="margin-top:14px">
+          <div class="form-grid">
+            <div class="field"><label>Sector / လုပ်ငန်းကဏ္ဍ</label><select id="scopeSector"></select></div>
+            <div class="field"><label>Licence jurisdiction / လိုင်စင်နယ်ပယ်</label><select id="jurisdiction"><option>Mainland / Commercial Free Zone</option><option>DIFC</option><option>ADGM</option><option>Other regulated jurisdiction</option></select></div>
+          </div>
+          <div id="scopeResult" class="callout info" style="margin-top:12px"></div>
+        </div>
+        <div class="callout warning" style="margin-top:14px">
+          <strong>Common error:</strong> “General Trading” or an ordinary service company is not automatically a DNFBP merely because it is licensed in the UAE. Conversely, a company-formation/registered-office business may be a TCSP even when its licence wording looks like ordinary consultancy. Assess the actual activity, not only the label.
+        </div>
+      </section>
+
+      <section id="registration" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 03</div><h2>goAML Registration Workflow</h2><p class="sub">MOET-style two-stage workflow based on the 29 October 2024 registration guide. Other regulators may request different supporting documents.</p></div><div class="badge">Progress <span id="regPercent">0%</span></div></div>
+        <div class="progress"><span id="regProgress"></span></div>
+        <div class="grid-2" style="margin-top:14px">
+          <div class="glass card">
+            <h3>Stage 1 — SACM + Authenticator</h3>
+            <div class="steps">
+              <div class="step"><h3>Prepare one PDF</h3><p>Trade licence + CO/MLRO authorisation letter + Emirates ID and/or passport. For the MOET guide: combine as one PDF, maximum 5 MB.</p></div>
+              <div class="step"><h3>Submit SACM pre-registration</h3><p>Select Reporting Entity, legal company name, supervisory body, licence number, and CO/MLRO details. UAE mobile format in the guide: 009715xxxxxxxx.</p></div>
+              <div class="step"><h3>Verify email</h3><p>The request does not reach the regulator until the email is verified. Whitelist no-reply.sacm@uaefiu.gov.ae and no-reply.goaml@uaefiu.gov.ae.</p></div>
+              <div class="step"><h3>Regulator review</h3><p>Correct rejection reasons before resubmitting. Do not create duplicate requests to bypass a rejection.</p></div>
+              <div class="step"><h3>Generate secret key</h3><p>Use the email OTP and SMS OTP. The 2024 guide states the OTP is valid for 24 hours. Each individual must have a separate secret key.</p></div>
+              <div class="step"><h3>Configure Google Authenticator</h3><p>Store the secret securely. The six-digit code is used for the SACM first-level login.</p></div>
+            </div>
+          </div>
+          <div class="glass card">
+            <h3>Stage 2 — Organisation Registration</h3>
+            <div class="steps">
+              <div class="step"><h3>Open goAML through UAE FIU services</h3><p>First-level login: SACM username + authenticator code.</p></div>
+              <div class="step"><h3>Register New Organisation</h3><p>Select Reporting Entity and complete organisation, phone, address, CO/MLRO and passport/ID details.</p></div>
+              <div class="step"><h3>Upload supporting file</h3><p>Use complete, legible and consistent documents. Mandatory fields are marked with an asterisk.</p></div>
+              <div class="step"><h3>Submit and retain reference</h3><p>The system produces a request reference such as REP… Keep it in the compliance register.</p></div>
+              <div class="step"><h3>Receive Organisation ID</h3><p>After approval, retain the unique Org ID. Additional users register as persons under the active organisation.</p></div>
+              <div class="step"><h3>Set roles and access</h3><p>Grant only necessary permissions; promptly disable departed users on both SACM and goAML.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="glass card" style="margin-top:14px">
+          <h3>Readiness checklist / အဆင်သင့်ဖြစ်မှု စစ်ဆေးရန်</h3>
+          <div class="grid-2 checklist" id="regChecklist">
+            <label class="check"><input type="checkbox"> <span>Legal name and licence number exactly match the trade licence.</span></label>
+            <label class="check"><input type="checkbox"> <span>Correct supervisory body is confirmed.</span></label>
+            <label class="check"><input type="checkbox"> <span>Authorisation letter appoints the CO/MLRO and is signed/stamped.</span></label>
+            <label class="check"><input type="checkbox"> <span>CO/MLRO ID/passport is valid and legible.</span></label>
+            <label class="check"><input type="checkbox"> <span>Single PDF is within the applicable file-size limit.</span></label>
+            <label class="check"><input type="checkbox"> <span>Registered email and UAE mobile are controlled by the CO/MLRO.</span></label>
+            <label class="check"><input type="checkbox"> <span>System emails are whitelisted.</span></label>
+            <label class="check"><input type="checkbox"> <span>Secret key is not shared and recovery procedure is documented.</span></label>
+            <label class="check"><input type="checkbox"> <span>Both SACM and goAML references are retained.</span></label>
+            <label class="check"><input type="checkbox"> <span>Backup/deputy access and leaver deactivation procedure exist.</span></label>
+          </div>
+        </div>
+      </section>
+
+      <section id="decision" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 04</div><h2>Report Decision Wizard</h2><p class="sub">A triage tool, not an automated legal conclusion. The MLRO must review the facts, current report permissions and regulator instructions.</p></div></div>
+        <div class="decision glass" id="decisionWizard">
+          <div class="question active" data-q="0">
+            <div class="q-title">1. Did the FIU send a request for additional information?</div>
+            <div class="bi-grid"><div class="mm-col muted">FIU Message Board/IEMS မှ အချက်အလက်တောင်းထားပါသလား။</div><div class="en-col muted">Was the request initiated by the FIU?</div></div>
+            <div class="q-buttons"><button class="btn primary" data-answer="fiu-yes">Yes</button><button class="btn" data-answer="fiu-no">No</button></div>
+          </div>
+          <div class="question" data-q="1">
+            <div class="q-title">2. Is the FIU request linked to your earlier report, or is it a broader enquiry?</div>
+            <div class="q-buttons"><button class="btn primary" data-answer="prior">Prior report</button><button class="btn" data-answer="broad">Broader enquiry</button></div>
+          </div>
+          <div class="question" data-q="2">
+            <div class="q-title">3. Does the requested response include transactions?</div>
+            <div class="q-buttons"><button class="btn primary" data-answer="tx-yes">Yes</button><button class="btn" data-answer="tx-no">No</button></div>
+          </div>
+          <div class="question" data-q="3">
+            <div class="q-title">2. Is this a sanctions / Targeted Financial Sanctions match?</div>
+            <div class="q-buttons"><button class="btn primary" data-answer="tfs-yes">Yes</button><button class="btn" data-answer="tfs-no">No</button></div>
+          </div>
+          <div class="question" data-q="4">
+            <div class="q-title">3. Is the match confirmed or only potential/partial?</div>
+            <div class="q-buttons"><button class="btn primary" data-answer="confirmed">Confirmed</button><button class="btn" data-answer="partial">Potential / Partial</button></div>
+          </div>
+          <div class="question" data-q="5">
+            <div class="q-title">3. Is a sector activity-report trigger met?</div>
+            <p class="muted">Examples: REAR cash/VA property trigger or DPMSR threshold trigger.</p>
+            <div class="q-buttons"><button class="btn primary" data-answer="sector-yes">Yes</button><button class="btn" data-answer="sector-no">No</button></div>
+          </div>
+          <div class="question" data-q="6">
+            <div class="q-title">4. Is there suspicion or reasonable grounds to suspect ML/TF/PF?</div>
+            <div class="q-buttons"><button class="btn primary" data-answer="sus-yes">Yes</button><button class="btn" data-answer="sus-no">No</button></div>
+          </div>
+          <div class="question" data-q="7">
+            <div class="q-title">5. Was the suspicious transaction executed?</div>
+            <div class="q-buttons"><button class="btn primary" data-answer="executed">Executed</button><button class="btn" data-answer="attempted">Attempted / activity only</button></div>
+          </div>
+          <div id="decisionResult" class="result-box"></div>
+          <div class="actions"><button class="btn" id="resetDecision">Reset wizard</button></div>
+        </div>
+        <div class="grid-3" style="margin-top:14px">
+          <div class="callout danger"><strong>No threshold rule:</strong> A suspicious transaction of AED 100 may require reporting; a non-suspicious AED 1 million transaction does not become an STR merely because it is large.</div>
+          <div class="callout warning"><strong>Parallel reports:</strong> REAR/DPMSR may be required by sector trigger and an STR/SAR may also be required for suspicion.</div>
+          <div class="callout info"><strong>Do not tip off:</strong> Never tell the customer that an STR/SAR was filed or that an investigation is underway.</div>
+        </div>
+      </section>
+
+      <section id="catalog" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 05</div><h2>goAML Report Catalog</h2><p class="sub">Report availability may depend on entity type, permissions and current UAE FIU configuration.</p></div></div>
+        <div class="report-filter" id="reportFilters">
+          <button class="chip active" data-filter="all">All</button><button class="chip" data-filter="suspicion">Suspicion</button><button class="chip" data-filter="request">FIU request</button><button class="chip" data-filter="sector">Sector</button><button class="chip" data-filter="tfs">TFS</button><button class="chip" data-filter="special">Special</button>
+        </div>
+        <div class="grid-3" id="reportGrid"></div>
+        <div class="callout warning" style="margin-top:14px"><strong>Portal hygiene from the 2024 FAQ:</strong> attachment names should be short, in English and without special characters; each attachment should not exceed 5 MB. The 2022 sector guides state a 20 MB total per report. The description field was stated as 4,000 characters. Verify the current portal limits before final submission.</div>
+      </section>
+
+      <section id="risk" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 06</div><h2>AML/CFT/CPF Risk Engine</h2><p class="sub">Article 5 risk factors plus sanctions, proliferation-financing and technology overlays. This is a triage model and must be calibrated to the entity's own risk assessment.</p></div></div>
+        <div class="risk-layout">
+          <div class="glass card">
+            <h3>Inherent risk factors (1 = low, 5 = very high)</h3>
+            <div id="riskSliders"></div>
+            <div class="field" style="margin-top:13px"><label>Control effectiveness (1 = weak, 5 = strong)</label><input id="controlScore" type="range" min="1" max="5" value="3"><div class="muted">Current: <span id="controlValue">3</span>/5</div></div>
+            <div class="callout info" style="margin-top:12px">Residual risk formula used here: inherent weighted score reduced by documented control effectiveness. It is intentionally conservative and is not a regulator-approved formula.</div>
+          </div>
+          <div class="score-panel glass">
+            <div class="score-ring" id="scoreRing"><span id="scoreValue">0</span></div>
+            <div class="score-label" id="scoreLabel">Not calculated</div>
+            <p class="muted" id="scoreAdvice">Move the sliders to assess the case.</p>
+            <div class="matrix" aria-label="5x5 risk matrix">
+              <div class="cell med">5</div><div class="cell high">10</div><div class="cell high">15</div><div class="cell crit">20</div><div class="cell crit">25</div>
+              <div class="cell med">4</div><div class="cell med">8</div><div class="cell high">12</div><div class="cell high">16</div><div class="cell crit">20</div>
+              <div class="cell low">3</div><div class="cell med">6</div><div class="cell med">9</div><div class="cell high">12</div><div class="cell high">15</div>
+              <div class="cell low">2</div><div class="cell low">4</div><div class="cell med">6</div><div class="cell med">8</div><div class="cell high">10</div>
+              <div class="cell low">1</div><div class="cell low">2</div><div class="cell low">3</div><div class="cell med">4</div><div class="cell med">5</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="sectors" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 07</div><h2>Sector Command Centre</h2>
+          <p class="sub">Dropdown မှ sector တစ်ခုရွေးလိုက်သည်နှင့် scope, reports, risks, controls, documents, action flow နှင့် cases အားလုံးပြောင်းလဲမည်။</p></div>
+          <span class="badge new" id="selectedSectorBadge"></span></div>
+        <div id="sectorCommand"></div>
+      </section>
+
+      <section id="sector-docs" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 07A</div><h2>Required Document Pack</h2>
+          <p class="sub">Company setup, customer/UBO, transaction evidence, goAML attachments နှင့် after-submission records ကို sector အလိုက်ခွဲထားသည်။</p></div>
+          <span class="badge">Readiness <b id="sectorDocPct">0%</b></span></div>
+        <div class="doc-progress"><span id="sectorDocBar"></span></div>
+        <div id="sectorDocuments" class="grid-2"></div>
+        <div class="callout warning" style="margin-top:14px"><strong>Attachment rule from the uploaded guides:</strong>
+          Report ကို Save လုပ်ပြီးမှ attachments တင်နိုင်သည်။ 2022 guides အရ file တစ်ခု 5 MB အများဆုံး၊ report တစ်ခုလုံး 20 MB အများဆုံး၊ English filename တိုတိုနှင့် special characters မပါရန် ဖော်ပြထားသည်။ Live portal BRRs ကို မတင်မီပြန်စစ်ပါ။
+        </div>
+      </section>
+
+      <section id="action-cycle" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 07B</div><h2>Before Preparing → Before Action → During Action → After Action</h2>
+          <p class="sub">Sector-specific operating sequence / ကဏ္ဍအလိုက် လုပ်ဆောင်မှုအစဉ်</p></div></div>
+        <div id="sectorActions" class="ops-grid"></div>
+      </section>
+
+      <section id="goaml-practice" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 07C</div><h2>Realistic goAML Submission Practice</h2>
+          <p class="sub">New Reports → Web Reports flow ကို လေ့ကျင့်ရန်။ Offline simulation သာဖြစ်ပြီး UAE FIU သို့ data မပို့ပါ။</p></div>
+          <span class="badge new" id="practiceSectorBadge"></span></div>
+        <div class="glass card">
+          <div class="practice-steps" id="practiceSteps"></div>
+          <div id="practiceErrors" class="callout danger" style="display:none"></div>
+
+          <div class="practice-panel active" data-pstep="0">
+            <h3>1. Report Selection / Report ရွေးရန်</h3>
+            <div class="form-grid">
+              <div class="field"><label>Sector</label><select id="psSector"></select></div>
+              <div class="field"><label>Report Type *</label>
+                <select id="psReport"><option>STR</option><option>SAR</option><option>AIF</option><option>AIFT</option><option>RFI</option><option>RFIT</option><option>DPMSR</option><option>REAR</option><option>PNMR</option><option>FFR</option></select>
+              </div>
+            </div>
+            <div id="psHelp" class="callout info" style="margin-top:10px"></div>
+          </div>
+
+          <div class="practice-panel" data-pstep="1">
+            <h3>2. Report Cover / အဖုံးအချက်အလက်</h3>
+            <div class="practice-form">
+              <div class="field"><label>Reporting Entity ID</label><input id="psOrg" value="PRACTICE-ORG-001" readonly></div>
+              <div class="field"><label>MLRO / Reporting Person *</label><input id="psMlro"></div>
+              <div class="field"><label>Submission Date</label><input id="psDate" readonly></div>
+              <div class="field"><label>Internal Reference *</label><input id="psRef" placeholder="AML-2026-001"></div>
+              <div class="field" id="psFiuWrap"><label>FIU Reference *</label><input id="psFiu"></div>
+              <div class="field"><label>Branch</label><input id="psBranch"></div>
+              <div class="field"><label>Incident Address *</label><input id="psAddress"></div>
+              <div class="field"><label>City *</label><input id="psCity" value="Dubai"></div>
+              <div class="field"><label>Emirate / State *</label><input id="psState" value="Dubai"></div>
+            </div>
+            <div class="field" style="margin-top:10px"><label>Description of Report *</label><textarea id="psDescription" placeholder="Who, what, when, amount, payment route and why the matter is being reported."></textarea></div>
+            <div class="field" style="margin-top:10px"><label>Action Taken by Reporting Entity *</label><textarea id="psAction" placeholder="Executed/rejected/held, EDD, monitoring, escalation, freeze action where legally required."></textarea></div>
+          </div>
+
+          <div class="practice-panel" data-pstep="2">
+            <h3>3. Report Party / ပါတီအချက်အလက်</h3>
+            <div class="practice-form">
+              <div class="field"><label>Party Type *</label><select id="ppType"><option>Person</option><option>Entity</option><option>Account</option></select></div>
+              <div class="field"><label>Role *</label><select id="ppRole"><option>Subject</option><option>Customer</option><option>Buyer</option><option>Seller</option><option>Payer</option><option>Beneficiary</option><option>Representative</option></select></div>
+              <div class="field"><label>Significance 0–10 *</label><input id="ppSig" type="number" min="0" max="10" value="8"></div>
+              <div class="field"><label>Name *</label><input id="ppName"></div>
+              <div class="field"><label>ID / Passport / Licence No. *</label><input id="ppId"></div>
+              <div class="field"><label>Nationality / Country *</label><input id="ppCountry"></div>
+            </div>
+            <div class="field" style="margin-top:10px"><label>Reason for Reporting Party *</label><textarea id="ppReason"></textarea></div>
+            <div class="actions"><button class="btn primary" id="addPracticeParty">Add Party</button></div>
+            <div id="practicePartyList" class="file-preview"></div>
+          </div>
+
+          <div class="practice-panel" data-pstep="3">
+            <h3>4. Transaction / Activity</h3>
+            <div class="practice-form">
+              <div class="field"><label>Transaction / Activity Ref *</label><input id="ptRef"></div>
+              <div class="field"><label>Date *</label><input id="ptDate" type="date"></div>
+              <div class="field"><label>Status *</label><select id="ptStatus"><option>Executed</option><option>Attempted / Rejected</option><option>Pending / Held</option></select></div>
+              <div class="field"><label>Amount</label><input id="ptAmount" type="number" step="0.01"></div>
+              <div class="field"><label>Currency</label><input id="ptCurrency" value="AED"></div>
+              <div class="field"><label>Mode</label><select id="ptMode"><option>Cash</option><option>Wire Transfer</option><option>Cheque</option><option>Card</option><option>Virtual Asset</option><option>Activity only</option></select></div>
+              <div class="field"><label>From / Source *</label><input id="ptFrom"></div>
+              <div class="field"><label>To / Destination *</label><input id="ptTo"></div>
+              <div class="field"><label>Account / Wallet / Property / Item Ref</label><input id="ptAccount"></div>
+            </div>
+            <div class="field" style="margin-top:10px"><label>Detailed Activity / Transaction Description *</label><textarea id="ptDescription"></textarea></div>
+            <div class="actions"><button class="btn primary" id="addPracticeTxn">Add Transaction / Activity</button></div>
+            <div id="practiceTxnList" class="file-preview"></div>
+          </div>
+
+          <div class="practice-panel" data-pstep="4">
+            <h3>5. Reasons, Attachments & Review</h3>
+            <div class="grid-2 checklist" id="practiceReasons">
+              <label class="check"><input type="checkbox" value="Unusual pattern"><span>Unusual pattern / ပုံမှန်မဟုတ်သော pattern</span></label>
+              <label class="check"><input type="checkbox" value="Structuring or linked payments"><span>Structuring / linked payments</span></label>
+              <label class="check"><input type="checkbox" value="Third-party payer or beneficiary"><span>Third-party payer / beneficiary</span></label>
+              <label class="check"><input type="checkbox" value="Unclear source of funds or wealth"><span>Unclear Source of Funds / Wealth</span></label>
+              <label class="check"><input type="checkbox" value="Opaque beneficial ownership"><span>Opaque UBO</span></label>
+              <label class="check"><input type="checkbox" value="Sanctions or TFS concern"><span>Sanctions / TFS concern</span></label>
+              <label class="check"><input type="checkbox" value="Attempted or rejected suspicious activity"><span>Attempted / rejected activity</span></label>
+              <label class="check"><input type="checkbox" value="Sector threshold trigger"><span>REAR / DPMSR sector trigger</span></label>
+            </div>
+            <div class="field" style="margin-top:12px"><label>Practice Attachments (local only)</label><input id="practiceFiles" type="file" multiple></div>
+            <div id="practiceFileList" class="file-preview"></div>
+            <textarea id="practiceReview" class="narrative-output" readonly style="margin-top:12px"></textarea>
+          </div>
+
+          <div class="practice-panel" data-pstep="5">
+            <h3>6. Practice Submit / လေ့ကျင့်တင်သွင်းမှု</h3>
+            <div id="practiceSubmitSummary" class="callout success">Complete the prior steps and run validation.</div>
+            <div class="actions">
+              <button class="btn" id="savePracticeDraft">Save Local Draft</button>
+              <button class="btn primary" id="practiceSubmitBtn">Practice Submit</button>
+              <button class="btn danger" id="clearPracticeDraft">Clear</button>
+            </div>
+          </div>
+
+          <div class="actions" style="justify-content:space-between;margin-top:14px">
+            <button class="btn" id="practicePrev">← Previous</button>
+            <button class="btn primary" id="practiceNext">Next →</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="sector-practice" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 07D</div><h2>Sector Practice Cases</h2>
+          <p class="sub">Sector dropdown ပြောင်းလိုက်သည်နှင့် cases ပြောင်းလဲမည်။</p></div>
+          <span class="badge">Score <b id="sectorCaseScore">0/0</b></span></div>
+        <div id="sectorCaseGrid" class="grid-2"></div>
+      </section>
+
+      <section id="cdd" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 08</div><h2>CDD, EDD & Ongoing Monitoring</h2><p class="sub">A high-level operational sequence aligned with the 2025 Executive Regulation. Sector/regulator rules can add more detail.</p></div></div>
+        <div class="grid-3">
+          <div class="card glass"><h3>1. Identify & verify</h3><ul class="compact"><li>Natural person identity, nationality, address, DOB/place of birth</li><li>Legal form, registered office, constitutional documents, tax/reference data</li><li>Authority of the person acting for the customer</li></ul></div>
+          <div class="card glass"><h3>2. Determine UBO & control</h3><ul class="compact"><li>Natural person owning 25% or more</li><li>If unclear, identify control by other means</li><li>If still none, identify relevant senior management</li><li>Map trusts/legal arrangements and all relevant parties</li></ul></div>
+          <div class="card glass"><h3>3. Purpose & expected activity</h3><ul class="compact"><li>Nature and intended purpose of relationship</li><li>Business model and ownership/control structure</li><li>Expected transaction size, frequency, counterparties and geography</li></ul></div>
+          <div class="card glass"><h3>4. Screen</h3><ul class="compact"><li>UAE/UN targeted financial sanctions</li><li>PEP, relatives and close associates</li><li>Adverse media and internal watchlists</li><li>PF/dual-use and sector-specific risks</li></ul></div>
+          <div class="card glass"><h3>5. Apply EDD where high risk</h3><ul class="compact"><li>More identity/occupation/UBO information</li><li>Source of funds and source of wealth</li><li>More frequent updates and monitoring</li><li>Senior-management approval</li><li>First payment from customer-name account where appropriate</li></ul></div>
+          <div class="card glass"><h3>6. Monitor & refresh</h3><ul class="compact"><li>Compare actual activity with expected profile</li><li>Review high-risk customers more frequently</li><li>Investigate alerts and document closure/escalation</li><li>Retain reconstructable records for at least five years</li></ul></div>
+        </div>
+        <div class="bi-grid" style="margin-top:14px">
+          <div class="callout danger mm-col"><strong>CDD မပြီးနိုင်လျှင်:</strong> Business relationship ကို မစတင်/မဆက်၊ transaction ကို မလုပ်ရ။ Suspicion ရှိလျှင် STR စဉ်းစားပါ။ CDD ပြုလုပ်ခြင်းက customer ကို alert လုပ်နိုင်သည်ဟု အကြောင်းပြချက်ရှိလျှင် CDD မဆက်ဘဲ အကြောင်းပြချက်ပါ STR တင်နိုင်သည်။</div>
+          <div class="callout danger en-col"><strong>If CDD cannot be completed:</strong> Do not establish or continue the relationship and do not execute the transaction. Consider an STR where necessary. If further CDD would alert the customer, the Regulation allows reporting the reasons for not applying it.</div>
+        </div>
+      </section>
+
+      <section id="governance" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 09</div><h2>Compliance Governance & MLRO Operating Model</h2><p class="sub">The compliance function must be demonstrably effective, not merely named on paper.</p></div></div>
+        <div class="grid-4">
+          <div class="card glass"><h3>Management level</h3><p>CO/MLRO should have appropriate seniority, competence and experience.</p></div>
+          <div class="card glass"><h3>Independence</h3><p>Independent decision-making, direct access to senior management/board, and conflict controls.</p></div>
+          <div class="card glass"><h3>Resources</h3><p>Access to data, staff, monitoring, sanctions tools and sufficient budget.</p></div>
+          <div class="card glass"><h3>No sales conflict</h3><p>The 2026 joint guidance warns against day-to-day sales/customer relationship responsibility.</p></div>
+        </div>
+        <div class="grid-2" style="margin-top:14px">
+          <div class="glass card">
+            <h3>Minimum operating cycle</h3>
+            <table class="compare">
+              <tr><th>Frequency</th><th>Required evidence</th></tr>
+              <tr><td>Ongoing</td><td>Alert review, sanctions screening, STR/SAR decisions, current KYC/UBO</td></tr>
+              <tr><td>Monthly</td><td>High-risk customer review, overdue CDD, alert backlog, report status</td></tr>
+              <tr><td>Quarterly</td><td>Risk metrics, training completion, control issues and remediation</td></tr>
+              <tr><td>Semi-annual</td><td>CO/MLRO compliance report to senior management and relevant supervisor as applicable under 2026 joint guidance</td></tr>
+              <tr><td>Annual / trigger</td><td>Business-wide risk assessment, policy refresh, independent audit/testing, training plan</td></tr>
+            </table>
+          </div>
+          <div class="glass card">
+            <h3>Stop / Start / Increase</h3>
+            <div class="callout danger"><strong>Stop:</strong> generic policies, shared logins, undocumented alert closures, nationality-only risk ratings, and threshold-only STR decisions.</div>
+            <div class="callout success" style="margin-top:9px"><strong>Start:</strong> evidence-based customer risk assessment, UBO mapping, case logs, report quality review and current-list verification.</div>
+            <div class="callout info" style="margin-top:9px"><strong>Increase:</strong> senior-management challenge, sector-specific training, PF controls, independent testing and monitoring of high-risk customers.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cases" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 10</div><h2>Case Lab</h2><p class="sub">Read the facts, decide independently, then reveal the suggested treatment.</p></div></div>
+        <div class="grid-2" id="caseGrid"></div>
+      </section>
+
+      <section id="narrative" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 11</div><h2>STR/SAR Narrative Builder</h2><p class="sub">Build a factual English draft. Remove speculation, unsupported accusations and irrelevant personal data before use.</p></div></div>
+        <div class="grid-2">
+          <div class="glass card">
+            <div class="form-grid">
+              <div class="field"><label>Report type</label><select id="nType"><option>STR</option><option>SAR</option></select></div>
+              <div class="field"><label>Internal reference</label><input id="nRef" placeholder="AML-2026-001"></div>
+              <div class="field"><label>Subject / customer</label><input id="nSubject" placeholder="Name or internal customer ID"></div>
+              <div class="field"><label>Date / period</label><input id="nDate" placeholder="DD MMM YYYY or period"></div>
+              <div class="field"><label>Amount and currency</label><input id="nAmount" placeholder="AED 250,000"></div>
+              <div class="field"><label>Transaction status</label><select id="nStatus"><option>Executed</option><option>Attempted / not executed</option><option>Activity only</option></select></div>
+            </div>
+            <div class="field" style="margin-top:10px"><label>What happened? Facts in chronological order</label><textarea id="nFacts" placeholder="State dates, parties, payment route, accounts, goods/property and events."></textarea></div>
+            <div class="field" style="margin-top:10px"><label>Why is it suspicious? Specific red flags and profile mismatch</label><textarea id="nWhy" placeholder="Explain the inconsistency; do not merely say 'suspicious'."></textarea></div>
+            <div class="field" style="margin-top:10px"><label>CDD / source information and gaps</label><textarea id="nCdd" placeholder="KYC, UBO, source of funds/wealth, screening and missing information."></textarea></div>
+            <div class="field" style="margin-top:10px"><label>Actions taken</label><textarea id="nActions" placeholder="Escalation, transaction hold/rejection, enhanced review, account monitoring, documents retained."></textarea></div>
+            <div class="actions"><button class="btn primary" id="generateNarrative">Generate narrative</button><button class="btn" id="saveNarrative">Save locally</button><button class="btn danger" id="clearNarrative">Clear</button></div>
+          </div>
+          <div class="glass card">
+            <h3>Generated English draft</h3>
+            <textarea id="nOutput" class="narrative-output" placeholder="Generated narrative will appear here."></textarea>
+            <div class="actions"><button class="btn" id="copyNarrative">Copy</button></div>
+            <div class="callout warning" style="margin-top:12px"><strong>Quality test:</strong> A reviewer should be able to answer who, what, when, where, how much, transaction flow, why the activity is inconsistent, what evidence exists, and what the entity did.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="iems" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 12</div><h2>goAML vs IEMS</h2><p class="sub">These are separate systems. Mixing their purpose creates missed deadlines and incorrect submissions.</p></div></div>
+        <div class="glass card">
+          <table class="compare">
+            <tr><th>Area</th><th>goAML</th><th>IEMS</th></tr>
+            <tr><td>Primary purpose</td><td>Submit suspicious and specified sector/TFS reports; communicate through Message Board</td><td>Execute and respond to enquiries, prosecution decisions and other domestic-authority requests</td></tr>
+            <tr><td>Typical users</td><td>CO/MLRO and authorised reporting users</td><td>Admin, Maker and Checker</td></tr>
+            <tr><td>Workflow</td><td>Create, validate, submit report; respond to FIU requests with the appropriate report type</td><td>Maker prepares response/attachments; Checker authorises or rejects; Admin manages users</td></tr>
+            <tr><td>Critical discipline</td><td>Correct report type, factual narrative, no tipping off, report without delay</td><td>Follow due date, FIU comments, checklist, requested period and file format exactly</td></tr>
+          </table>
+        </div>
+        <div class="callout danger" style="margin-top:14px"><strong>IEMS operational warning from the uploaded guide:</strong> pay strict attention to due dates and FIU comments; provide account statements for the requested period in CSV and PDF where requested; implement freeze orders immediately according to the instruction and case scope.</div>
+      </section>
+
+      <section id="sources" class="module searchable">
+        <div class="module-head"><div><div class="kicker">Module 13</div><h2>Source Map, Conflicts & Update Rules</h2><p class="sub">Use the most current authoritative source for law, then current supervisor/FIU instructions, then operational guides.</p></div></div>
+        <div class="glass card" style="overflow:auto">
+          <table class="compare"><tr><th>Priority</th><th>Source</th><th>Access</th></tr><tr><td>Current law</td><td>Cabinet Resolution No. 134 of 2025 - Executive Regulations of Federal Decree-Law No. 10 of 2025</td><td><a href="https://www.moj.gov.ae/assets/6b3e3bf7/cabinet-resolution-no-134-of-2025-regarding-the-executive-regulations-of-federal-decree-law-no-639053857268671601.aspx" target="_blank" rel="noopener">Open official source</a></td></tr>
+<tr><td>Current guidance</td><td>Joint Guidance on the AML/CFT/CPF Compliance Officer / MLRO (2026)</td><td><a href="https://www.moj.gov.ae/assets/d07caec5/notice-no-24712026-re-joint-guidance-on-the-amlcftcpf-compliance-officer-money-laundering-639129716936640830.aspx" target="_blank" rel="noopener">Open official source</a></td></tr>
+<tr><td>Current official hub</td><td>Ministry of Economy &amp; Tourism - AML legislation, circulars and sector guides</td><td><a href="https://www.moet.gov.ae/en/aml" target="_blank" rel="noopener">Open official source</a></td></tr>
+<tr><td>Current official hub</td><td>UAE FIU System Guides</td><td><a href="https://uaefiu.gov.ae/en/more/knowledge-centre/system-guides/" target="_blank" rel="noopener">Open official source</a></td></tr>
+<tr><td>Uploaded source</td><td>goAML System Registration Guide - 29 October 2024</td><td>Included in the uploaded document set</td></tr>
+<tr><td>Uploaded source</td><td>goAML FAQs V2.1 - 18 April 2024</td><td>Included in the uploaded document set</td></tr>
+<tr><td>Uploaded source</td><td>goAML Registration Guide V3.4 - 18 March 2022</td><td>Included in the uploaded document set</td></tr>
+<tr><td>Uploaded source</td><td>goAML Web Submission Guide V2.4 - 20 July 2022</td><td>Included in the uploaded document set</td></tr>
+<tr><td>Uploaded source</td><td>DPMSR Submission Guide V1.3 - 20 July 2022</td><td>Included in the uploaded document set</td></tr>
+<tr><td>Uploaded source</td><td>PNMR &amp; FFR Submission Guide V1.3 - 20 July 2022</td><td>Included in the uploaded document set</td></tr>
+<tr><td>Uploaded source</td><td>REAR Submission Guide V1.1 - 20 July 2022</td><td>Included in the uploaded document set</td></tr>
+<tr><td>Uploaded source</td><td>IEMS User Guide for Reporting Entities V2.1.2 - 17 March 2022</td><td>Included in the uploaded document set</td></tr></table>
+        </div>
+        <div class="grid-3" style="margin-top:14px">
+          <div class="callout success"><strong>Use first:</strong> 2025 law/regulation, 2026 joint guidance, current regulator circulars and live sanctions/high-risk country instructions.</div>
+          <div class="callout warning"><strong>Use with caution:</strong> 2022-2024 UAE FIU manuals for portal workflow and report mechanics. They predate the new AML/CFT/CPF legal baseline.</div>
+          <div class="callout danger"><strong>Exclude:</strong> The uploaded FIAU Malta goAML guide is jurisdiction-specific to Malta and must not be used as UAE authority.</div>
+        </div>
+        <div class="glass card" style="margin-top:14px">
+          <h3>Before every real submission</h3>
+          <div class="checklist">
+            <label class="check"><input type="checkbox"> <span>Confirm the current UAE FIU portal/report type and your user permission.</span></label>
+            <label class="check"><input type="checkbox"> <span>Check the current supervisory-authority circulars and high-risk-country measures.</span></label>
+            <label class="check"><input type="checkbox"> <span>Check current UAE/UN sanctions lists and TFS instructions.</span></label>
+            <label class="check"><input type="checkbox"> <span>Validate all names, dates, amounts, roles, transaction flow and attachments.</span></label>
+            <label class="check"><input type="checkbox"> <span>Obtain MLRO approval and retain the decision rationale confidentially.</span></label>
+          </div>
+        </div>
+      </section>
+      <div class="footer">UAE goAML & AML/CFT/CPF Compliance Portal · Bilingual operational aid · Version 2026-07-28</div>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast">Saved</div>
+
+<script>
+const sectors = [{"id": "real-estate", "icon": "⌂", "name_mm": "အိမ်ခြံမြေ အကျိုးဆောင်နှင့် Agent", "name_en": "Real Estate Brokers & Agents", "scope_mm": "ဖောက်သည်ကိုယ်စား အိမ်ခြံမြေ ဝယ်/ရောင်း transaction သို့မဟုတ် settlement ကို စီစဉ်/ပြီးစီးပေးသည့်အခါ AML scope ဝင်သည်။", "scope_en": "In scope when concluding transactions or settlements on behalf of customers for the purchase or sale of real estate.", "risks_mm": ["ငွေသားပေးချေမှုနှင့် payment ခွဲပေးခြင်း", "တတိယပုဂ္ဂိုလ်က ပေးချေခြင်း", "UBO မရှင်းသော offshore structure", "တန်ဖိုးမမှန်ခြင်း/အမြန်ပြန်ရောင်းခြင်း", "Virtual asset သို့မဟုတ် VA မှပြောင်းလာသောငွေ"], "risks_en": ["Cash and split payments", "Third-party payments", "Opaque offshore ownership", "Mispricing or rapid resale", "Virtual assets or VA-converted funds"], "controls_mm": ["Buyer, seller, payer နှင့် UBO ကို သီးခြားစစ်ပါ", "Source of Funds/Wealth ကို transaction နဲ့ချိတ်စစ်ပါ", "Valuation နှင့် economic rationale ကို မှတ်တမ်းတင်ပါ", "Payment trail တစ်လျှောက်လုံးကို စောင့်ကြည့်ပါ"], "controls_en": ["Identify buyer, seller, payer and UBO separately", "Link source of funds/wealth to the transaction", "Document valuation and economic rationale", "Monitor the complete payment trail"], "trigger_mm": "Freehold ဝယ်/ရောင်းတွင် cash AED 55,000+ (တစ်ကြိမ်/ခွဲပေး), virtual asset ဖြင့် ပေးချေခြင်း၊ သို့မဟုတ် VA မှ/သို့ ပြောင်းထားသောငွေ အသုံးပြုခြင်းဆို REAR စဉ်းစားပါ။ Suspicion ရှိလျှင် STR/SAR ကို ထပ်စဉ်းစားရသည်။", "trigger_en": "Consider REAR for freehold purchase/sale involving cash of AED 55,000+ (single or linked payments), virtual assets, or funds converted from/to virtual assets. A separate STR/SAR may also be required where suspicion exists."}, {"id": "dpms", "icon": "◆", "name_mm": "တန်ဖိုးကြီးသတ္တုနှင့် ကျောက်မျက်ရတနာ ရောင်းဝယ်သူ", "name_en": "Dealers in Precious Metals & Stones", "scope_mm": "လက်ရှိ 2025 Executive Regulation အရ linked cash transaction AED 55,000+ ပြုလုပ်သည့် DPMS သည် DNFBP scope ဝင်သည်။", "scope_en": "Under the 2025 Executive Regulation, DPMS are in scope when conducting a single or linked cash transaction of AED 55,000 or more.", "risks_mm": ["တန်ဖိုးမြင့်၊ သယ်ယူလွယ်သောပစ္စည်း", "ငွေသားနှင့် structuring", "Invoice/weight/purity မမှန်ခြင်း", "တတိယပုဂ္ဂိုလ် payment", "Gold origin၊ sanctions နှင့် trade-based laundering"], "risks_en": ["High-value portable goods", "Cash and structuring", "False invoice/weight/purity", "Third-party payment", "Gold origin, sanctions and trade-based laundering"], "controls_mm": ["ID/Passport၊ trade licence၊ authorized representative စစ်ပါ", "Goods description, purity, weight, invoice နှင့် payment ကို reconcile လုပ်ပါ", "Supplier/source country နှင့် responsible sourcing စစ်ပါ", "Linked transactions ကို စုစည်းစောင့်ကြည့်ပါ"], "controls_en": ["Verify ID/passport, trade licence and authorised representative", "Reconcile goods description, purity, weight, invoice and payment", "Check supplier/source country and responsible sourcing", "Aggregate and monitor linked transactions"], "trigger_mm": "Cash AED 55,000+ အတွက် DPMSR operational guide ကိုလိုက်နာပါ။ 2022 guide တွင် company transaction ကို cash သို့မဟုတ် wire transfer AED 55,000+ ဟု ဖော်ပြထားသော်လည်း 2025 Regulation တွင် scope threshold ကို cash ဟုရေးထားသည်—corporate wire case ကို လက်ရှိ FIU/MOET instruction ဖြင့် အတည်ပြုပါ။", "trigger_en": "Use the DPMSR operational guide for cash transactions of AED 55,000+. The 2022 guide also mentions company transactions of AED 55,000+ by cash or wire transfer, while the 2025 Regulation frames the scope threshold as cash; confirm current FIU/MOET instructions for corporate wire cases."}, {"id": "tcsp", "icon": "▦", "name_mm": "Company & Trust Service Provider", "name_en": "Company & Trust Service Providers", "scope_mm": "Company တည်ထောင်ပေးခြင်း၊ director/secretary/partner စီစဉ်ပေးခြင်း၊ registered address ပေးခြင်း၊ trustee/nominee shareholder အဖြစ် ဆောင်ရွက်ခြင်းတို့တွင် scope ဝင်သည်။", "scope_en": "In scope for company formation agency, arranging directors/secretaries/partners, providing registered addresses, trustee functions and nominee shareholder services.", "risks_mm": ["Shell company နှင့် substance မရှိခြင်း", "ရှုပ်ထွေးသော ownership chain", "Nominee arrangement", "အမြန် director/shareholder ပြောင်းခြင်း", "Sanctions/PF နိုင်ငံနှင့် dual-use trade ချိတ်ဆက်မှု"], "risks_en": ["Shell companies and lack of substance", "Complex ownership chains", "Nominee arrangements", "Rapid director/shareholder changes", "Sanctions/PF and dual-use trade exposure"], "controls_mm": ["UBO 25%+ နှင့် control by other means စစ်ပါ", "Business purpose၊ expected activity နှင့် source of capital စစ်ပါ", "Nominee/nominator relationship ကို ထုတ်ဖော်မှတ်တမ်းတင်ပါ", "Address-only customer များကို enhanced monitoring လုပ်ပါ"], "controls_en": ["Identify 25%+ ownership and control by other means", "Verify business purpose, expected activity and source of capital", "Document nominee/nominator relationships", "Apply enhanced monitoring to address-only customers"], "trigger_mm": "သံသယ transaction/attempt/activity ရှိလျှင် STR/SAR။ Threshold မရှိပါ။", "trigger_en": "Use STR/SAR where a transaction, attempt or activity is suspicious. There is no monetary threshold for suspicion reporting."}, {"id": "accounting", "icon": "Σ", "name_mm": "Independent Accountants & Auditors", "name_en": "Independent Accountants & Auditors", "scope_mm": "ဖောက်သည်ကိုယ်စား သတ်မှတ်ထားသော financial/company transaction များ ပြင်ဆင်၊ ဆောင်ရွက်၊ အကောင်အထည်ဖော်သည့်အခါ scope ဝင်နိုင်သည်။", "scope_en": "May be in scope when preparing, conducting or executing specified financial or company transactions on behalf of customers.", "risks_mm": ["စာရင်းအတု/အတု invoice", "အကြောင်းမရှိ capital injection", "Related-party transaction ဖုံးကွယ်ခြင်း", "Client money misuse", "Audit evidence ပေးရန် ရှောင်ရှားခြင်း"], "risks_en": ["False records or invoices", "Unexplained capital injection", "Hidden related-party transactions", "Misuse of client money", "Avoidance of audit evidence"], "controls_mm": ["General ledger နှင့် bank/payment evidence reconcile", "UBO နှင့် related parties ကို map လုပ်ပါ", "Management override ကို challenge လုပ်ပါ", "Suspicion decision rationale ကို CO/MLRO မှတ်တမ်းတင်ပါ"], "controls_en": ["Reconcile ledger to bank/payment evidence", "Map UBOs and related parties", "Challenge management override", "Document the CO/MLRO suspicion decision"], "trigger_mm": "Executed suspicious transaction အတွက် STR; attempted/non-executed suspicious activity အတွက် SAR။ Professional secrecy exemption ကို blanket exemption အဖြစ် မသုံးရ။", "trigger_en": "STR for an executed suspicious transaction; SAR for suspicious activity or an attempted/non-executed transaction. Professional secrecy is not a blanket exemption."}, {"id": "legal", "icon": "§", "name_mm": "Lawyers, Notaries & Independent Legal Professionals", "name_en": "Lawyers, Notaries & Independent Legal Professionals", "scope_mm": "အိမ်ခြံမြေ၊ ဖောက်သည်ငွေ၊ bank/securities account၊ company contribution၊ legal person/arrangement တည်ထောင်/ဝယ်/ရောင်း စသည့် သတ်မှတ်လုပ်ငန်းများတွင် scope ဝင်သည်။", "scope_en": "In scope for specified activities involving real estate, customer funds, bank/securities accounts, company contributions, and establishing or buying/selling legal persons or arrangements.", "risks_mm": ["Client account/escrow အသုံးချမှု", "Opaque corporate structure", "Property/company acquisition with unexplained funds", "Privilege ကို အလွဲသုံးစားလုပ်ခြင်း", "Nominee နှင့် third-party payer"], "risks_en": ["Misuse of client/escrow accounts", "Opaque corporate structures", "Property/company acquisitions with unexplained funds", "Misuse of privilege", "Nominees and third-party payers"], "controls_mm": ["Matter scope ကို တိတိကျကျ ခွဲခြားပါ", "Privilege/legal professional secrecy သက်ရောက်မှုကို case-by-case legal review လုပ်ပါ", "Client, payer, UBO နှင့် purpose စစ်ပါ", "Client account movement ကို matter အလိုက် reconcile လုပ်ပါ"], "controls_en": ["Define the matter scope precisely", "Assess privilege/legal professional secrecy case by case", "Verify client, payer, UBO and purpose", "Reconcile client-account movements to each matter"], "trigger_mm": "2025 Regulation Article 18 တွင် judicial position assessment/representation နှင့် သတ်မှတ် professional secrecy circumstances အတွက် ကန့်သတ် exemption ရှိသည်။ အခြား commercial transaction များကို အလိုအလျောက် exempt မလုပ်ပါနှင့်။", "trigger_en": "Article 18 of the 2025 Regulation provides a limited exemption for specified judicial-position, representation and professional-secrecy contexts. Do not automatically exempt other commercial transactions."}, {"id": "financial", "icon": "₿", "name_mm": "Financial Institutions", "name_en": "Financial Institutions", "scope_mm": "Banking, exchange, remittance, payment, investment, insurance နှင့် အခြား regulated financial activities များ။ သက်ဆိုင်ရာ regulator rulebook ထပ်မံလိုက်နာရသည်။", "scope_en": "Banking, exchange, remittance, payment, investment, insurance and other regulated financial activities, subject to the relevant regulator rulebook.", "risks_mm": ["Mule/pass-through account", "Structuring and rapid movement", "Trade finance document mismatch", "High-risk correspondent relationship", "Cash, remittance and sanctions exposure"], "risks_en": ["Mule/pass-through accounts", "Structuring and rapid movement", "Trade-finance document mismatch", "High-risk correspondent relationships", "Cash, remittance and sanctions exposure"], "controls_mm": ["Transaction monitoring scenario tuning", "Originator/beneficiary data quality", "Expected activity နှင့် actual activity နှိုင်းယှဉ်ခြင်း", "Sanctions/PEP/adverse media screening", "Correspondent due diligence"], "controls_en": ["Tune transaction-monitoring scenarios", "Ensure originator/beneficiary data quality", "Compare expected and actual activity", "Sanctions/PEP/adverse-media screening", "Correspondent due diligence"], "trigger_mm": "Suspicion ရှိလျှင် တန်ဖိုးမရွေး ချက်ချင်း STR/SAR။ Occasional CDD threshold နှင့် wire-transfer rules ကို regulator rules ဖြင့်ပါ စစ်ပါ။", "trigger_en": "Where suspicion exists, report immediately regardless of value. Also apply regulator-specific occasional-transaction CDD and wire-transfer rules."}, {"id": "vasp", "icon": "⬡", "name_mm": "Virtual Asset Service Providers", "name_en": "Virtual Asset Service Providers", "scope_mm": "VA/fiat exchange၊ VA-to-VA exchange၊ transfer၊ custody/admin၊ issuer-related financial services စသည့် activity များ။", "scope_en": "Includes VA/fiat exchange, VA-to-VA exchange, transfer, custody/administration and issuer-related financial services.", "risks_mm": ["Unhosted wallet", "Mixer/tumbler နှင့် chain hopping", "Privacy-enhancing asset", "Sanctions address exposure", "Rapid fiat conversion နှင့် mule network"], "risks_en": ["Unhosted wallets", "Mixers/tumblers and chain hopping", "Privacy-enhancing assets", "Sanctions-address exposure", "Rapid fiat conversion and mule networks"], "controls_mm": ["Blockchain analytics", "Wallet ownership/economic purpose verification", "Travel-rule data", "Source of crypto/funds", "Risk-based enhanced monitoring"], "controls_en": ["Blockchain analytics", "Wallet ownership and economic-purpose verification", "Travel-rule data", "Source of crypto/funds", "Risk-based enhanced monitoring"], "trigger_mm": "2025 Regulation အရ occasional transaction AED 3,500+ တွင် CDD လိုအပ်နိုင်သည်။ Suspicion report က တန်ဖိုးမရွေး STR/SAR ဖြစ်သည်။", "trigger_en": "Under the 2025 Regulation, CDD may be required for occasional transactions of AED 3,500+. Suspicion reporting remains value-independent through STR/SAR."}, {"id": "gaming", "icon": "◈", "name_mm": "Commercial Gaming Operators", "name_en": "Commercial Gaming Operators", "scope_mm": "2025 Executive Regulation တွင် ထည့်သွင်းထားသော DNFBP category အသစ်ဖြစ်ပြီး single/linked financial transaction AED 11,000+ အတွက် scope ဝင်သည်။", "scope_en": "A DNFBP category added by the 2025 Executive Regulation, in scope for a single or linked financial transaction of AED 11,000 or more.", "risks_mm": ["Buy-in ပြီးချက်ချင်း cash-out", "Third-party funding", "Collusion and chip transfer", "Online identity/payment mismatch", "Sanctions/PEP/high-risk geography"], "risks_en": ["Rapid buy-in and cash-out", "Third-party funding", "Collusion and chip transfers", "Online identity/payment mismatch", "Sanctions/PEP/high-risk geography"], "controls_mm": ["Player, payer, beneficiary ခွဲစစ်ပါ", "Linked transaction aggregation", "Session/betting behaviour monitoring", "Source of funds နှင့် device/payment linkage", "GCGRA instruction စစ်ပါ"], "controls_en": ["Separate player, payer and beneficiary", "Aggregate linked transactions", "Monitor session/betting behaviour", "Verify source of funds and device/payment linkage", "Check GCGRA instructions"], "trigger_mm": "Uploaded UAE guides တွင် gaming-specific goAML report မပါရှိပါ။ Suspicion ရှိလျှင် STR/SAR နှင့် လက်ရှိ GCGRA/FIU instruction ကို သုံးပါ။", "trigger_en": "The uploaded UAE guides do not contain a gaming-specific goAML report. Use STR/SAR for suspicion and follow current GCGRA/FIU instructions."}];
+const reportTypes = [["STR", "Suspicious Transaction Report", "ပြီးစီးသွားသော transaction သို့မဟုတ် funds သည် ML/TF/PF crime နှင့် ဆက်စပ်နိုင်သည်ဟု သံသယ/အကြောင်းပြချက်ရှိသောအခါ။ တန်ဖိုးမရွေး ချက်ချင်းတင်ရန်။", "Executed transaction or funds suspected or reasonably suspected to be linked to ML/TF/PF. Submit immediately and without delay, regardless of value.", "suspicion"], ["SAR", "Suspicious Activity Report", "မပြီးစီးသေးသော/ကြိုးစားထားသော transaction သို့မဟုတ် suspicious activity ကို report လုပ်ရန်။", "Suspicious activity or an attempted/non-executed transaction.", "suspicion"], ["AIF", "Additional Information File", "ယခင် report ကို FIU က transaction မပါသော အချက်အလက်ထပ်တောင်းသည့်အခါ။", "Used when the FIU requests additional information without transactions regarding a prior report.", "request"], ["AIFT", "Additional Information File with Transactions", "FIU က transaction data ပါသော အချက်အလက်ထပ်တောင်းသည့်အခါ။", "Used when the FIU requests additional information including transactions.", "request"], ["RFI", "Request for Information", "FIU က reporting entity များထံ transaction မပါသော တိကျသည့် information request ပေးသည့်အခါ။", "Response to an FIU information request without transactions.", "request"], ["RFIT", "Request for Information with Transactions", "FIU request ကို transaction data နှင့် ပြန်လည်တင်သည့်အခါ။", "Response to an FIU information request including transactions.", "request"], ["DPMSR", "Dealers in Precious Metals & Stones Report", "DPMS sector threshold/operational reporting။ Suspicion report မဟုတ်ဘဲ sector report ဖြစ်သည်; red flags ရှိလျှင် STR/SAR ထပ်လိုနိုင်သည်။", "Threshold/operational sector report for DPMS. It is not a substitute for STR/SAR where red flags exist.", "sector"], ["REAR", "Real Estate Activity Report", "သတ်မှတ် cash/virtual-asset real-estate activity report။ Suspicion မရှိလည်း trigger ပြည့်လျှင် တင်ရနိုင်သည်။", "Specified cash/virtual-asset real-estate activity report. It may be required even without suspicion.", "sector"], ["PNMR", "Partial Name Match Report", "TFS screening တွင် potential/partial match ဖြစ်သောအခါ။ Identity resolution နှင့် current TFS instruction ကို ချက်ချင်းလိုက်နာရန်။", "Used for a potential/partial TFS name match. Resolve identity and follow current TFS instructions immediately.", "tfs"], ["FFR", "Funds Freeze Report", "Confirmed sanctions/TFS match၊ freezing/prohibition သို့မဟုတ် attempted transaction နှင့် သက်ဆိုင်သော report။", "Used for confirmed TFS matches, freezing/prohibition measures and related attempted transactions.", "tfs"], ["HRC / HRCA", "High-Risk Country Transaction / Activity", "2022 guide တွင်ပါသော specialized report type။ နိုင်ငံစာရင်းပြောင်းလဲနိုင်သဖြင့် current FIU/supervisor instruction ရှိမှ သုံးပါ။", "Specialised types listed in the 2022 guide. Use only under current FIU/supervisor instructions because country lists and measures change.", "special"], ["PSTR", "Postponement of Suspicious Transaction Report", "Specialized postponement report type။ ကိုယ်တိုင်အဓိပ္ပါယ်ခန့်မှန်းပြီး မသုံးဘဲ FIU/supervisor procedure အတိုင်းသာ သုံးပါ။", "Specialised postponement report type. Use only under the applicable FIU/supervisor procedure; do not infer eligibility.", "special"]];
+const cases = [{"title_mm": "အိမ်ခြံမြေ cash trigger သာရှိပြီး red flag မရှိ", "title_en": "Real-estate cash trigger with no red flags", "facts_mm": "Freehold property AED 1.2 million ဝယ်ယူရာတွင် buyer က AED 60,000 cash ပေးပြီး ကျန်ငွေကို မိမိအမည် bank account မှပေးသည်။ KYC/SoF သင့်တော်ပြီး red flag မရှိ။", "facts_en": "A buyer purchases a freehold property for AED 1.2 million, pays AED 60,000 in cash and the balance from an account in the buyer's own name. KYC and source of funds are satisfactory.", "answer_mm": "REAR ကို စဉ်းစား/တင်ရမည်။ Suspicion မရှိသဖြင့် STR ကို threshold တစ်ခုတည်းကြောင့် မတင်ရ။", "answer_en": "Consider/file REAR. Do not file an STR solely because the threshold was met where there is no suspicion."}, {"title_mm": "Third-party property payments", "title_en": "Third-party property payments", "facts_mm": "AED 2.5 million property ကို buyer နှင့်မဆိုင်သော company ၄ ခုက ခွဲပေးပြီး buyer က UBO/source ကို မရှင်းပြနိုင်။", "facts_en": "Four unrelated companies split the payment for a buyer's AED 2.5 million property, and the buyer cannot explain the UBOs or source.", "answer_mm": "Payment method က REAR trigger ပြည့်ပါက REAR; သံသယ transaction ပြီးစီးပါက STR ကိုလည်း တင်ရန်။ CDD မပြီးနိုင်လျှင် transaction/relationship မဆက်ရန်နှင့် STR စဉ်းစားရန်။", "answer_en": "File REAR if its payment trigger is met, and also file STR for the executed suspicious transaction. If CDD cannot be completed, do not proceed/continue and consider an STR."}, {"title_mm": "DPMS cash purchase", "title_en": "DPMS cash purchase", "facts_mm": "Resident customer က gold AED 70,000 ကို cash ဖြင့်ဝယ်သည်။ ID valid၊ source သင့်တော်၊ linked activity မရှိ။", "facts_en": "A resident customer buys AED 70,000 of gold in cash. ID is valid, source is reasonable and no linked suspicious activity is found.", "answer_mm": "DPMSR sector report လိုအပ်နိုင်သည်။ Suspicion မရှိလျှင် STR မလိုပါ။ Record ကို အနည်းဆုံး 5 နှစ်ထားပါ။", "answer_en": "A DPMSR sector report may be required. An STR is not required without suspicion. Retain the records for at least five years."}, {"title_mm": "Attempted transaction with forged ID", "title_en": "Attempted transaction using a forged ID", "facts_mm": "Customer က transaction မပြီးခင် forged ID သံသယကြောင့် process ရပ်သွားသည်။", "facts_en": "The process is stopped before execution because the customer's identity document appears forged.", "answer_mm": "မပြီးစီးသော attempted transaction/activity ဖြစ်သဖြင့် SAR ကို အဓိကစဉ်းစားပါ။ Evidence နှင့် decision rationale ကို သိမ်းပါ။", "answer_en": "Treat it primarily as a SAR scenario because the transaction was attempted but not executed. Preserve evidence and the decision rationale."}, {"title_mm": "Confirmed TFS match", "title_en": "Confirmed TFS match", "facts_mm": "Customer identifiers အားလုံးက sanctions list entry နှင့် confirmed match ဖြစ်သည်။", "facts_en": "All relevant customer identifiers confirm a match to a sanctions-list entry.", "answer_mm": "Current TFS instruction အတိုင်း without delay freeze/prohibit လုပ်ပြီး FFR တင်ပါ။ Customer ကို STR/FFR/investigation အကြောင်း မပြောရ။", "answer_en": "Apply freezing/prohibition without delay under current TFS instructions and file an FFR. Do not disclose the report or investigation to the customer."}, {"title_mm": "Potential name match", "title_en": "Potential name match", "facts_mm": "Name နှင့် nationality တူသော်လည်း DOB/passport မတူသေး၊ match ကို မဖြေရှင်းနိုင်သေး။", "facts_en": "Name and nationality are similar, but date of birth and passport do not yet resolve the match.", "answer_mm": "PNMR နှင့် urgent escalation ကို စဉ်းစားပါ။ Confirmed match ဟု အလျင်စလိုသတ်မှတ်ခြင်း သို့မဟုတ် screening alert ကို ပယ်ဖျက်ခြင်း မလုပ်ပါနှင့်။", "answer_en": "Consider PNMR and urgent escalation. Do not prematurely classify it as confirmed or dismiss the alert without documented resolution."}, {"title_mm": "FIU က transaction data ထပ်တောင်း", "title_en": "FIU requests additional transaction data", "facts_mm": "ယခင် STR အပေါ် FIU Message Board မှ bank/payment transaction details ထပ်တောင်းသည်။", "facts_en": "The FIU requests additional bank/payment transaction details through the Message Board regarding a previous STR.", "answer_mm": "AIFT ကို သုံးပါ။ FIU request reference၊ deadline နှင့် requested scope ကို တိတိကျကျလိုက်နာပါ။", "answer_en": "Use AIFT. Follow the FIU request reference, deadline and requested scope precisely."}, {"title_mm": "UBO information မပေး", "title_en": "Customer refuses UBO information", "facts_mm": "Company customer က ownership chain နှင့် controlling person ကို မပေးဘဲ အမြန် transaction လုပ်ရန် ဖိအားပေးသည်။", "facts_en": "A corporate customer refuses to provide its ownership chain and controlling person, while pressuring staff to execute quickly.", "answer_mm": "CDD မပြီးနိုင်သဖြင့် relationship/transaction ကို မစတင်/မဆက်/မလုပ်ရ။ Suspicion ရှိလျှင် STR စဉ်းစားပြီး rationale ကို confidentially မှတ်တမ်းတင်ပါ။", "answer_en": "Do not establish/continue the relationship or execute the transaction where CDD cannot be completed. Consider an STR where suspicion exists and document the rationale confidentially."}];
+
+const sectorOps = {"real-estate": {"docs": ["Trade licence, goAML Org ID and MLRO authorisation", "Buyer and seller Emirates ID/passport", "Company licence, UBO chart and representative authority where a party is corporate", "MOU/Form F/SPA, property/unit/title details", "Payment schedule, cash receipts, deposit slips and bank statements", "Wallet addresses, exchange receipts and transaction hashes for VA cases", "Source of Funds/Wealth and valuation evidence for higher-risk cases", "Submitted report ID, attachment list and MLRO decision record"], "before": ["Confirm freehold property and broker role", "Map buyer, seller, payer, beneficiary and UBO", "Aggregate single/linked cash payments and identify VA/VA-converted-fund triggers", "Open internal case reference and preserve evidence"], "action": ["Complete KYC/UBO and sanctions/PEP screening before execution", "Reconcile property price, valuation, payer and source of funds", "Capture every payment date, amount, method, payer account/wallet", "Escalate third-party payment, rapid resale, mispricing and document inconsistency"], "after": ["File REAR where triggered; separately decide STR/SAR where suspicion exists", "Retain report reference and monitor Message Board", "Update customer risk rating and ongoing monitoring", "Keep records for at least five years"], "reports": ["REAR", "STR", "SAR", "AIF", "AIFT", "RFI", "RFIT", "PNMR", "FFR"], "cases": [["AED 60,000 cash is paid toward a freehold property. KYC/SoF is satisfactory and there are no red flags.", "REAR only", "REAR cash trigger is met; do not file STR solely because of value."], ["Four unrelated companies split payment for a buyer and UBO/source cannot be explained. Transaction completed.", "REAR plus STR where REAR trigger is met", "Sector reporting and suspicion reporting are separate decisions."], ["A forged passport is detected before the deposit is accepted.", "SAR", "Attempted/non-executed suspicious activity is primarily a SAR scenario."]]}, "dpms": {"docs": ["Trade licence, goAML Org ID and MLRO authorisation", "Resident EID/passport or non-resident passport/ID", "Company licence, UBO documents and representative ID/authority", "Invoice, cash receipt or bank transfer proof", "Item type, weight, purity, quantity, certificate/serial number", "Buyer, seller, payer and collection/delivery evidence", "Supplier/refinery/source-country and responsible-sourcing evidence", "Submitted DPMSR/STR/SAR reference and five-year record pack"], "before": ["Classify resident, non-resident or company customer", "Aggregate linked transactions and identify cash/wire method", "Collect goods, purity, weight and supplier information", "Map buyer, payer, representative and UBO"], "action": ["Verify IDs/licence/authority before sale", "Reconcile invoice, payment, weight, purity and stock movement", "Check structuring, multiple invoices, third-party payment and rapid resale", "Screen supplier/source geography, sanctions and adverse media"], "after": ["File DPMSR where the operational trigger is met", "Separately file STR for executed suspicion or SAR for attempted activity", "Save report before uploading evidence", "Retain records for at least five years"], "reports": ["DPMSR", "STR", "SAR", "AIF", "AIFT", "RFI", "RFIT", "PNMR", "FFR"], "cases": [["Resident buys AED 70,000 of gold in cash; ID and source are satisfactory.", "DPMSR only", "The 2022 operational DPMSR threshold is met without separate suspicion."], ["Company buys AED 90,000 of gold using a transfer from an unrelated individual; UBO explanation is unclear.", "DPMSR plus STR if executed", "The threshold report and suspicion report may both be required."], ["Customer requests two AED 30,000 invoices, refuses ID and leaves.", "SAR", "This is attempted structuring and a non-executed suspicious activity."]]}, "tcsp": {"docs": ["TCSP/CSP trade licence and goAML registration", "Founder/director/shareholder passports and addresses", "Corporate-chain documents, UBO chart and control evidence", "Business plan, purpose, expected activity and countries", "Source of capital/funds/wealth", "Nominee/nominator and registered-office agreements", "Formation fees, capital contribution and payer evidence", "Share/director change records and ongoing-monitoring log"], "before": ["Map all shareholders, controllers, directors, nominees and signatories", "Verify purpose, expected activity and source of capital", "Identify address-only, shelf-company or nominee features", "Assess sanctions/PF and dual-use exposure"], "action": ["Do not incorporate where UBO remains unclear", "Document nominee/nominator relationships", "Challenge unnecessary layers and third-party funding", "Apply EDD and senior approval to high-risk structures"], "after": ["Monitor control changes, dormant-to-active behaviour and unusual funding", "Executed suspicious funding = STR; attempted setup = SAR", "Retain restricted case and goAML records", "Check registrar/regulator obligations when terminating service"], "reports": ["STR", "SAR", "AIF", "AIFT", "RFI", "RFIT", "PNMR", "FFR"], "cases": [["Client wants an employee as shareholder and refuses to disclose the true owner.", "Do not proceed; consider SAR", "CDD/UBO cannot be completed and nominee concealment is a red flag."], ["Shareholder changes three times in two weeks and capital comes from an unrelated offshore company.", "STR if funds were received and suspicion remains", "Rapid control changes plus executed unexplained funding warrant STR review."], ["Client wants only a registered address and will not explain business purpose.", "EDD; potentially decline and consider SAR", "Opaque address-only structures require enhanced review."]]}, "accounting": {"docs": ["Professional licence, goAML and MLRO records", "Client identity, corporate documents and UBO", "Engagement letter and authorised-signatory evidence", "Ledger, trial balance and bank statements", "Invoices, contracts, tax/customs and related-party schedules", "Source of capital/loan evidence", "Audit queries, responses and unresolved gaps", "Restricted AML decision file and submission evidence"], "before": ["Define engagement scope and related parties", "Map UBO and source of capital", "Collect bank, ledger, invoice and contract evidence", "Assess professional secrecy/privilege case by case"], "action": ["Reconcile ledger to bank evidence", "Corroborate management explanations", "Challenge false invoices, unexplained journals and circular flows", "Escalate withheld evidence and management override"], "after": ["STR for executed suspicious transactions; SAR for attempted activity", "Use exact FIU reference for AIF/AIFT/RFI/RFIT", "Separate engagement file from restricted AML file", "Retain evidence and rationale for at least five years"], "reports": ["STR", "SAR", "AIF", "AIFT", "RFI", "RFIT", "PNMR", "FFR"], "cases": [["AED 800,000 consulting invoice has no contract or deliverable and payment is complete.", "STR if suspicion remains after review", "This is an executed suspicious-payment scenario."], ["Client refuses bank statements and provides only a ledger with heavy cash sales.", "EDD and possible STR/SAR escalation", "Evidence limitation and cash-profile mismatch require escalation."], ["FIU asks for transaction data relating to the firm's earlier STR.", "AIFT", "It is linked to the prior report and includes transactions."]]}, "legal": {"docs": ["Professional licence and authority registration", "Client/UBO identity and engagement letter", "POA, board authority and trust/nominee documents", "Matter-purpose and privilege assessment", "Client/escrow statements and payment instructions", "Property/company transaction agreements and valuation", "Source of funds/wealth and payer relationship", "Restricted reporting rationale and submission records"], "before": ["Define matter scope and client capacity", "Map client, payer, beneficiary and UBO", "Assess privilege/professional secrecy in writing", "Reconcile client-account funds to the matter"], "action": ["Challenge unrelated third-party funds and pass-through use", "Verify POA, beneficiary and transaction purpose", "Screen sanctions/TFS before controlling funds", "Escalate overpayment/refund and changed beneficiary"], "after": ["Absent an applicable exemption, executed suspicion = STR and attempted activity = SAR", "Retain privilege/reporting determination", "Only freeze/hold/return funds under applicable authority", "Monitor FIU requests and retain records"], "reports": ["STR", "SAR", "AIF", "AIFT", "RFI", "RFIT", "PNMR", "FFR"], "cases": [["Unrelated company sends AED 500,000 to a client account for immediate onward payment.", "EDD and consider STR; stop/hold only as legally permitted", "Pass-through client-account use is high risk."], ["Name and nationality partially match a sanctions entry; DOB is unresolved.", "PNMR and urgent resolution", "Potential/partial matches require documented identity resolution."], ["Sanctions match is confirmed and funds are controlled.", "Current TFS action and FFR", "Apply current TFS measures without delay and do not tip off."]]}, "financial": {"docs": ["Regulatory licence, goAML/MPLS/SACM records", "KYC, UBO, expected activity and source data", "Account statements and transaction extracts", "Originator/beneficiary and SWIFT/remittance messages", "Trade finance, invoices and shipping documents", "Linked-account, device/IP and network analysis", "Sanctions/PEP/adverse-media evidence", "Alert case, approvals, report ID and IEMS response pack"], "before": ["Collect account profile, history and linked parties", "Validate originator/beneficiary and payment data", "Review sanctions/TFS and prior alert history", "Confirm authority for holds/freezes/restrictions"], "action": ["Assess patterns, not only single transactions", "Check structuring, mule/pass-through and rapid movement", "Reconcile trade documents and payment", "Use bi-party transaction structure where required"], "after": ["Link goAML ID to internal alert/case", "Update monitoring and relationship decision", "Calendar Message Board and IEMS deadlines", "Feed case outcomes into scenario tuning"], "reports": ["STR", "SAR", "AIF", "AIFT", "RFI", "RFIT", "HRC", "HRCA", "PNMR", "FFR", "PSTR"], "cases": [["New account receives AED 1.5m and sends funds to 12 unrelated beneficiaries in 24 hours.", "Prompt STR review", "Executed rapid dispersal is a pass-through red flag."], ["Confirmed sanctions match and transfer attempt has not completed.", "TFS action/FFR and assess SAR", "FFR is primary for the match; attempted suspicion may require separate SAR review."], ["FIU requests transaction details from multiple reporting entities.", "RFIT", "Multiple entities plus transaction data indicates RFIT."]]}, "vasp": {"docs": ["VASP licence and goAML records", "Customer KYC/UBO and wallet-control evidence", "Wallet addresses, hashes, chains, tokens and timestamps", "Fiat deposit/withdrawal and bank evidence", "Counterparty VASP and travel-rule data", "Blockchain-analytics report and sanctions exposure", "Source/acquisition history of crypto", "Internal alert, action and report reference"], "before": ["Map customer, UBO and wallet ownership", "Collect on-chain and fiat legs", "Review mixer, bridge, privacy and sanctions exposure", "Verify source of crypto/funds"], "action": ["Verify wallet control and economic purpose", "Check travel-rule data and counterparty VASP", "Capture transaction hash, block time and value", "Escalate mixer, chain-hopping and sanctioned-address exposure"], "after": ["Executed suspicious transfer = STR; rejected/attempted activity = SAR", "Update wallet risk, limits and monitoring rules", "Retain exportable blockchain evidence", "Check separate regulator incident/freeze duties"], "reports": ["STR", "SAR", "AIF", "AIFT", "RFI", "RFIT", "PNMR", "FFR"], "cases": [["Mixer-origin funds are immediately cashed out to fiat and the transfer completed.", "STR", "Executed mixer-to-fiat behaviour requires prompt review."], ["Wallet is a potential sanctions-address match but analysis is unresolved.", "Urgent resolution and PNMR/TFS procedure", "Do not auto-clear or auto-confirm a weak match."], ["Customer attempts structuring through 20 wallets and the system rejects it.", "SAR", "It is attempted/non-executed suspicious activity."]]}, "gaming": {"docs": ["Gaming licence and goAML records", "Player KYC and payment-instrument ownership", "Source of funds/wealth and screening", "Buy-in, play, transfer, payout and refund logs", "Session/device/account linkage", "Cash/card/bank/VA payment evidence", "CCTV/digital evidence where lawful and necessary", "Internal case, MLRO action and report ID"], "before": ["Map player, payer, beneficiary and linked accounts", "Build the session and money-flow timeline", "Check source of funds and payment ownership", "Screen sanctions, PEP and high-risk geography"], "action": ["Check rapid buy-in/cash-out and minimal play", "Flag third-party funding and payout mismatch", "Aggregate linked transactions and shared devices", "Escalate attempted/rejected activity separately"], "after": ["Executed suspicious transaction = STR; attempted activity = SAR", "Update player risk, limits and monitoring", "Preserve session/payment evidence", "Check current GCGRA/FIU instructions"], "reports": ["STR", "SAR", "AIF", "AIFT", "RFI", "RFIT", "PNMR", "FFR"], "cases": [["Player buys in AED 200,000, plays minimally and requests payout to an unrelated beneficiary.", "STR if executed; SAR if stopped", "Rapid cash-out, minimal play and third-party beneficiary are high risk."], ["Online deposit is rejected because the card appears stolen.", "SAR", "The attempted suspicious activity was not executed."], ["Player and payer are confirmed sanctions matches.", "Current TFS action and FFR", "Confirmed matches require current TFS action without delay."]]}};
+
+const toast = (msg) => {
+  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1800);
+};
+
+const safeStore = {
+  get(key) { try { return window.localStorage.getItem(key); } catch(e) { return null; } },
+  set(key, value) { try { window.localStorage.setItem(key, value); return true; } catch(e) { return false; } },
+  remove(key) { try { window.localStorage.removeItem(key); return true; } catch(e) { return false; } }
+};
+
+
+// v2: fixed bilingual sector command, documents, lifecycle, cases and practice simulator
+const globalSectorSelect = document.getElementById('globalSectorSelect');
+const psSector = document.getElementById('psSector');
+sectors.forEach(s=>{
+  globalSectorSelect.add(new Option(s.name_en+' / '+s.name_mm,s.id));
+  psSector.add(new Option(s.name_en+' / '+s.name_mm,s.id));
+});
+let activeSector = safeStore.get('activeSector') || sectors[0].id;
+if(!sectors.some(s=>s.id===activeSector)) activeSector=sectors[0].id;
+globalSectorSelect.value=activeSector; psSector.value=activeSector;
+
+const listHTML = a => '<ul class="compact">'+a.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
+function sectorNow(){return sectors.find(s=>s.id===activeSector)}
+function opsNow(){return sectorOps[activeSector]}
+
+function renderSectorCommand(){
+  const s=sectorNow(), o=opsNow();
+  document.getElementById('selectedSectorBadge').textContent=s.icon+' '+s.name_en;
+  document.getElementById('practiceSectorBadge').textContent=s.name_en;
+  document.getElementById('sectorCommand').innerHTML=`
+    <div class="grid-2">
+      <div class="glass card"><h3>Scope / လုပ်ငန်းနယ်ပယ်</h3>
+        <div class="bi-grid"><div class="lang-card mm-col"><span class="lang-tag">မြန်မာ</span><p>${s.scope_mm}</p></div>
+        <div class="lang-card en-col"><span class="lang-tag">English</span><p>${s.scope_en}</p></div></div>
+      </div>
+      <div class="glass card"><h3>Relevant Report Types</h3>
+        <div class="badges">${o.reports.map(r=>`<span class="badge new">${r}</span>`).join('')}</div>
+        <div class="callout warning" style="margin-top:10px"><strong>Reporting:</strong><br>${s.trigger_en}</div>
+      </div>
+    </div>
+    <div class="grid-3" style="margin-top:14px">
+      <div class="callout danger"><h3>Key Risks</h3>${listHTML(s.risks_en)}</div>
+      <div class="callout success"><h3>Core Controls</h3>${listHTML(s.controls_en)}</div>
+      <div class="callout info"><h3>Compliant Outcome</h3>${listHTML(['Correct scope and report type','Complete KYC/UBO and evidence','Factual report narrative','No tipping off','Submission ID and follow-up retained'])}</div>
+    </div>`;
+  renderSectorDocuments(); renderSectorActions(); renderSectorCases(); updatePracticeHelp();
+}
+
+function renderSectorDocuments(){
+  const o=opsNow(), saved=JSON.parse(safeStore.get('doc_'+activeSector)||'[]');
+  const groups=[
+    ['Before Preparing / မပြင်ဆင်မီ',o.docs.slice(0,2)],
+    ['Customer & UBO / ဖောက်သည်စာရွက်စာတမ်း',o.docs.slice(2,4)],
+    ['Transaction Evidence / Transaction သက်သေ',o.docs.slice(4,6)],
+    ['goAML & After Action / တင်ပြီးနောက်',o.docs.slice(6)]
+  ];
+  document.getElementById('sectorDocuments').innerHTML=groups.map((g,gi)=>`
+    <div class="glass card"><h3>${g[0]}</h3><div class="checklist">
+      ${g[1].map((x,i)=>{const k=gi+'-'+i;return `<label class="check"><input class="sector-doc-check" data-k="${k}" type="checkbox" ${saved.includes(k)?'checked':''}><span>${x}</span></label>`}).join('')}
+    </div></div>`).join('');
+  document.querySelectorAll('.sector-doc-check').forEach(c=>c.addEventListener('change',saveSectorDocs));
+  updateSectorDocProgress();
+}
+function saveSectorDocs(){
+  const v=[...document.querySelectorAll('.sector-doc-check:checked')].map(x=>x.dataset.k);
+  safeStore.set('doc_'+activeSector,JSON.stringify(v)); updateSectorDocProgress();
+}
+function updateSectorDocProgress(){
+  const all=document.querySelectorAll('.sector-doc-check').length, done=document.querySelectorAll('.sector-doc-check:checked').length;
+  const p=all?Math.round(done/all*100):0;
+  document.getElementById('sectorDocPct').textContent=p+'%';
+  document.getElementById('sectorDocBar').style.width=p+'%';
+}
+function renderSectorActions(){
+  const o=opsNow();
+  const phases=[
+    ['Before Preparing / မပြင်ဆင်မီ',o.before],
+    ['Before Action / မဆောင်ရွက်မီ',o.action],
+    ['During goAML Preparation / goAML ပြင်ဆင်နေစဉ်',[
+      'Select the correct transaction or activity report structure',
+      'Complete cover, location, action taken, parties and at least one supported reason',
+      'Save before attaching files; validate names, sizes and evidence consistency',
+      'MLRO reviews factual chronology, amounts, roles and report type before submission'
+    ]],
+    ['After Action / ဆောင်ရွက်ပြီးနောက်',o.after]
+  ];
+  document.getElementById('sectorActions').innerHTML=phases.map(p=>`<div class="ops-phase"><h3>${p[0]}</h3>${listHTML(p[1])}</div>`).join('');
+}
+
+let caseDone=0, caseRight=0;
+function renderSectorCases(){
+  const c=opsNow().cases; caseDone=0;caseRight=0; updateSectorCaseScore();
+  document.getElementById('sectorCaseGrid').innerHTML=c.map((x,i)=>`
+    <div class="glass card sector-case" data-done="0">
+      <div class="kicker">Case ${i+1}</div><h3>${x[0]}</h3>
+      <div class="case-choice">
+        ${[x[1],'STR only','SAR only','No report / no action'].filter((v,j,a)=>a.indexOf(v)===j).map((v,j)=>`<button class="btn sector-case-choice" data-case="${i}" data-answer="${v===x[1]?'1':'0'}">${v}</button>`).join('')}
+      </div>
+      <div class="case-rationale callout info" id="sector-rationale-${i}"><strong>Suggested treatment:</strong> ${x[1]}<br>${x[2]}</div>
+    </div>`).join('');
+  document.querySelectorAll('.sector-case-choice').forEach(b=>b.addEventListener('click',e=>{
+    const card=e.currentTarget.closest('.sector-case'); if(card.dataset.done==='1')return;
+    card.dataset.done='1';caseDone++;
+    if(e.currentTarget.dataset.answer==='1'){caseRight++;e.currentTarget.classList.add('primary');e.currentTarget.textContent='✓ '+e.currentTarget.textContent}
+    else{e.currentTarget.classList.add('danger');e.currentTarget.textContent='✗ '+e.currentTarget.textContent}
+    document.getElementById('sector-rationale-'+e.currentTarget.dataset.case).classList.add('show');updateSectorCaseScore();
+  }));
+}
+function updateSectorCaseScore(){document.getElementById('sectorCaseScore').textContent=caseRight+'/'+caseDone}
+
+globalSectorSelect.addEventListener('change',()=>{
+  activeSector=globalSectorSelect.value; psSector.value=activeSector; safeStore.set('activeSector',activeSector);renderSectorCommand();
+});
+psSector.addEventListener('change',()=>{
+  activeSector=psSector.value;globalSectorSelect.value=activeSector;safeStore.set('activeSector',activeSector);renderSectorCommand();
+});
+
+// Practice simulator
+const reportRules={
+ STR:{fiu:false,desc:true,help:'Executed suspicious transaction. Suspicion reporting has no monetary threshold.'},
+ SAR:{fiu:false,desc:true,help:'Attempted/non-executed transaction or suspicious activity.'},
+ AIF:{fiu:true,desc:false,help:'FIU requests additional information without transactions about your earlier report.'},
+ AIFT:{fiu:true,desc:false,help:'FIU requests additional information with transactions about your earlier report.'},
+ RFI:{fiu:true,desc:false,help:'FIU requests information without transactions from multiple reporting entities.'},
+ RFIT:{fiu:true,desc:false,help:'FIU requests transaction information from multiple reporting entities.'},
+ DPMSR:{fiu:false,desc:true,help:'DPMS sector operational/threshold report. It does not replace STR/SAR where suspicion exists.'},
+ REAR:{fiu:false,desc:true,help:'Real-estate cash/virtual-asset activity report. It does not replace STR/SAR where suspicion exists.'},
+ PNMR:{fiu:false,desc:true,help:'Potential/partial targeted-financial-sanctions name match. Supporting documents are mandatory in the uploaded guide.'},
+ FFR:{fiu:false,desc:true,help:'Confirmed TFS match/funds-freeze reporting. Supporting documents are mandatory in the uploaded guide.'}
+};
+let pStep=0, pParties=[], pTxns=[], pFiles=[];
+const pNames=['Report','Cover','Parties','Transaction','Review','Submit'];
+document.getElementById('practiceSteps').innerHTML=pNames.map((x,i)=>`<div class="practice-step ${i===0?'active':''}" data-i="${i}">${i+1}. ${x}</div>`).join('');
+document.getElementById('psDate').value=new Date().toISOString().slice(0,10);
+document.getElementById('ptDate').value=new Date().toISOString().slice(0,10);
+
+function updatePracticeHelp(){
+  const r=document.getElementById('psReport').value, rule=reportRules[r];
+  document.getElementById('psFiuWrap').style.display=rule.fiu?'block':'none';
+  document.getElementById('psHelp').innerHTML='<strong>'+r+'</strong><br>'+rule.help;
+}
+document.getElementById('psReport').addEventListener('change',updatePracticeHelp);
+
+function practiceGo(n){
+  pStep=Math.max(0,Math.min(5,n));
+  document.querySelectorAll('.practice-panel').forEach(x=>x.classList.toggle('active',+x.dataset.pstep===pStep));
+  document.querySelectorAll('.practice-step').forEach((x,i)=>x.classList.toggle('active',i===pStep));
+  document.getElementById('practicePrev').disabled=pStep===0;
+  document.getElementById('practiceNext').style.display=pStep===5?'none':'inline-block';
+  document.getElementById('practiceErrors').style.display='none';
+  if(pStep===4)buildPracticeReview();
+}
+function pv(id){return document.getElementById(id).value.trim()}
+function practiceValidate(step){
+  const e=[],r=reportRules[pv('psReport')];
+  if(step===1){
+    ['psMlro','psRef','psAddress','psCity','psState','psAction'].forEach(id=>{if(!pv(id))e.push(id+' is required')});
+    if(r.desc&&!pv('psDescription'))e.push('Description is required');
+    if(r.fiu&&!pv('psFiu'))e.push('FIU Reference is required');
+  }
+  if(step===2&&!pParties.length)e.push('Add at least one report party');
+  if(step===3&&!pTxns.length)e.push('Add at least one transaction or activity');
+  if(step===4){
+    if(!document.querySelectorAll('#practiceReasons input:checked').length)e.push('Select at least one supported reason');
+    if(['PNMR','FFR'].includes(pv('psReport'))&&!pFiles.length)e.push('PNMR/FFR supporting documents are mandatory');
+  }
+  return e;
+}
+function showPracticeErrors(e){
+  const box=document.getElementById('practiceErrors');box.innerHTML='<strong>Fix before continuing</strong>'+listHTML(e);box.style.display='block';
+}
+document.getElementById('practiceNext').addEventListener('click',()=>{const e=practiceValidate(pStep);if(e.length)showPracticeErrors(e);else practiceGo(pStep+1)});
+document.getElementById('practicePrev').addEventListener('click',()=>practiceGo(pStep-1));
+
+document.getElementById('addPracticeParty').addEventListener('click',()=>{
+  if(!pv('ppName')||!pv('ppId')||!pv('ppCountry')||!pv('ppReason'))return showPracticeErrors(['Complete party name, ID/licence, country and reason']);
+  pParties.push({type:pv('ppType'),role:pv('ppRole'),sig:pv('ppSig'),name:pv('ppName'),id:pv('ppId'),country:pv('ppCountry'),reason:pv('ppReason')});
+  ['ppName','ppId','ppCountry','ppReason'].forEach(id=>document.getElementById(id).value='');renderPracticeLists();toast('Practice party added');
+});
+document.getElementById('addPracticeTxn').addEventListener('click',()=>{
+  if(!pv('ptRef')||!pv('ptDate')||!pv('ptFrom')||!pv('ptTo')||!pv('ptDescription'))return showPracticeErrors(['Complete reference, date, source, destination and description']);
+  pTxns.push({ref:pv('ptRef'),date:pv('ptDate'),status:pv('ptStatus'),amount:pv('ptAmount'),currency:pv('ptCurrency'),mode:pv('ptMode'),from:pv('ptFrom'),to:pv('ptTo'),account:pv('ptAccount'),description:pv('ptDescription')});
+  ['ptRef','ptAmount','ptFrom','ptTo','ptAccount','ptDescription'].forEach(id=>document.getElementById(id).value='');renderPracticeLists();toast('Practice transaction/activity added');
+});
+function renderPracticeLists(){
+  document.getElementById('practicePartyList').innerHTML=pParties.map((x,i)=>`<div class="file-row"><span>${x.role} · ${x.name} · ${x.id}</span><button class="btn danger" onclick="removePParty(${i})">Remove</button></div>`).join('');
+  document.getElementById('practiceTxnList').innerHTML=pTxns.map((x,i)=>`<div class="file-row"><span>${x.ref} · ${x.status} · ${x.amount||'N/A'} ${x.currency} · ${x.from} → ${x.to}</span><button class="btn danger" onclick="removePTxn(${i})">Remove</button></div>`).join('');
+}
+window.removePParty=i=>{pParties.splice(i,1);renderPracticeLists()};
+window.removePTxn=i=>{pTxns.splice(i,1);renderPracticeLists()};
+
+document.getElementById('practiceFiles').addEventListener('change',e=>{
+  pFiles=[...e.target.files].map(f=>({name:f.name,size:f.size}));
+  document.getElementById('practiceFileList').innerHTML=pFiles.map(f=>{
+    const bad=/[^A-Za-z0-9._ -]/.test(f.name)||f.size>5*1024*1024;
+    return `<div class="file-row"><span>${f.name} · ${(f.size/1024/1024).toFixed(2)} MB</span><span>${bad?'Review':'OK'}</span></div>`;
+  }).join('');
+});
+function buildPracticeReview(){
+  const reasons=[...document.querySelectorAll('#practiceReasons input:checked')].map(x=>x.value);
+  document.getElementById('practiceReview').value=
+`PRACTICE ONLY — NOT SUBMITTED TO UAE FIU
+Sector: ${sectorNow().name_en}
+Report Type: ${pv('psReport')}
+Organisation: ${pv('psOrg')}
+MLRO: ${pv('psMlro')}
+Date: ${pv('psDate')}
+Internal Reference: ${pv('psRef')}
+FIU Reference: ${pv('psFiu')||'N/A'}
+Location: ${pv('psAddress')}, ${pv('psCity')}, ${pv('psState')}
+
+DESCRIPTION
+${pv('psDescription')||'N/A'}
+
+ACTION TAKEN
+${pv('psAction')||'N/A'}
+
+PARTIES
+${pParties.map((x,i)=>`${i+1}. ${x.role} | ${x.type} | ${x.name} | ${x.id} | ${x.country} | significance ${x.sig}/10 | ${x.reason}`).join('\n')||'None'}
+
+TRANSACTIONS / ACTIVITIES
+${pTxns.map((x,i)=>`${i+1}. ${x.ref} | ${x.date} | ${x.status} | ${x.amount||'N/A'} ${x.currency} | ${x.mode} | ${x.from} -> ${x.to} | ${x.account||'N/A'} | ${x.description}`).join('\n')||'None'}
+
+REASONS
+${reasons.map((x,i)=>`${i+1}. ${x}`).join('\n')||'None'}
+
+ATTACHMENTS
+${pFiles.map((x,i)=>`${i+1}. ${x.name} (${(x.size/1024/1024).toFixed(2)} MB)`).join('\n')||'None'}`;
+}
+document.getElementById('savePracticeDraft').addEventListener('click',()=>{
+  const ids=['psSector','psReport','psMlro','psRef','psFiu','psBranch','psAddress','psCity','psState','psDescription','psAction'];
+  safeStore.set('practiceDraft',JSON.stringify({form:Object.fromEntries(ids.map(id=>[id,pv(id)])),parties:pParties,txns:pTxns,reasons:[...document.querySelectorAll('#practiceReasons input:checked')].map(x=>x.value)}));toast('Practice draft saved locally');
+});
+document.getElementById('practiceSubmitBtn').addEventListener('click',()=>{
+  let e=[];for(let i=0;i<5;i++)e.push(...practiceValidate(i));if(e.length)return showPracticeErrors([...new Set(e)]);
+  buildPracticeReview();const ref='PRACTICE-REP-'+new Date().toISOString().slice(0,10).replaceAll('-','')+'-'+Math.random().toString(36).slice(2,8).toUpperCase();
+  document.getElementById('practiceSubmitSummary').innerHTML='<strong>Practice validation passed.</strong><br>Reference: <strong>'+ref+'</strong><br>No data was sent to UAE FIU.';
+  toast('Practice submission complete');
+});
+document.getElementById('clearPracticeDraft').addEventListener('click',()=>{if(confirm('Clear practice draft?')){safeStore.remove('practiceDraft');location.reload()}});
+try{
+  const d=JSON.parse(safeStore.get('practiceDraft')||'null');
+  if(d){Object.entries(d.form||{}).forEach(([id,v])=>{const el=document.getElementById(id);if(el)el.value=v});pParties=d.parties||[];pTxns=d.txns||[];
+    (d.reasons||[]).forEach(r=>{const c=[...document.querySelectorAll('#practiceReasons input')].find(x=>x.value===r);if(c)c.checked=true});renderPracticeLists();}
+}catch(e){}
+
+renderSectorCommand();updatePracticeHelp();practiceGo(0);
+
+
+
+// v4: single-module navigation and detailed Myanmar guide
+const mmPageGuides = {"home": {"title": "Dashboard ကို ဘယ်လိုအသုံးပြုမလဲ", "paras": ["ဒီ Dashboard သည် goAML registration မှစ၍ customer due diligence၊ sector risk analysis၊ report type ရွေးချယ်မှု၊ report တင်ရန်ပြင်ဆင်မှုနှင့် တင်ပြီးနောက် follow-up အထိ လုပ်ငန်းစဉ်တစ်ခုလုံးကို စုစည်းကြည့်နိုင်သော ပင်မစာမျက်နှာဖြစ်သည်။", "ဘယ်ဘက် menu မှ module တစ်ခုကိုနှိပ်လိုက်ပါက အဲဒီ module တစ်ခုတည်းသာပေါ်လာမည်။ မလိုအပ်သောအပိုင်းများကိုတပြိုင်နက်မပြသတော့သဖြင့် လေ့လာရန်နှင့် လုပ်ငန်းသုံးရန် ပိုရှင်းလင်းသွားသည်။"], "bullets": ["ပထမဦးစွာ Scope Check ဖြင့် မိမိကုမ္ပဏီသည် reporting entity ဖြစ်/မဖြစ် စစ်ပါ။", "ထို့နောက် Sector Command မှ မိမိလုပ်ငန်းကဏ္ဍကိုရွေးပြီး risk၊ documents နှင့် controls ကိုဖတ်ပါ။", "တကယ့် report မတင်မီ goAML Practice တွင် data structure နှင့် mandatory fields ကိုလေ့ကျင့်ပါ။", "STR/SAR ဆုံးဖြတ်ချက်ကို monetary threshold တစ်ခုတည်းအပေါ်မထားဘဲ suspicion နှင့် case facts အပေါ်ဆုံးဖြတ်ပါ။"], "warning": "ဒီ portal သည် training နှင့် internal preparation အတွက်သာဖြစ်သည်။ UAE FIU live portal သို့ တိုက်ရိုက် report မပို့ပါ။"}, "scope": {"title": "Reporting Entity Scope ကိုမှန်ကန်စွာသတ်မှတ်ခြင်း", "paras": ["UAE trade licence ရှိသောကုမ္ပဏီတိုင်းသည် goAML reporting entity မဟုတ်ပါ။ Licence activity၊ တကယ်လုပ်နေသော business model နှင့် supervising authority ကိုပေါင်းစပ်စစ်ပြီးမှ scope ကိုဆုံးဖြတ်ရသည်။", "Licence name သာကြည့်ပြီးဆုံးဖြတ်ခြင်းသည် မှားနိုင်သည်။ ဥပမာ consultancy licence ဖြစ်သော်လည်း company formation၊ registered address သို့ nominee service လုပ်နေပါက TCSP scope ဝင်နိုင်သည်။"], "bullets": ["Licence activity နှင့် actual service နှစ်ခုလုံးကိုရေးသားဖော်ပြပါ။", "Mainland/Commercial Free Zone၊ DIFC၊ ADGM သို့မဟုတ် အခြား regulator jurisdiction ကိုခွဲပါ။", "Customer ကိုယ်စား transaction ပြုလုပ်ခြင်း၊ client funds ကိုင်တွယ်ခြင်း၊ company formation သို့ threshold cash transaction ရှိ/မရှိ စစ်ပါ။", "Scope မသေချာလျှင် supervisor ထံ written clarification တောင်းပြီး case file ထဲသိမ်းပါ။"], "warning": "General Trading ဖြစ်ခြင်းတစ်ခုတည်းကြောင့် DNFBP မဖြစ်သလို၊ consultancy ဟုခေါ်ခြင်းတစ်ခုတည်းကြောင့် scope အပြင်မထွက်ပါ။"}, "registration": {"title": "SACM နှင့် goAML Registration ကိုအဆင့်လိုက်ပြင်ဆင်ခြင်း", "paras": ["Registration သည် SACM pre-registration နှင့် goAML organisation registration ဟူသော အဆင့်နှစ်ဆင့်ရှိသည်။ SACM approval မပြီးမချင်း goAML organisation registration ကိုမပြီးနိုင်ပါ။", "Company legal name၊ licence number၊ supervisory body၊ MLRO အမည်နှင့် ID data တို့သည် supporting documents နှင့် portal fields အတွင်း တစ်လုံးမလွဲကိုက်ညီရမည်။"], "bullets": ["Trade licence၊ MLRO authorisation letter နှင့် MLRO ID/passport ကို သတ်မှတ်ထားသော format/size ဖြင့်ပြင်ပါ။", "Email verification မလုပ်လျှင် request သည် supervisor ထံမရောက်နိုင်ပါ။", "Secret key နှင့် authenticator code ကို တခြား user နှင့်မမျှဝေပါနှင့်။", "SACM reference၊ REP registration reference၊ Organisation ID နှင့် user approval records အားလုံးကို compliance register ထဲသိမ်းပါ။"], "warning": "Rejected request ကို အကြောင်းပြချက်မပြင်ဘဲ duplicate application အသစ်ထပ်တင်ခြင်းသည် ဖြေရှင်းနည်းမဟုတ်ပါ။"}, "decision": {"title": "ဘယ် goAML Report Type ကိုရွေးမလဲ", "paras": ["Report type ရွေးရာတွင် ပထမဆုံး FIU က information request ပေးထားခြင်းရှိ/မရှိ၊ TFS sanctions match ဖြစ်/မဖြစ်၊ sector threshold report trigger ရှိ/မရှိနှင့် suspicion ရှိ/မရှိကို အစဉ်လိုက်စစ်ရသည်။", "Suspicious transaction ပြီးစီးပြီးသားဖြစ်လျှင် STR ကိုအဓိကစဉ်းစားပြီး၊ transaction မပြီးသေးဘဲ attempt သို့ suspicious activity သာရှိလျှင် SAR ကိုအဓိကစဉ်းစားရသည်။"], "bullets": ["FIU request + prior report + transactions ပါက AIFT ကိုစဉ်းစားပါ။", "FIU request + multiple entities + transactions ပါက RFIT ကိုစဉ်းစားပါ။", "REAR/DPMSR trigger ပြည့်ခြင်းနှင့် STR/SAR suspicion သည် သီးခြားဆုံးဖြတ်ချက်များဖြစ်သည်။", "Potential sanctions match အတွက် PNMR၊ confirmed match/freeze action အတွက် FFR ကို current TFS instructions နှင့်တွဲသုံးပါ။"], "warning": "Suspicion report အတွက် အနည်းဆုံးငွေပမာဏမရှိပါ။ Proof of crime ရသည်အထိစောင့်ရန်လည်းမလိုပါ။"}, "catalog": {"title": "Report Catalog ကိုအသုံးပြုသည့်နည်း", "paras": ["ဒီအပိုင်းသည် goAML report types တစ်ခုချင်း၏ရည်ရွယ်ချက်ကို ခွဲခြားဖတ်ရှုရန်ဖြစ်သည်။ Entity type၊ supervisor နှင့် user permission အလိုက် live portal တွင် report type အားလုံးမပေါ်နိုင်ပါ။", "Report code တူညီသော်လည်း transaction ပါ/မပါ၊ FIU reference လို/မလိုနှင့် sector-specific requirement မတူနိုင်သဖြင့် report မဖွင့်မီ case structure ကိုဆုံးဖြတ်ပါ။"], "bullets": ["STR/SAR = suspicion reporting", "AIF/AIFT/RFI/RFIT = FIU request response", "REAR/DPMSR = sector activity/threshold reporting", "PNMR/FFR = targeted financial sanctions reporting", "Special reports ကို current FIU/supervisor instruction ရှိမှအသုံးပြုပါ။"], "warning": "Sector report တင်ထားခြင်းသည် suspicion ရှိသောအခါ STR/SAR မတင်ရဟု မဆိုလိုပါ။"}, "risk": {"title": "Risk Engine Result ကိုဘယ်လိုအဓိပ္ပါယ်ဖော်မလဲ", "paras": ["Risk score သည် Customer/UBO၊ geography၊ product/service၊ transaction pattern၊ delivery channel နှင့် sanctions/PF factors ကိုအခြေခံထားသော practice model ဖြစ်သည်။", "Inherent risk မြင့်သော်လည်း controls ကောင်းလျှင် residual risk လျော့နိုင်သော်လည်း sanctions match၊ UBO concealment သို့ reasonable suspicion ကဲ့သို့ critical issue ကို score နိမ့်အောင်လုပ်၍ မပယ်ဖျက်နိုင်ပါ။"], "bullets": ["Score ထည့်ရာတွင် nationality တစ်ခုတည်းကို high risk အဖြစ်မသတ်မှတ်ပါနှင့်။", "Risk factor တစ်ခုချင်းအတွက် evidence နှင့် rationale ထားပါ။", "High risk customer ကို EDD၊ senior approval နှင့် frequent monitoring ဖြင့်စီမံပါ။", "Very high residual risk ဖြစ်လျှင် relationship decline/termination နှင့် STR/SAR/TFS assessment ကိုစဉ်းစားပါ။"], "warning": "ဒီ calculator သည် regulator-approved formula မဟုတ်ပါ။ မိမိကုမ္ပဏီ Business-Wide Risk Assessment နှင့် calibration လုပ်ရမည်။"}, "sectors": {"title": "Sector Command Centre အသုံးပြုခြင်း", "paras": ["Top bar ရှိ Sector Dropdown မှ မိမိလုပ်ငန်းကိုရွေးလိုက်သည်နှင့် သက်ဆိုင်ရာ scope၊ report types၊ risks၊ controls နှင့် compliant outcome အားလုံးပြောင်းလဲမည်။", "တစ်ကုမ္ပဏီတွင် activity အများအပြားရှိပါက risk အမြင့်ဆုံး activity တစ်ခုတည်းကိုရွေးပြီး ကျန် activity များကိုမေ့မထားဘဲ separate assessment ပြုလုပ်ပါ။"], "bullets": ["Scope နှင့် regulator ကိုအရင်ဖတ်ပါ။", "Relevant report types ကို live portal permissions နှင့်နှိုင်းယှဉ်ပါ။", "Key risks မှ မိမိ business model နှင့်တူသော red flags ကို internal monitoring scenarios အဖြစ်ပြောင်းပါ။", "Core controls တစ်ခုချင်းကို policy၊ procedure၊ system evidence နှင့် responsible owner ဖြင့်ထောက်ခံပါ။"], "warning": "Sector dropdown က training guidance ကိုပြောင်းပေးခြင်းသာဖြစ်ပြီး legal classification ကိုအလိုအလျောက်အတည်မပြုပါ။"}, "sector-docs": {"title": "Required Documents ကို Case File အဖြစ်တည်ဆောက်ခြင်း", "paras": ["Documents ကို KYC စာရွက်စာတမ်းစုခြင်းသာမဟုတ်ဘဲ customer identity၊ UBO/control၊ transaction flow၊ source of funds/wealth နှင့် MLRO decision ကိုပြန်လည်တည်ဆောက်နိုင်အောင် စနစ်တကျစုရသည်။", "Checkbox ကိုနှိပ်ထားခြင်းသည် document quality ကောင်းသည်ဟုမဆိုလိုပါ။ Validity၊ legibility၊ consistency နှင့် independent verification ကိုထပ်စစ်ရမည်။"], "bullets": ["Entity setup records၊ MLRO appointment နှင့် policies ကိုသီးခြား folder ထားပါ။", "Customer/UBO document အမည်နှင့် report party fields ကိုတူညီအောင်စစ်ပါ။", "Transaction amounts ကို invoice၊ contract၊ bank statement၊ receipt နှင့် reconcile လုပ်ပါ။", "Submitted report ID၊ attachments list၊ approval နှင့် FIU follow-up ကို after-action folder ထဲသိမ်းပါ။"], "warning": "မလိုအပ်သော personal data အားလုံးကို attachment အဖြစ်မတင်ပါနှင့်။ Case ကိုထောက်ခံရန်လိုအပ်သော evidence သာရွေးပါ။"}, "action-cycle": {"title": "Action Lifecycle ကိုအလုပ်သုံးနည်း", "paras": ["AML compliance ကို report တင်သည့်အချိန်မှစတင်ခြင်းမဟုတ်ပါ။ Customer onboarding မတိုင်မီပြင်ဆင်မှုမှ transaction ဆောင်ရွက်နေစဉ် evidence capture၊ report preparation နှင့် after-action monitoring အထိ continuous process ဖြစ်သည်။", "အဆင့်တစ်ခုကျော်သွားပါက နောက်ပိုင်း report quality၊ FIU response နှင့် audit trail ပျက်စီးနိုင်သည်။"], "bullets": ["Before Preparing: scope၊ access၊ documents နှင့် case reference ကိုအဆင်သင့်လုပ်ပါ။", "Before Action: CDD/EDD၊ sanctions screening နှင့် approval gates ကိုပြီးစီးပါ။", "During Action: transaction status၊ payer/beneficiary၊ dates/amounts နှင့် red flags ကိုချက်ချင်းမှတ်တမ်းတင်ပါ။", "After Action: report status၊ Message Board၊ risk-rating update နှင့် record retention ကိုဆက်လုပ်ပါ။"], "warning": "CDD မပြီးသေးဘဲ commercial urgency ကြောင့် transaction ကိုအရင်လုပ်ခြင်းသည် အဓိက control failure ဖြစ်သည်။"}, "goaml-practice": {"title": "goAML Practice Form ကိုတကယ့် report မတင်မီအသုံးပြုခြင်း", "paras": ["ဒီ simulation သည် Report Selection၊ Cover၊ Parties၊ Transaction/Activity၊ Reasons၊ Attachments နှင့် Review အဆင့်များကို တကယ့် portal လုပ်ငန်းစဉ်နီးပါးအတိုင်းလေ့ကျင့်နိုင်ရန်ပြုလုပ်ထားသည်။", "Practice form ထဲတွင် ထည့်သောအချက်အလက်သည် browser အတွင်း local draft အဖြစ်သာသိမ်းနိုင်ပြီး UAE FIU သို့ မပို့ပါ။"], "bullets": ["Report type ကို case facts နှင့် transaction status အပေါ်ရွေးပါ။", "Party တစ်ဦးချင်း၏ role၊ ID နှင့် reporting reason ကိုတိကျစွာရေးပါ။", "Amount၊ currency၊ date၊ from/to parties နှင့် account/wallet/property reference ကို source documents နှင့်နှိုင်းယှဉ်ပါ။", "Reasons/indicators ကို facts ထောက်ခံသည့်အရာများသာရွေးပါ။", "Review screen ကို MLRO quality check checklist အဖြစ်အသုံးပြုပါ။"], "warning": "Practice Submit reference သည် training reference သာဖြစ်ပြီး official UAE FIU submission ID မဟုတ်ပါ။"}, "sector-practice": {"title": "Sector-Specific Case Practice", "paras": ["ဒီအပိုင်းတွင် Sector Dropdown ဖြင့်ရွေးထားသောလုပ်ငန်းကဏ္ဍနှင့်သက်ဆိုင်သည့် case များသာပေါ်မည်။ အဖြေမကြည့်မီ မိမိဆုံးဖြတ်ချက်ကိုအရင်ရွေးရန်ရည်ရွယ်ထားသည်။", "အဖြေမှန်မှတ်ရန်ထက် report type ရွေးသည့်အကြောင်းရင်း၊ transaction status၊ sector trigger နှင့် suspicion ကိုခွဲတတ်ရန်ပိုအရေးကြီးသည်။"], "bullets": ["Executed transaction နှင့် attempted activity ကိုခွဲပါ။", "Sector threshold report နှင့် suspicion report နှစ်မျိုးလုံးလိုနိုင်/မလိုနိုင်ကိုစစ်ပါ။", "CDD မပြီးနိုင်သော case တွင် transaction ကိုဆက်လုပ်ခြင်းမပြုရန်သတိထားပါ။", "Sanctions partial match နှင့် confirmed match ကိုမရောပါနှင့်။"], "warning": "Case examples သည် training examples ဖြစ်ပြီး case တစ်ခုချင်း၏ facts နှင့် current authority instruction က final outcome ကိုပြောင်းနိုင်သည်။"}, "cdd": {"title": "CDD၊ EDD နှင့် Ongoing Monitoring ကိုအသေးစိတ်နားလည်ခြင်း", "paras": ["CDD သည် ID copy ယူခြင်းတစ်ခုတည်းမဟုတ်ပါ။ Customer ကိုသိခြင်း၊ representative authority ကိုစစ်ခြင်း၊ UBO/control ကိုဖော်ထုတ်ခြင်း၊ relationship purpose နှင့် expected activity ကိုနားလည်ခြင်းတို့ပါဝင်သည်။", "High-risk relationship တွင် EDD ဖြင့် Source of Funds၊ Source of Wealth၊ additional documents၊ senior management approval နှင့် frequent monitoring ထပ်မံလုပ်ရသည်။"], "bullets": ["Natural person နှင့် legal entity verification ကိုသီးခြားစံနှုန်းဖြင့်လုပ်ပါ။", "25% ownership စစ်ပြီးမတွေ့လျှင် control by other means နှင့် senior management ကိုဆက်စစ်ပါ။", "Actual transaction ကို expected profile နှင့်အမြဲနှိုင်းယှဉ်ပါ။", "CDD မပြီးနိုင်လျှင် relationship/transaction ကိုမစတင်၊ မဆက်၊ မလုပ်ဘဲ STR assessment ပြုလုပ်ပါ။"], "warning": "Customer ကို မေးခွန်းထပ်မေးခြင်းက tipping off ဖြစ်စေနိုင်သည်ဟု reasonable concern ရှိလျှင် MLRO/legal procedure ဖြင့်ကိုင်တွယ်ပါ။"}, "governance": {"title": "MLRO Governance နှင့် Management Accountability", "paras": ["MLRO ကိုနာမည်တင်ထားရုံမလုံလောက်ပါ။ Independent decision-making၊ data access၊ senior management direct access၊ adequate resources နှင့် conflict-free role ရှိကြောင်း evidence ဖြင့်ပြသရသည်။", "Board/Senior Management သည် AML risk ကို compliance department တစ်ခုတည်းထံလွှဲချ၍မရဘဲ policy approval၊ resources၊ remediation နှင့် risk acceptance အတွက်တာဝန်ယူရသည်။"], "bullets": ["MLRO နှင့် deputy role/authority ကိုရေးသားထားပါ။", "Alert backlog၊ high-risk customers၊ overdue KYC နှင့် reports ကို management metrics အဖြစ်တင်ပါ။", "Training ကို role-based နှင့် sector-specific ပြုလုပ်ပါ။", "Independent audit/testing findings ကို owner၊ deadline နှင့် closure evidence ဖြင့်စီမံပါ။"], "warning": "Sales target သို့ customer relationship responsibility နှင့် MLRO reporting decision တိုက်ရိုက်ပဋိပက္ခရှိပါက independence ပျက်နိုင်သည်။"}, "cases": {"title": "General Case Lab ကိုအသုံးပြုခြင်း", "paras": ["General Case Lab သည် sector မရွေးဘဲ အများဆုံးတွေ့ရသော STR၊ SAR၊ REAR၊ DPMSR၊ PNMR၊ FFR နှင့် FIU information request scenarios ကိုလေ့ကျင့်ရန်ဖြစ်သည်။", "Case တစ်ခုချင်းတွင် report type တစ်ခုတည်းကိုရှာရန်မဟုတ်ဘဲ parallel obligations၊ transaction status နှင့် evidence gaps ကိုစဉ်းစားပါ။"], "bullets": ["Facts ကို chronology အလိုက်ပြန်ရေးကြည့်ပါ။", "Executed/attempted၊ suspicious/non-suspicious နှင့် threshold/non-threshold ကိုခွဲပါ။", "CDD failure နှင့် customer pressure ကို red flags အဖြစ်စဉ်းစားပါ။", "အဖြေဖွင့်ပြီးနောက် မိမိ rationale နှင့် suggested treatment မတူသည့်နေရာကိုမှတ်ပါ။"], "warning": "Large amount ဖြစ်ခြင်းတစ်ခုတည်းသည် STR မဟုတ်သလို small amount ဖြစ်ခြင်းကြောင့် suspicion report ကင်းလွတ်မည်မဟုတ်ပါ။"}, "narrative": {"title": "STR/SAR Narrative ကို FIU ဖတ်ရလွယ်အောင်ရေးခြင်း", "paras": ["Narrative သည် customer အကြောင်းအပြစ်တင်စာမဟုတ်ဘဲ FIU analyst တစ်ဦးက transaction flow နှင့် suspicion basis ကိုပြန်လည်နားလည်နိုင်သော factual chronology ဖြစ်ရသည်။", "Who၊ What၊ When၊ Where၊ How Much၊ From/To၊ Why unusual နှင့် entity ကဘာလုပ်ခဲ့သလဲ ဆိုသည့်မေးခွန်းများအားလုံးကိုဖြေဆိုရမည်။"], "bullets": ["ရက်စွဲ၊ amount၊ currency၊ payer၊ beneficiary နှင့် account/reference ကိုတိကျစွာရေးပါ။", "Customer profile နှင့် actual activity မကိုက်ညီသည့်အချက်ကို evidence ဖြင့်ရှင်းပါ။", "UBO/SoF/SoW gaps နှင့် customer explanation ကို factual wording ဖြင့်ရေးပါ။", "Unsupported criminal allegation၊ vague phrase နှင့် copy-paste boilerplate ကိုရှောင်ပါ။"], "warning": "Narrative ထဲတွင် “customer is laundering money” ဟုသက်သေမရှိဘဲမရေးပါနှင့်။ Suspicion basis ကိုသာဖော်ပြပါ။"}, "iems": {"title": "goAML နှင့် IEMS မရောထွေးရန်", "paras": ["goAML သည် suspicious/sector/TFS reports တင်ရန်နှင့် FIU Message Board မှဆက်သွယ်ရန်ဖြစ်သည်။ IEMS သည် FIU သို့ domestic authorities ကပေးပို့သော enquiry၊ freeze order နှင့်အခြား request များကို execute/response ပြုလုပ်ရန်ဖြစ်သည်။", "IEMS request ကို ordinary goAML report အဖြစ်ပို့ခြင်း သို့ goAML Message Board request ကို IEMS ထဲအလိုအလျောက်ပြန်ခြင်းမပြုပါနှင့်။"], "bullets": ["Admin၊ Maker နှင့် Checker roles ကိုခွဲထားပါ။", "FIU comments၊ checklist၊ period နှင့် file format ကိုတိတိကျကျလိုက်နာပါ။", "Maker ပြင်ဆင်ပြီး Checker approve မလုပ်မချင်း response မပြီးသေးပါ။", "Deadline နှင့် freeze instruction ကို urgent case register တွင်စောင့်ကြည့်ပါ။"], "warning": "Freeze order ကို liability ရှိခြင်းကြောင့်အလိုအလျောက်နှောင့်နှေးခြင်းမပြုဘဲ request wording နှင့် applicable authority အတိုင်းချက်ချင်းဆောင်ရွက်ရသည်။"}, "sources": {"title": "Source Hierarchy နှင့် Version Control", "paras": ["AML requirements သည်ဥပဒေ၊ Executive Regulation၊ supervisor circular၊ FIU guide နှင့် portal configuration ပြောင်းလဲမှုကြောင့် update ဖြစ်နိုင်သည်။ အဟောင်း guide တစ်ခုကို final authority အဖြစ်မသုံးရပါ။", "ဒီ portal တွင် 2022–2024 UAE FIU guides ကို operational mechanics အတွက်အသုံးပြုထားပြီး current law/regulator instructions ကို legal priority အဖြစ်ထားသည်။"], "bullets": ["Current UAE law/Executive Regulation ကိုပထမဦးဆုံးစစ်ပါ။", "Supervisor နှင့် UAE FIU current circular/system guide ကိုဆက်စစ်ပါ။", "Live sanctions list၊ high-risk country measures နှင့် TFS instruction ကို case date အတိုင်းစစ်ပါ။", "Policy/procedure တွင် source name၊ version/date၊ review date နှင့် owner ကိုမှတ်တမ်းတင်ပါ။"], "warning": "Uploaded FIAU Malta guide သည် UAE authority မဟုတ်သောကြောင့် UAE legal/procedural conclusion အတွက်မသုံးထားပါ။"}};
+
+const pageLabels = {
+  home:'Dashboard / ပင်မစာမျက်နှာ',
+  scope:'Scope Check / သက်ဆိုင်မှုစစ်ဆေးခြင်း',
+  registration:'Registration / မှတ်ပုံတင်ခြင်း',
+  decision:'Report Decision / Report ရွေးချယ်ခြင်း',
+  catalog:'Report Catalog / Report အမျိုးအစားများ',
+  risk:'Risk Engine / Risk တွက်ချက်ခြင်း',
+  sectors:'Sector Command / ကဏ္ဍထိန်းချုပ်မှု',
+  'sector-docs':'Sector Documents / လိုအပ်စာရွက်စာတမ်း',
+  'action-cycle':'Action Lifecycle / လုပ်ငန်းစဉ်အဆင့်များ',
+  'goaml-practice':'goAML Practice / တင်သွင်းမှုလေ့ကျင့်ခန်း',
+  'sector-practice':'Sector Practice / ကဏ္ဍအလိုက် Case လေ့ကျင့်ခန်း',
+  cdd:'CDD & EDD / Customer စိစစ်ခြင်း',
+  governance:'Governance / MLRO စီမံခန့်ခွဲမှု',
+  cases:'Case Lab / Case လေ့လာခန်း',
+  narrative:'Narrative Builder / Report စာသားရေးသားခြင်း',
+  iems:'IEMS / Authority Request စီမံခြင်း',
+  sources:'Sources / ကိုးကားရင်းမြစ်များ'
+};
+
+function injectMyanmarGuides(){
+  document.querySelectorAll('.module').forEach(section=>{
+    const data=mmPageGuides[section.id];
+    if(!data || section.querySelector('.mm-detail-guide')) return;
+    const guide=document.createElement('div');
+    guide.className='mm-detail-guide';
+    guide.innerHTML=`
+      <div class="mm-guide-head"><span class="mm-guide-icon">မြ</span><h3>${data.title}</h3></div>
+      ${data.paras.map(p=>`<p>${p}</p>`).join('')}
+      <ul>${data.bullets.map(x=>`<li>${x}</li>`).join('')}</ul>
+      <div class="mm-guide-warning"><strong>အရေးကြီးသတိပြုရန် —</strong> ${data.warning}</div>`;
+    const head=section.querySelector('.module-head');
+    if(head) head.insertAdjacentElement('afterend',guide);
+    else section.insertAdjacentElement('afterbegin',guide);
+  });
+}
+
+function validPageId(id){
+  return !!id && !!document.getElementById(id) && document.getElementById(id).classList.contains('module');
+}
+
+function showOnlyPage(id, push=true){
+  if(!validPageId(id)) id='home';
+  document.querySelectorAll('.module').forEach(s=>{
+    s.classList.toggle('page-active',s.id===id);
+    s.classList.remove('hidden-search','module-search-hit');
+  });
+  document.querySelectorAll('.nav-link').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+id));
+  const label=document.getElementById('activePageName');
+  if(label) label.textContent=pageLabels[id] || id;
+  if(push){
+    history.pushState({page:id},'', '#'+id);
+  } else {
+    history.replaceState({page:id},'', '#'+id);
+  }
+  safeStore.set('activePage',id);
+  const search=document.getElementById('pageSearch');
+  if(search) search.value='';
+  document.querySelectorAll('.nav-link').forEach(a=>a.classList.remove('nav-search-hidden'));
+  window.scrollTo({top:0,behavior:'instant'});
+}
+
+document.addEventListener('click',e=>{
+  const link=e.target.closest('a[href^="#"]');
+  if(!link) return;
+  const id=link.getAttribute('href').slice(1);
+  if(validPageId(id)){
+    e.preventDefault();
+    showOnlyPage(id,true);
+    const dialog=link.closest('dialog');
+    if(dialog && dialog.open) dialog.close();
+  }
+});
+
+window.addEventListener('popstate',()=>{
+  const id=location.hash.slice(1);
+  showOnlyPage(validPageId(id)?id:'home',false);
+});
+
+function setupModuleSearch(){
+  const old=document.getElementById('pageSearch');
+  if(!old) return;
+  const fresh=old.cloneNode(true);
+  old.parentNode.replaceChild(fresh,old);
+  fresh.placeholder='Menu ရှာရန် / Enter နှိပ်ပြီးဖွင့်ရန်';
+  fresh.addEventListener('input',()=>{
+    const q=fresh.value.trim().toLowerCase();
+    const matches=[];
+    document.querySelectorAll('.nav-link').forEach(a=>{
+      const id=a.getAttribute('href').slice(1);
+      const section=document.getElementById(id);
+      const hay=(a.innerText+' '+(section?section.innerText:'')).toLowerCase();
+      const match=!q || hay.includes(q);
+      a.classList.toggle('nav-search-hidden',!match);
+      if(match && q) matches.push(id);
+    });
+    fresh.dataset.first=matches[0]||'';
+  });
+  fresh.addEventListener('keydown',e=>{
+    if(e.key==='Enter' && fresh.dataset.first){
+      e.preventDefault();showOnlyPage(fresh.dataset.first,true);
+    }
+  });
+}
+
+injectMyanmarGuides();
+setupModuleSearch();
+
+const initialHash=location.hash.slice(1);
+const savedPage=safeStore.get('activePage');
+const initialPage=validPageId(initialHash)?initialHash:(validPageId(savedPage)?savedPage:'home');
+showOnlyPage(initialPage,false);
+
+
+// Legacy scrolling observer disabled because v4 displays one module at a time.
+const modules = [...document.querySelectorAll('.module')];
+
+// Scope
+const scopeSelect = document.getElementById('scopeSector');
+sectors.forEach(s=>scopeSelect.add(new Option(s.name_en+' / '+s.name_mm,s.id)));
+function updateScope() {
+  const s=sectors.find(x=>x.id===scopeSelect.value);
+  const j=document.getElementById('jurisdiction').value;
+  let regulator='Confirm the licensing/supervisory authority.';
+  if(j.startsWith('Mainland')) {
+    if(['real-estate','dpms','tcsp','accounting'].includes(s.id)) regulator='Likely MOET supervisory scope, subject to the exact licensed and actual activity.';
+    else if(s.id==='legal') regulator='Likely Ministry of Justice supervisory scope.';
+    else regulator='The sector-specific regulator must be confirmed; MOET is not automatically the supervisor.';
+  } else if(j==='DIFC') regulator='Confirm DFSA/DIFC rules and federal AML requirements.';
+  else if(j==='ADGM') regulator='Confirm FSRA/ADGM rules and federal AML requirements.';
+  document.getElementById('scopeResult').innerHTML=`<strong>${s.name_en}</strong><br>${s.scope_en}<br><br><strong>Indicative regulator:</strong> ${regulator}`;
+}
+scopeSelect.addEventListener('change',updateScope); document.getElementById('jurisdiction').addEventListener('change',updateScope); updateScope();
+
+// Registration progress
+const regChecks=[...document.querySelectorAll('#regChecklist input')];
+function regProgress() {
+  const done=regChecks.filter(x=>x.checked).length, pct=Math.round(done/regChecks.length*100);
+  document.getElementById('regProgress').style.width=pct+'%'; document.getElementById('regPercent').textContent=pct+'%';
+  safeStore.set('goamlRegChecks',JSON.stringify(regChecks.map(x=>x.checked)));
+}
+try {
+  const saved=JSON.parse(safeStore.get('goamlRegChecks')||'[]');
+  regChecks.forEach((x,i)=>x.checked=!!saved[i]);
+} catch(e) {}
+regChecks.forEach(x=>x.addEventListener('change',regProgress)); regProgress();
+
+// Decision wizard
+let decisionState={sector:false, prior:null};
+const qs=[...document.querySelectorAll('.question')], result=document.getElementById('decisionResult');
+function showQ(i){qs.forEach(q=>q.classList.remove('active')); const el=qs.find(q=>+q.dataset.q===i); if(el)el.classList.add('active');}
+function finish(title, mm, en, warn='') {
+  qs.forEach(q=>q.classList.remove('active'));
+  result.classList.add('show');
+  result.innerHTML=`<div class="kicker">Likely treatment</div><h3>${title}</h3><div class="bi-grid"><div class="mm-col">${mm}</div><div class="en-col">${en}</div></div>${warn?`<div class="callout warning" style="margin-top:12px">${warn}</div>`:''}`;
+}
+document.querySelectorAll('#decisionWizard [data-answer]').forEach(b=>b.addEventListener('click',()=>{
+  const a=b.dataset.answer;
+  if(a==='fiu-yes') showQ(1);
+  if(a==='fiu-no') showQ(3);
+  if(a==='prior') {decisionState.prior=true;showQ(2)}
+  if(a==='broad') {decisionState.prior=false;showQ(2)}
+  if(a==='tx-yes') finish(decisionState.prior?'AIFT':'RFIT','Transaction data ပါသည့် FIU request response ကို သတ်မှတ် reference/deadline အတိုင်းတင်ပါ။', 'Submit the FIU-request response with transaction data, using the exact request reference and deadline.');
+  if(a==='tx-no') finish(decisionState.prior?'AIF':'RFI','Transaction မပါသော FIU request response ကို သတ်မှတ် reference/deadline အတိုင်းတင်ပါ။', 'Submit the FIU-request response without transactions, using the exact request reference and deadline.');
+  if(a==='tfs-yes') showQ(4);
+  if(a==='tfs-no') showQ(5);
+  if(a==='confirmed') finish('FFR + immediate TFS action','Confirmed match ဖြစ်ပါက current TFS instruction အတိုင်း freezing/prohibition ကို without delay လုပ်ပြီး FFR တင်ပါ။','For a confirmed match, apply freezing/prohibition without delay under current TFS instructions and file an FFR.','Do not tip off. Confirm reporting timelines and measures from the current Executive Office and supervisory-authority instructions.');
+  if(a==='partial') finish('PNMR + urgent resolution','Potential/partial match အဖြစ် PNMR နှင့် urgent identity resolution ကို စဉ်းစားပါ။','Treat as a potential/partial match: consider PNMR and urgently resolve identity.','Do not auto-clear or auto-freeze solely from a weak name similarity; follow current TFS procedures.');
+  if(a==='sector-yes') {decisionState.sector=true;showQ(6)}
+  if(a==='sector-no') {decisionState.sector=false;showQ(6)}
+  if(a==='sus-no') finish(decisionState.sector?'Sector report only (likely REAR/DPMSR)':'No goAML suspicion report identified','Sector trigger ပြည့်လျှင် သက်ဆိုင်ရာ REAR/DPMSR ကိုတင်ပါ။ Suspicion မရှိလျှင် STR/SAR မတင်ပါနှင့်။','File the applicable sector report where its trigger is met. Do not file STR/SAR merely because of value where suspicion is absent.','Retain the assessment and evidence. Continue monitoring.');
+  if(a==='sus-yes') showQ(7);
+  if(a==='executed') finish(decisionState.sector?'STR + applicable sector report':'STR','ပြီးစီးသော suspicious transaction ဖြစ်သဖြင့် STR ကို without delay တင်ပါ။ Sector trigger ရှိလျှင် sector report ကိုပါ သီးခြားတင်ပါ။','File STR without delay for the executed suspicious transaction. If a sector-report trigger also exists, file that report separately.','Do not wait for proof of crime; reasonable grounds to suspect are sufficient.');
+  if(a==='attempted') finish(decisionState.sector?'SAR + assess sector report trigger':'SAR','Attempted/non-executed transaction သို့မဟုတ် suspicious activity ဖြစ်သဖြင့် SAR ကို တင်ပါ။ Sector report က completed activity ကိုလိုအပ်/မလိုအပ် စစ်ပါ။','File SAR for an attempted/non-executed transaction or suspicious activity. Separately verify whether the sector report requires a completed activity.','Document why the transaction was not executed and preserve the evidence.');
+}));
+document.getElementById('resetDecision').addEventListener('click',()=>{decisionState={sector:false,prior:null};result.classList.remove('show');result.innerHTML='';showQ(0)});
+
+// Report catalog
+const reportGrid=document.getElementById('reportGrid');
+function renderReports(filter='all') {
+  reportGrid.innerHTML=reportTypes.filter(r=>filter==='all'||r[4]===filter).map(r=>`
+    <div class="card glass report-card">
+      <span class="report-kind">${r[4]}</span><div class="report-code">${r[0]}</div><h3>${r[1]}</h3>
+      <div class="bi-grid"><div class="mm-col"><span class="lang-tag">မြန်မာ</span><p>${r[2]}</p></div><div class="en-col"><span class="lang-tag">English</span><p>${r[3]}</p></div></div>
+    </div>`).join('');
+}
+renderReports();
+document.querySelectorAll('#reportFilters .chip').forEach(c=>c.addEventListener('click',()=>{
+  document.querySelectorAll('#reportFilters .chip').forEach(x=>x.classList.remove('active'));c.classList.add('active');renderReports(c.dataset.filter);
+}));
+
+// Risk engine
+const riskFactors=[
+  ['Customer / UBO','Customer identity, ownership opacity, PEP, adverse information',20],
+  ['Geography','High-risk jurisdictions, sanctions, cross-border complexity',16],
+  ['Product / Service','Anonymity, liquidity, portability, complexity',14],
+  ['Transaction','Size, frequency, structuring, third-party flow, inconsistency',20],
+  ['Delivery channel','Non-face-to-face, intermediaries, remote onboarding',10],
+  ['Sanctions / PF','TFS exposure, dual-use goods, proliferation-financing indicators',12],
+  ['Technology / VA','New technology, virtual assets, cyber-enabled risk',8]
+];
+const riskDiv=document.getElementById('riskSliders');
+riskDiv.innerHTML=riskFactors.map((f,i)=>`<div class="slider-row"><label>${f[0]} <span class="muted">(${f[2]}%)</span></label><input class="risk-range" data-weight="${f[2]}" type="range" min="1" max="5" value="2"><b class="range-value">2</b></div>`).join('');
+function calcRisk() {
+  let weighted=0,total=0;
+  document.querySelectorAll('.risk-range').forEach(r=>{const w=+r.dataset.weight;weighted+=(+r.value)*w;total+=w;r.parentElement.querySelector('.range-value').textContent=r.value;});
+  const inherent=weighted/total;
+  const control=+document.getElementById('controlScore').value;
+  document.getElementById('controlValue').textContent=control;
+  const residual=Math.max(1,Math.min(5,inherent-(control-3)*0.45));
+  const score=Math.round(residual/5*100);
+  const deg=score*3.6;
+  document.getElementById('scoreRing').style.background=`conic-gradient(var(--cyan) ${deg}deg,rgba(255,255,255,.08) 0deg)`;
+  document.getElementById('scoreValue').textContent=score;
+  let label,advice,color;
+  if(score<35){label='Low';advice='Standard CDD may be proportionate, subject to no suspicion and current rules.';color='var(--green)'}
+  else if(score<55){label='Medium';advice='Strengthen monitoring and resolve all material data gaps.';color='var(--amber)'}
+  else if(score<75){label='High';advice='EDD, senior approval and more frequent monitoring are likely required.';color='#ff9a7d'}
+  else{label='Very High';advice='Consider declining/ending the relationship; urgently assess STR/SAR and TFS implications.';color='var(--red)'}
+  document.getElementById('scoreLabel').textContent=label+' residual risk';
+  document.getElementById('scoreLabel').style.color=color;
+  document.getElementById('scoreAdvice').textContent=advice;
+}
+document.querySelectorAll('.risk-range').forEach(r=>r.addEventListener('input',calcRisk));
+document.getElementById('controlScore').addEventListener('input',calcRisk);calcRisk();
+
+// Legacy sector toolbar removed in v2.
+
+// Cases
+document.getElementById('caseGrid').innerHTML=cases.map((c,i)=>`<div class="case-card glass">
+  <div class="bi-grid"><div class="mm-col"><span class="lang-tag">Case ${i+1} · မြန်မာ</span><h3>${c.title_mm}</h3><p>${c.facts_mm}</p></div><div class="en-col"><span class="lang-tag">Case ${i+1} · English</span><h3>${c.title_en}</h3><p>${c.facts_en}</p></div></div>
+  <button class="btn reveal" data-case="${i}">Reveal suggested treatment</button>
+  <div class="case-answer callout info" id="case-${i}"><div class="bi-grid"><div class="mm-col">${c.answer_mm}</div><div class="en-col">${c.answer_en}</div></div></div>
+</div>`).join('');
+document.querySelectorAll('.reveal').forEach(b=>b.addEventListener('click',()=>{const a=document.getElementById('case-'+b.dataset.case);a.classList.toggle('show');b.textContent=a.classList.contains('show')?'Hide answer':'Reveal suggested treatment'}));
+
+// Narrative builder
+const narrativeIds=['nType','nRef','nSubject','nDate','nAmount','nStatus','nFacts','nWhy','nCdd','nActions','nOutput'];
+function get(id){return document.getElementById(id).value.trim()}
+document.getElementById('generateNarrative').addEventListener('click',()=>{
+  const type=get('nType'), ref=get('nRef')||'[internal reference]', subject=get('nSubject')||'[subject/customer]', date=get('nDate')||'[date/period]', amount=get('nAmount')||'[amount/currency]', status=get('nStatus');
+  const facts=get('nFacts')||'[Insert chronological facts.]', why=get('nWhy')||'[Insert specific red flags and profile inconsistencies.]', cdd=get('nCdd')||'[Insert CDD/UBO/source information and outstanding gaps.]', actions=get('nActions')||'[Insert actions taken.]';
+  const text=`Report type: ${type}\nReporting entity reference: ${ref}\nSubject: ${subject}\nRelevant date/period: ${date}\nAmount/currency: ${amount}\nTransaction status: ${status}\n\nFACTUAL CHRONOLOGY\n${facts}\n\nBASIS FOR SUSPICION\n${why}\n\nCDD, BENEFICIAL OWNERSHIP AND SOURCE INFORMATION\n${cdd}\n\nACTIONS TAKEN BY THE REPORTING ENTITY\n${actions}\n\nThis report is based on the information available to the reporting entity as of the submission date. Supporting records and documents are retained and can be provided upon request.`;
+  document.getElementById('nOutput').value=text;
+});
+document.getElementById('saveNarrative').addEventListener('click',()=>{const d={};narrativeIds.forEach(id=>d[id]=document.getElementById(id).value);safeStore.set('goamlNarrative',JSON.stringify(d));toast('Narrative saved locally')});
+document.getElementById('clearNarrative').addEventListener('click',()=>{if(confirm('Clear all narrative fields?')){narrativeIds.forEach(id=>{if(!['nType','nStatus'].includes(id))document.getElementById(id).value=''});safeStore.remove('goamlNarrative')}});
+document.getElementById('copyNarrative').addEventListener('click',async()=>{await navigator.clipboard.writeText(get('nOutput'));toast('Narrative copied')});
+try {const d=JSON.parse(safeStore.get('goamlNarrative')||'null');if(d)narrativeIds.forEach(id=>{if(d[id]!=null)document.getElementById(id).value=d[id]})} catch(e) {}
+</script>
+</body>
+</html>
